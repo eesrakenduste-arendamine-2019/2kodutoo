@@ -1,0 +1,12 @@
+body {
+    background: #8188AF;
+    color: #fff;
+}
+button {
+    background-color: #8188AF;
+    border: 2px solid #fff;
+	color: #fff;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 2px;
+	}

@@ -25,7 +25,8 @@ $(function() { // Same as $(document).ready();
         saveToLocalStorage();
     });
     $('#loadButton').on('click', () => loadFromFile());
-
+    $('#todos').on('click', '.deleteButton', removeEntry);
+    $('#todos').on('click', '.doneCheckbox', removeEntry);
 
     loadFromLocalStorage();
 });
@@ -38,7 +39,6 @@ function render() {
         console.log(todoIndex);
         $('#todos').append('<ul><li>' + todo.title + '</li><li>' + todo.description + '</li><li>' + todo.date + '</li></ul>');
     });
-    
 }
 
 
@@ -53,13 +53,15 @@ function addEntry() {
     render();
 }
 
+function removeEntry() {
+    let id = $(this).data('id');
+    todos.splice(id, 1);
+    render();
+}
+
 function saveToFile() {
-    $.post('server.php', { save: todos }).done(function () {
-        console.log('done');
-    }).fail(function () {
-        console.log('fail');
-    }).always(function () {
-        console.log('always');
+    $.post('server.php', { save: todos }).fail(function () {
+        alert('Failed to save to the server!');
     });
 }
 

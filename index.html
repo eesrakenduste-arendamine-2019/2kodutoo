@@ -10,22 +10,38 @@
 </head>
 
 <body>
-    <span>Pealkiri:</span>
-    <input type="text" id="title">
-    <span>Sisu:</span>
-    <input type="text" id="description">
-    <span>Tähtaeg:</span>
-    <input type="date" id="date">
-    <span>Kategooria:</span>
-    <select>
-        <option value="Kool">Kool</option>
-        <option value="Töö">Töö</option>
-        <option value="Isiklik">Isiklik</option>
-        <option value="Muu">Muu</option>
-    </select>
-    <button id="addButton">Lisa</button>
-    <button id="saveButton">Salvesta</button>
-    <button id="loadButton">Lae Serverist</button>
+    <div class="panel">
+        <div class="panel-header">
+            <p>Lisa ülesanne</p>
+        </div>
+        <div class="panel-content">
+            <form>
+                
+                
+                <div class="form-row">
+                    <label>Pealkiri:</label>
+                    <input type="text" id="title">
+                    <label>Sisu:</label>
+                    <input type="text" id="description">
+                    <label>Tähtaeg:</label>
+                    <input type="date" id="date">
+                    <label>Kategooria:</label>
+                    <select>
+                        <option value="Kool">Kool</option>
+                        <option value="Töö">Töö</option>
+                        <option value="Isiklik">Isiklik</option>
+                        <option value="Muu">Muu</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <button id="addButton">Lisa</button>
+                    <button id="saveButton">Salvesta</button>
+                    <button id="loadButton">Lae Serverist</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
     <hr>
     <div id="todos">Siia tulevad todod</div>
     <table id="todo">

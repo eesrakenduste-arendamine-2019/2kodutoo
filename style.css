@@ -1,16 +1,49 @@
-{
+html, * {
    box-sizing: border-box;
 }
 
-table, table th, table td  {
-   border: 1px solid black;
+table  {
+   border: 1px solid #b1b1b1;
    border-collapse: collapse;
+   border-radius: 5px;
 }
 
 table  {
    width: 100%;
 }
+table tr {
+   
+   border-radius: 5px;
+}
 
 table th, table td {
    padding: 4px;
+}
+
+table th {
+   background-color: #cecece;
+}
+
+div.panel {
+   border: 1px solid #b1b1b1;
+   border-radius: 5px;
+}
+
+div.panel .panel-header {
+   background-color: #cecece;
+   padding: 5px 15px;
+   border-bottom: 1px solid #b1b1b1;
+   font-weight: bold;
+}
+
+div.panel .panel-content {
+   padding: 15px;
+}
+
+div.form-row input, div.form-row select {
+   margin: 5px;
+}
+
+p {
+   margin:0;
 }

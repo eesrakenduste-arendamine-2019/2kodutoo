@@ -1,10 +1,11 @@
 /* jshint esversion:6 */
 
 class Todo {
-    constructor(title, description, date, done = false) {
+    constructor(title, description, date, category,done = false) {
         this.title = title;
         this.description = description;
         this.date = date;
+        this.category=category;
         this.done = done;
     }
 }
@@ -33,12 +34,12 @@ $(function() { // Same as $(document).ready();
 
 
 function render() {
-    $('#todos').html("");
+    $('#todos tr:not(#header)').remove();
     todos.forEach(function (todo, todoIndex) {
         console.log(todoIndex);
-        $('#todos').append('<ul><li>' + todo.title + '</li><li>' + todo.description + '</li><li>' + todo.date + '</li></ul>');
+        $('#todo').append('<tr><th>' + todo.title + '</th><th>' + todo.description + '</th><th>' + todo.date +'</th><th>'+ todo.category+'</th><th>'+todo.done+'</th><th><button class="editButton">Muuda</button></th><th><button class="deleteButton">Kustuta</button></th></tr>');
     });
-    
+
 }
 
 
@@ -46,8 +47,9 @@ function addEntry() {
     const titleValue = $('#title').val();
     const dateValue = $('#date').val();
     const descriptionValue = $('#description').val();
+    const categoryValue= $('#category').val();
 
-    todos.push(new Todo(titleValue, descriptionValue, dateValue));
+    todos.push(new Todo(titleValue, descriptionValue, dateValue,categoryValue));
 
     console.log(todos);
     render();
@@ -82,7 +84,7 @@ function loadFromLocalStorage() {
         console.log(todos);
         render();
     }
-    
+
 }
 
 function arrayToTodoItems(items) {

@@ -17,7 +17,7 @@
     <span>Tähtaeg:</span>
     <input type="date" id="date">
     <span>Kategooria:</span>
-    <select>
+    <select id="category">
         <option value="Kool">Kool</option>
         <option value="Töö">Töö</option>
         <option value="Isiklik">Isiklik</option>
@@ -29,11 +29,12 @@
     <hr>
     <div id="todos">Siia tulevad todod</div>
     <table id="todo">
-        <tr>
+        <tr id="header">
             <th>Pealkiri</th>
             <th>Sisutekst</th>
             <th>Tähtaeg</th>
             <th>Kategooria</th>
+            <th>Tehtud</th>
             <th>(muuda)</th>
             <th>(kustuta)</th>
         </tr>

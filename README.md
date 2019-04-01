@@ -1,12 +1,14 @@
 # 2. kodutöö – ToDo rakendus
-
+## Autorid Roland Vägi ja Steven Saluri
 ### Tähtpäev 21.04.2019 23:59
 
-## Nõuded
+## Keerukused
+
+## funktsionaalsused
 
 1. Töö tuleb teha vähemalt kahekesi, eelnevalt kokkuleppel on lubatud ka kolm liiget. GitHub'is peab eristuma, kes mida tegi!
 1. README.md fail sisaldab:
-    * autorite nimesid; 
+    * autorite nimesid;
     * kirjeldust tekkinud keerukustest
     * funktsionaalsuste kirjeldust
 1. Todo rakenduse funktsionaalsused:   
@@ -29,7 +31,7 @@
 ## Githubi töövoog grupiga töötades
 
 1. Üks grupi liikmetest teeb fork-i 2kodutoo repositooriumist
-2. Tuleb lisada meeskonnaliikmed collaborators-iteks fork-itud repositooriumi 
+2. Tuleb lisada meeskonnaliikmed collaborators-iteks fork-itud repositooriumi
 3. Collaborator-id peavad kutsega nõustuma (e-mail)
 4. Iga ühel tuleb teha git clone fork-itud repositooriumist (git clone https://YOURUSERNAME@github.com/REPOSITORYOWNERUSERNAME/REPOSITORY.git)
 5. Muudatuste lisamine:

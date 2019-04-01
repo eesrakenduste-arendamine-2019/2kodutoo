@@ -1,5 +1,5 @@
 <?php
-require ("../../config.php");
+require ("../../../../config.php");
 $database = "if18_ET";
 session_start();
 

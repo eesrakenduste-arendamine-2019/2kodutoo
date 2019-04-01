@@ -20,7 +20,7 @@
     if(empty($emailError) and empty($passwordError)){
         $notice = signin($email, $_POST["password"]);
         } else {
-        $notice = "Ei saa sisse logida!";
+        $notice = "Sisselogimine ebaõnnestus!";
     }
     
     }
@@ -32,20 +32,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="index.css">
     <title>Document</title>
 </head>
 <body>
     <div id="login">
         <h1>Sisselogimine</h1>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-            <label>E-mail (kasutajatunnus):</label><br>
-            <input type="email" name="email" value="<?php echo $email; ?>">&nbsp;<span><?php echo $emailError; ?></span><br>
+            <input type="email" name="email" placeholder="E-Mail" value="<?php echo $email; ?>"><br>
             
-            <label>Salasõna:</label><br>
-            <input name="password" type="password">&nbsp;<span><?php echo $passwordError; ?></span><br>
+            <input name="password" type="password" placeholder="Salasõna"><br>
             
-            <input name="login" type="submit" value="Logi sisse">&nbsp;<span><?php echo $notice; ?>
+            <input name="login" type="submit" value="Logi sisse">
         </form>
-    </div>
+        <br>
+        <a><?php echo $notice; ?></a>
+    </div><br>
+
 </body>
 </html>

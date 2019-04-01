@@ -7,6 +7,7 @@
     top: 0;
     left: 0;
     position: fixed;
+    border-bottom:solid #76afff 4px;
 }
 .title a{
     display: inline-block;
@@ -21,18 +22,10 @@
     padding-left: 15px;
     color: white;
 }
-.title #logout{
-    display: inline-block;
-    padding-top: 0px;
-    text-align: right;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-}
 
 .sidenav {
-    padding-top: 80px;
     height: 100%;
-    width: 200px;
+    width: 0;
     position: fixed;
     z-index: 1;
     top: 0;
@@ -41,6 +34,7 @@
     overflow-x: hidden;
     margin-top: 80px;
     transition: 0.5s;
+    border-right:solid #76afff 0px;
   }
   .sidenav h1 {
     padding: 0px 8px 8px 32px;
@@ -50,18 +44,21 @@
     color: #f1f1f1;
     display: block;
     transition: 0.3s;
+    font-family: Arial, Helvetica, sans-serif;
   }
   .sidenav a {
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-family: menu1;
     font-size: 20px;
-    color: #bebcbcef;
+    color: #d4cdcdef;
     display: block;
     transition: 0.3s;
+    font-family: Arial, Helvetica, sans-serif;
   }
   .sidenav a:hover, .offcanvas a:focus{
     color: #f1f1f1;
+    background-color: #80b1f5;
     cursor: pointer;
   }
   .sidenav .closebtn {

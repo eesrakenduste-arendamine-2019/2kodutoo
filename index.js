@@ -1,4 +1,9 @@
 /*jshint esversion:6*/
+let todos = [];
+
+$(document).ready(function(){
+    render();
+});
 
 class Todo{
   constructor(title, description, date){
@@ -6,10 +11,10 @@ class Todo{
     this.description = description;
     this.date = date;
     this.done = false;
+    this.status = false;
   }
 }
 
-let todos = [];
 
 $('#addButton').on('click', ()=>addEntry());
 $('#saveButton').on('click', ()=>saveToFile());
@@ -19,9 +24,14 @@ function render(){
   $('#todos').html("");
   $.get('database.txt', function(data){
     let content = JSON.parse(data).content;
+    todos = content;
+    localStorage.setItem('ToDoList', JSON.stringify(todos));
+    console.log(todos);
     content.forEach(function(todo, todoIndex){
-      console.log(todoIndex);
       $('#todos').append('<ul><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li></ul>');
+      if(!todo.status){
+        ul.style.backgroundColor = "red";
+      }
     });
   });
 }

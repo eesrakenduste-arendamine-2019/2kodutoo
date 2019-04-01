@@ -11,12 +11,9 @@ class ToDo{
 
 let todos = [];
 
-$("#addButton").on("click", () => addEntry());
-$("#saveButton").on("click", () => saveToFile());
-$("#loadButton").on("click", () => render());
-
+$("#saveButton").on("click", () => addEntry());
 function render(){
-    $("#todos").html("");
+    $("#todos").html(""); // Clear the view before loading items
     $.get("database.txt", function(data){
         let content = JSON.parse(data).content;
 
@@ -34,17 +31,25 @@ function addEntry(){
 
     todos.push(new ToDo(titleValue, descriptionValue, dateValue));
 
-    console.log(todos);
+    saveAndRender();
 }
 
 function saveToFile(){
     $.post("server.php", {
         save: todos
     }).done(function(){
-        console.log("done");
+        console.log("Successfully saved to file");
     }).fail(function(){
-        console.log("fail");
-    }).always(function(){
-        console.log("always");
+        console.log("Failed to save to file");
     });
+}
+
+function saveToLocalStorage(){
+    $(todos).val(localStorage);
+}
+
+function saveAndRender(){
+    saveToFile();
+    saveToLocalStorage();
+    render();
 }

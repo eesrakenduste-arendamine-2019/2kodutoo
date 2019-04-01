@@ -28,10 +28,13 @@ function render(){
     localStorage.setItem('ToDoList', JSON.stringify(todos));
     console.log(todos);
     content.forEach(function(todo, todoIndex){
-      $('#todos').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button id=delete'+todoIndex+'>KUSTUTA</button></ul>');
       if(todo.status == 'false'){
+        $('#todos').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button id=delete'+todoIndex+'>KUSTUTA</button></ul>');
+      } else {
+        $('#right').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button id=delete'+todoIndex+'>KUSTUTA</button></ul>');
+      }
+      if(todo.done == 'true'){
         $("#"+todoIndex+"").css("background-color","lightgreen");
-        //$("#"+todoIndex+"").css("white-space","nowrap");
       } else {
         $("#"+todoIndex+"").css("background-color","red");
       }

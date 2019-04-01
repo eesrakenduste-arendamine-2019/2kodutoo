@@ -22,6 +22,7 @@ $('#loadButton').on('click', ()=>render());
 
 function render(){
   $('#todos').html("");
+  $('#right').html("");
   $.get('database.txt', function(data){
     let content = JSON.parse(data).content;
     todos = content;
@@ -30,7 +31,7 @@ function render(){
     content.forEach(function(todo, todoIndex){
       if(todo.status == 'false'){
         $('#todos').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button id=delete'+todoIndex+'>KUSTUTA</button></ul>');
-      } else {
+      } else if (todo.status == 'true') {
         $('#right').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button id=delete'+todoIndex+'>KUSTUTA</button></ul>');
       }
       if(todo.done == 'true'){

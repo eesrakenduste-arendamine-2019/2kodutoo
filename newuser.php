@@ -1,6 +1,8 @@
 <?php
 	require("functions.php");
 
+	echo "<body style='background-color:#428cf4'>";
+
 	$email = "";
 	$name = "";
 

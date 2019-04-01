@@ -14,6 +14,7 @@ let todos = [];
 $('#addButton').on('click', ()=>addEntry());
 $('#saveButton').on('click', ()=>saveToFile());
 $('#loadButton').on('click', ()=>render());
+$('#delButton').on('click', ()=>del());
 
 function render(){
     $('#todos').html("");
@@ -42,4 +43,16 @@ function saveToFile(){
     }).fail(function(){
         alert("HAA-HAA!");
     });
+}
+
+function done(){
+
+}
+
+function del(){
+  $.post('server.php', {delete: todos}).done(function(){
+      alert("Done!");
+  }).fail(function(){
+      alert("HAA-HAA!");
+  });
 }

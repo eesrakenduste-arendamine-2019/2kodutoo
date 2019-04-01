@@ -1,5 +1,5 @@
 <?php
-require ("../../../../config.php");
+require ("../../config.php");
 $database = "if18_ET";
 session_start();
 
@@ -28,7 +28,7 @@ function signin($email, $password){
 				exit();
 			}else{
 				$notice = "Vale salasõna!";
-			} 
+			}
 		}else{
 			$notice = "Kasutaja (". $email. ") ei ole olemas!" .$stmt->error;
 		}

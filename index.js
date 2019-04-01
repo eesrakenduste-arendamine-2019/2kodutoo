@@ -29,7 +29,14 @@ function addEntry(){
   const titleValue = $('#title').val();
   const dateValue = $('#date').val();
   const descriptionValue = $('#description').val();
-
+  var table = document.getElementById("table");
+  var row = table.insertRow(-1);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  var cell3 = row.insertCell(2);
+  cell1.innerHTML = titleValue;
+  cell2.innerHTML = descriptionValue;
+  cell3.innerHTML = dateValue;
   todos.push(new Todo(titleValue, descriptionValue, dateValue));
   console.log(todos);
 }

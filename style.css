@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+}
+
+table, table th, table td  {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+table  {
+    width: 100%;
+}
+
+table th, table td {
+    padding: 4px;
+}
+th.todo-item-button {
+    width: 10%;
+}
+
+td.todo-item-button {
+    text-align: center;
+}
+
+td.todo-item-title {
+    width: 20%;
+}
+td.todo-item-content {
+    width: 40%;
+}
+td.todo-item-date {
+    width: 20%;
+}
+
+table#todo tr td input {
+    width: 100%;
+}
+
+table#todo button {
+    padding: 4px;
+}
+
+.error-empty {
+    border-color: red;
+}

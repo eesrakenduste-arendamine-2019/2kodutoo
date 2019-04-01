@@ -1,5 +1,9 @@
 /* jshint esversion:6 */
 
+$(document).ready(function() {
+    render();
+});
+
 class ToDo{
     constructor(title, description, date){
         this.title = title;

@@ -40,7 +40,7 @@ Autorid: Merilin Võrk, Raimo Pregel, Kristian Paekivi
      * git fetch & pull
      * git push
 
-## Kasulikud viited
+## Kasulikud viited asuvad siin
 * [JQuery dokumentatsioon](http://api.jquery.com)
 * [Collaboration on github](https://github.com/eesrakenduste-arendamine-2019/2kodutoo/settings/collaboration)
 * [JQuery POST](https://api.jquery.com/jquery.post/)

@@ -20,14 +20,18 @@ $(function() { // Same as $(document).ready();
 
     $('#date').val(today);
 
-    $('#addButton').on('click', () => addEntry());
-    $('#saveButton').on('click', () => {
+    $('#addButton').on('click', (e) => {
+        e.preventDefault();
+        addEntry()
+    });
+    $('#saveButton').on('click', (e) => {
+        e.preventDefault();
         saveToFile();
         saveToLocalStorage();
     });
     $('#loadButton').on('click', () => loadFromFile());
-    $('#todos').on('click', '.deleteButton', removeEntry);
-    $('#todos').on('click', '.doneCheckbox', removeEntry);
+    $('#todo').on('click', '.deleteButton', removeEntry);
+    //$('#todo').on('change', '.doneCheckbox', removeEntry);
 
     loadFromLocalStorage();
 });
@@ -35,10 +39,22 @@ $(function() { // Same as $(document).ready();
 
 
 function render() {
-    $('#todos tr:not(#header)').remove();
+    $('#todo tr:not(#header)').remove();
     todos.forEach(function (todo, todoIndex) {
         console.log(todoIndex);
-        $('#todo').append('<tr><th>' + todo.title + '</th><th>' + todo.description + '</th><th>' + todo.date +'</th><th>'+ todo.category+'</th><th>'+todo.done+'</th><th><button class="editButton">Muuda</button></th><th><button class="deleteButton">Kustuta</button></th></tr>');
+        let checked = '';
+        if (todo.done) {
+            checked = 'checked';
+        }
+        $('#todo').append('<tr>' + 
+            '<td>' + todo.title + '</td>' + 
+            '<td>' + todo.description + '</td>' +
+            '<td>' + todo.date + '</td>' +
+            '<td>' + todo.category + '</td>' +
+            '<td><input type="checkbox" class="doneCheckbox" name="done" value="1" ' + checked + '></td>' +
+            '<td><button class="editButton">Muuda</button></td>' +
+            '<td><button class="deleteButton" data-id="' + todoIndex + '" >Kustuta</button></td>' +
+        '</tr>');
     });
 }
 
@@ -55,8 +71,10 @@ function addEntry() {
     render();
 }
 
-function removeEntry() {
+function removeEntry(e) {
+    e.preventDefault();
     let id = $(this).data('id');
+    console.log(id);
     todos.splice(id, 1);
     render();
 }

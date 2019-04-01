@@ -12,18 +12,18 @@ body {
 	box-shadow: 0px 2px 5px #AFAFAF;
 }
 
-#jarjehoidja {
+#nimistu {
 	margin: 20px 0;
 }
 
-.zanr {
+.vehicle {
     display: none;
     background: #333;
     color: #FFF;
     width: 100%;
 }
 
-#zanr-tabs span {
+#vehicle-tabs span {
     color: #FFF;
     background: #333;
     border-top-left-radius: 6px;
@@ -32,8 +32,8 @@ body {
 	cursor: pointer;
 	transition: 0.2s ease;
 }
-#zanr-tabs span:hover { background: #666; }
-#zanr-tabs span.active {
+#vehicle-tabs span:hover { background: #666; }
+#vehicle-tabs span.active {
     color: #FFF;
     background: #bb153b;
     border-top-left-radius: 6px;
@@ -41,7 +41,7 @@ body {
     padding: 4px 12px;
 }
 
-.zanr.active {
+.vehicle.active {
 	display: block;
 }
 
@@ -114,7 +114,7 @@ table td:last-child, table th:last-child {
 	table th, table td {
 		width: auto;
 	}
-	
+
 	.book-inputs-container {
 		display: inline-block;
 	}

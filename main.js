@@ -1,3 +1,5 @@
+/*jshint esversion:6*/
+
 let zanrAdd = document.querySelector("#zanr");
 let zanrValue = document.querySelector("#zanr-name");
 let jarjehoidja = document.querySelector("#jarjehoidja");
@@ -27,7 +29,7 @@ function CreateZanr(zanrId, zanrName) {
 		alert("Selline zanr on juba olemas!");
 		return;
 	}
-	
+
 	HideZanrs();
 
 	// põhi kontainerid jms
@@ -39,7 +41,7 @@ function CreateZanr(zanrId, zanrName) {
 	zanrLabel.innerText = zanrName;
 	let booksContainer = document.createElement("div");
 	booksContainer.class = "books";
-	
+
 	let booksTable = document.createElement("table");
 	let bookThead = document.createElement("thead");
 	let bookTr = document.createElement("tr");
@@ -59,7 +61,7 @@ function CreateZanr(zanrId, zanrName) {
 	let bookTbody = document.createElement("tbody");
 	booksTable.appendChild(bookTbody);
 	booksContainer.appendChild(booksTable);
-	
+
 	// Raamatu lisamise inputid.
 	let bookName = document.createElement("input");
 	bookName.type = "text";
@@ -78,24 +80,24 @@ function CreateZanr(zanrId, zanrName) {
 	bookAdd.value = "Lisa raamat";
 	let br = document.createElement("br");
 	zanrLabel.classList.add("active");
-	
+
 	// Raamatu lisamine
 	bookAdd.addEventListener("click", function() {
 		CreateBook(bookName.value, bookLk.value, bookDesc.value, bookTbody, books.length);
 		AddToBooks(zanrId, bookName.value, bookLk.value, bookDesc.value);
-		
+
 		bookName.value = "";
 		bookLk.value = "";
 		bookDesc.value = "";
 	});
-	
+
 	// Zanri ja selle tabi aktiveerimine
 	zanrLabel.addEventListener("click", function() {
 		HideZanrs();
 		zanrBlock.classList.add("active");
 		zanrLabel.classList.add("active");
 	});
-	
+
 	let inputContainer = document.createElement("div");
 	inputContainer.className = "book-inputs-container";
 	zanrTabs.appendChild(zanrLabel);
@@ -104,7 +106,7 @@ function CreateZanr(zanrId, zanrName) {
 	inputContainer.appendChild(bookDesc);
 	inputContainer.appendChild(bookAdd);
 	zanrBlock.appendChild(inputContainer);
-	
+
 	zanrBlock.appendChild(booksContainer);
 	jarjehoidja.appendChild(zanrBlock);
 }
@@ -197,7 +199,7 @@ function HideZanrs() {
 			zanr.classList.remove("active");
 		}
 	}
-	
+
 	let tabs = document.querySelectorAll("#zanr-tabs span");
 	for(let i = 0, tab; tab = tabs[i]; i++) {
 		if(tab.classList.contains("active")) {

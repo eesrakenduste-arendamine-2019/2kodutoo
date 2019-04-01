@@ -23,7 +23,7 @@ function render(){
 
         content.forEach(function(todo, todoIndex){
             console.log(todoIndex);
-            $("#todos").append("<ul class='" + todoIndex + "'><li>" + todo.title + "</li><li>" + todo.description + "</li><li>" + todo.date + '</li></ul> <button id="deleteButton">Delete</button>');
+            $("#todos").append("<ul class='" + todoIndex + "'><li>" + todo.title + "</li><li>" + todo.description + "</li><li>" + todo.date + '</li></ul> <button id="deleteButton">X</button> <input type="checkbox" name="doneCheckbox">');
         });
     });
 }

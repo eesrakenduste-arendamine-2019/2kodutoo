@@ -47,15 +47,13 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Katselise veebi kasutaja loomine</title>
+	<title>Create account</title>
 </head>
 <body>
-	<h1>Loo endale konto</h1>
-	<p>Siin on minu <a href="http://www.tlu.ee" target="_blank">TLÜ</a> õppetöö raames valminud veebilehed. See ei oma mingit sisu ja nende kopeerimine ei oma mõtet.</p>
+	<h1>Konto loomine</h1>
 	<br>
-	<hr>
 	
-	<div id="login">
+	<div id="signup">
 		<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 			<label>Nimi:</label><br>
 			<input name="firstName" type="text" value="<?php echo $name; ?>"><span><?php echo $nameError; ?></span><br>

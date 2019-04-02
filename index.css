@@ -1,0 +1,75 @@
+body{
+  background-color: lightblue;
+  margin: 8px;
+}
+
+.title{
+	position: absolute;
+	top: 55%;
+  left: 50%;
+	transform: translateX(-55%) translateY(-50%);
+	color: #4CAF50;
+	font-family:Lucida Console;
+	font-size: 30px;
+	text-shadow: 1px 1px red;
+  border: lightblue;
+}
+
+.description{
+	position: absolute;
+	top: 45%;
+  left: 48%;
+	transform: translateX(-45%) translateY(-48%);
+	color: #4CAF50;
+	font-family:Lucida Console;
+	font-size: 30px;
+	text-shadow: 1px 1px red;
+  border: lightblue;
+}
+
+.date{
+	position: absolute;
+	top: 50%;
+  left: 49.3%;
+	transform: translateX(-50%) translateY(-49.3%);
+	color: #4CAF50;
+	font-family:Lucida Console;
+	font-size: 30px;
+	text-shadow: 1px 1px red;
+  border: lightblue;
+}
+
+.button{
+  position: absolute;
+	top: 65%;
+  left: 49%;
+  transform: translateX(-65%) translateY(-49%);
+  display: inline-block;
+  background-color: #4CAF50;
+  border:#4CAF50;
+  font-size:30px;
+}
+
+.script{
+  position: absolute;
+	top: 65%;
+  left: 49%;
+  transform: translateX(-65%) translateY(-49%);
+
+}
+
+.entry{
+	color: red;
+  width: 50%;
+  border: 3px solid green;
+  font-family:Lucida Console;
+  white-space:pre;
+}
+
+.delete-task-button{
+  color:red;
+  font-size: 30px;
+  position: absolute;
+  left: 53%;
+  top:4%;
+}

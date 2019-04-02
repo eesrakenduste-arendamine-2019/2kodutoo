@@ -30,11 +30,25 @@ if(isset($_GET["logout"])){
         <div id="menuButton"><span style="font-size:60px;cursor:pointer" onclick="toggleNav()">&#9776;</span></div>
         <a>Tere,  <?php echo $_SESSION["username"]; ?></a>
     </div>
-
+    <br><br><br><br><br>
     <div id="mySidenav" class="sidenav">
         <h1>Menüü</h1>
             <a href="notebook.html">Märkmik</a>
             <a href="?logout=1">Logi välja</a>
     </div>
+    <div class="notebook">
+        <input type="text" id="title">
+        <input type="text" id="description">
+        <input type="date" id="date">
+        <br>
+        <button id="addButton">LISA</button>
+        <button id="saveButton">SALVESTA</button>
+        <button id="loadButton">LAE</button>
+        <button id="doneButton">MARK AS DONE</button>
+        <button id="delButton">DELETE</button>
+        <div id="todos">Siia tulevad todod</div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="notebook.js"></script>
 </body>
 </html>

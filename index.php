@@ -33,10 +33,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="index.css">
-    <title>Document</title>
+    <title>TODO Märkmik</title>
 </head>
 <body>
-    <div id="login">
+    <div id="main">
         <h1>Sisselogimine</h1>
         <form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
             <input type="email" name="email" placeholder="E-Mail" value="<?php echo $email; ?>"><br>
@@ -45,6 +45,9 @@
             
             <input name="login" type="submit" value="Logi sisse">
         </form>
+        <a style="text-align:left;" href="newuser.php">Loo kasutaja</a>
+        <a > | </a>
+        <a href="newuser.php">Unustasid salasõna?</a>
         <br>
         <a><?php echo $notice; ?></a>
     </div><br>

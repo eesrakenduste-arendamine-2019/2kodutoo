@@ -61,6 +61,7 @@ function signup($name, $email, $password){
 	$stmt->close();
 	$mysqli->close();
 	return $notice;
+	header("Location: index.php");
 }
 
 function test_input($data) {

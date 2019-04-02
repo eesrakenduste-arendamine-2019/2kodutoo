@@ -10,6 +10,7 @@
 	$nameError = "";
 	$emailError = "";
 	$passwordError = "";
+	$error = "";
 	
 	//kui on uue kasutaja loomise nuppu vajutatud
 	if(isset($_POST["submitUserData"])){
@@ -39,6 +40,8 @@
 	if(empty($nameError) and empty($emailError) and empty($passwordError)){
 		$notice = signup($name ,$email, $_POST["password"]);
 		echo $notice;
+	}else{
+		$error = "Kasutaja loomisel tekkis viga!";
 	}
 	
 	}//kui on nuppu vajutatud lõppeb ära
@@ -49,23 +52,22 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<title>Create account</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<title>Konto loomine</title>
 </head>
 <body>
-	<h1>Konto loomine</h1>
 	<br>
 	
-	<div id="signup">
+	<div id="main">
 		<form method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-			<label>Nimi:</label><br>
-			<input name="firstName" type="text" value="<?php echo $name; ?>"><span><?php echo $nameError; ?></span><br>
-			<label>E-mail (kasutajatunnus):</label><br>
-			<input type="email" name="email" value="<?php echo $email; ?>"><br><span><?php echo $emailError; ?></span><br>
-			<label>Salasõna:</label><br>
-			<input type="password" name="password" type="text"><span><?php echo $passwordError; ?></span>
+		    <h1>Konto loomine</h1>
+			<input name="firstName" type="text" placeholder="Nimi" value="<?php echo $name; ?>"><br>
+			<input type="email" name="email" placeholder="E-Mail" value="<?php echo $email; ?>"><br>
+			<input type="password" name="password" type="text" placeholder="Salasõna" >
 			<br>
 			<input name="submitUserData" type="submit" value="Loo kasutaja">
 		</form>
+		<a><?php echo $error; ?></a>
 	</div>
 </body>
 </html>

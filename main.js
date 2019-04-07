@@ -163,7 +163,7 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 		RenderVehicles();
 	});
 	let vRow = document.createElement("tr");
-	vRow.className = "vehicle";
+	vRow.className = "vehicles";
 	vRow.appendChild(vNameContainer);
 	vRow.appendChild(vNumContainer);
 	vRow.appendChild(vDateContainer);

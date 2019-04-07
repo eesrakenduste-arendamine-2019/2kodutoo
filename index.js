@@ -15,7 +15,6 @@ class Todo{
   }
 }
 
-
 $('#addButton').on('click', ()=>addEntry());
 $('#saveButton').on('click', ()=>saveToFile());
 $('#loadButton').on('click', ()=>render());
@@ -30,9 +29,9 @@ function render(){
     console.log(todos);
     content.forEach(function(todo, todoIndex){
       if(todo.status == 'false'){
-        $('#todos').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button id=delete'+todoIndex+'>KUSTUTA</button></ul>');
+        $('#todos').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button onclick="deleteB('+todoIndex+');" id=delete'+(todoIndex+1)+'>KUSTUTA</button></ul>');
       } else if (todo.status == 'true') {
-        $('#right').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button id=delete'+todoIndex+'>KUSTUTA</button></ul>');
+        $('#right').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button onclick="deleteB('+todoIndex+');" id=delete'+(todoIndex+1)+'>KUSTUTA</button></ul>');
       }
       if(todo.done == 'true'){
         $("#"+todoIndex+"").css("background-color","lightgreen");
@@ -43,6 +42,15 @@ function render(){
         $("li").css("padding","5px");
     });
   });
+}
+
+function deleteB(todoIndex){
+  todos.splice(todoIndex, 1);
+  console.log(todoIndex);
+  console.log(todos);
+  localStorage.setItem('ToDoList', JSON.stringify(todos));
+  saveToFile()
+  //render();
 }
 
 function addEntry(){

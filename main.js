@@ -3,7 +3,7 @@
 ﻿let categoryAdd = document.querySelector("#category");
 let vehicleType = document.querySelector("#vehicle-type");
 let vehicleList = document.querySelector("#veh-list");
-let vehicleTabs = document.querySelector("#vehicle-tabs");
+let vehicleTabs = document.querySelector("#category-tabs");
 
 let categorys = JSON.parse(localStorage.getItem("categorys"));
 let vehicles = JSON.parse(localStorage.getItem("vehicles"));
@@ -199,7 +199,7 @@ function HideCategorys() {
 		}
 	}
 
-	let tabs = document.querySelectorAll("#vehicle-tabs span");
+	let tabs = document.querySelectorAll("#category-tabs span");
 	for(let i = 0, tab; tab = tabs[i]; i++) {
 		if(tab.classList.contains("active")) {
 			tab.classList.remove("active");

@@ -7,6 +7,8 @@ let categoryTabs = document.querySelector("#vehicle-tabs");
 
 let categorys = JSON.parse(localStorage.getItem("categorys"));
 let vehicles = JSON.parse(localStorage.getItem("vehicles"));
+// let categorys = [];
+// let vehicles = [];
 
 if(categorys === null || categorys === undefined) { categorys = []; }
 if(vehicles === null || vehicles === undefined) { vehicles = []; }
@@ -212,6 +214,26 @@ function HideCategorys() {
 			tab.classList.remove("active");
 		}
 	}
+}
+
+function saveCategory(){
+	var data = new FormData();
+		data.append("name", vehicle-type.value);
+
+		var req = new XMLHttpRequest();
+		req.open('POST', "server.php");
+		req.onload = function() {
+			if (req.status == 200) {
+				console.log(req.response);
+			}
+		};
+
+		req.onerror = function() {
+			console.log("Error: Network Error");
+		};
+
+		req.send(data);
+  //$.post('server.php', {save: category});
 }
 
 (function() {

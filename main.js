@@ -199,7 +199,7 @@ function HideCategorys() {
 		}
 	}
 
-	let tabs = document.querySelectorAll("#category-tabs span");
+	let tabs = document.querySelectorAll("#vehicle-tabs span");
 	for(let i = 0, tab; tab = tabs[i]; i++) {
 		if(tab.classList.contains("active")) {
 			tab.classList.remove("active");

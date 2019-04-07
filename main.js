@@ -2,7 +2,7 @@
 
 let categoryAdd = document.querySelector("#vehicle");
 let categoryValue = document.querySelector("#vehicle-type");
-let nimistu = document.querySelector("#nimistu");
+let vehList = document.querySelector("#veh-list");
 let categoryTabs = document.querySelector("#vehicle-tabs");
 
 let categorys = JSON.parse(localStorage.getItem("categorys"));
@@ -52,7 +52,7 @@ function CreateCategory(categoryId, categoryName) {
 	vehicleTh.innerText = "Sõiduki numbrimärk";
 	vehicleTr.appendChild(vehicleTh);
 	vehicleTh = document.createElement("th");
-	vehicleTh.innerText = "Parkimise lõpu kuupäev";
+	vehicleTh.innerText = "Töö tähtaeg";
 	vehicleTr.appendChild(vehicleTh);
 	vehicleTh = document.createElement("th"); // btnite jaoks
 	vehicleTr.appendChild(vehicleTh);
@@ -62,33 +62,33 @@ function CreateCategory(categoryId, categoryName) {
 	vehiclesTable.appendChild(vehicleTbody);
 	vehiclesContainer.appendChild(vehiclesTable);
 
-	// Raamatu lisamise inputid.
+	// Sõiduki lisamise inputid.
 	let vehicleName = document.createElement("input");
 	vehicleName.type = "text";
 	vehicleName.className = "vehicle-title";
 	vehicleName.placeholder = "Sõiduki nimi";
-	let vehicleLk = document.createElement("input");
-	vehicleLk.className = "vehicle-lk";
-	vehicleLk.placeholder = "Sõiduki numbrimärk";
-	vehicleLk.type = "text";
-	let vehicleDesc = document.createElement("input");
-	vehicleDesc.className = "vehicle-desc";
-	vehicleDesc.placeholder = "Parkimise lõpu kuupäev";
-	vehicleDesc.type = "date";
+	let vehicleNum = document.createElement("input");
+	vehicleNum.className = "vehicle-num";
+	vehicleNum.placeholder = "Sõiduki numbrimärk";
+	vehicleNum.type = "text";
+	let vehicleDate = document.createElement("input");
+	vehicleDate.className = "vehicle-date";
+	vehicleDate.placeholder = "Töö tähtaeg";
+	vehicleDate.type = "date";
 	let vehicleAdd = document.createElement("input");
 	vehicleAdd.type = "button";
-	vehicleAdd.value = "Lisa raamat";
+	vehicleAdd.value = "Lisa sõiduk";
 	let br = document.createElement("br");
 	categoryLabel.classList.add("active");
 
-	// Raamatu lisamine
+	// Sõiduki lisamine
 	vehicleAdd.addEventListener("click", function() {
-		CreateVehicle(vehicleName.value, vehicleLk.value, vehicleDesc.value, vehicleTbody, vehicles.length);
-		AddToVehicles(categoryId, vehicleName.value, vehicleLk.value, vehicleDesc.value);
+		CreateVehicle(vehicleName.value, vehicleNum.value, vehicleDate.value, vehicleTbody, vehicles.length);
+		AddToVehicles(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value);
 
 		vehicleName.value = "";
-		vehicleLk.value = "";
-		vehicleDesc.value = "";
+		vehicleNum.value = "";
+		vehicleDate.value = "";
 	});
 
 	// categoryi ja selle tabi aktiveerimine
@@ -102,17 +102,17 @@ function CreateCategory(categoryId, categoryName) {
 	inputContainer.className = "vehicle-inputs-container";
 	categoryTabs.appendChild(categoryLabel);
 	inputContainer.appendChild(vehicleName);
-	inputContainer.appendChild(vehicleLk);
-	inputContainer.appendChild(vehicleDesc);
+	inputContainer.appendChild(vehicleNum);
+	inputContainer.appendChild(vehicleDate);
 	inputContainer.appendChild(vehicleAdd);
 	categoryBlock.appendChild(inputContainer);
 
 	categoryBlock.appendChild(vehiclesContainer);
-	nimistu.appendChild(categoryBlock);
+	vehList.appendChild(categoryBlock);
 }
 
-function AddToVehicles(categoryId, vehicleTitle, vehiclePage, vehicleDescription) {
-	let vehicle = {"category":categoryId, "name":vehicleTitle, "lk":vehiclePage, "description":vehicleDescription};
+function AddToVehicles(categoryId, vehicleName, vehicleNum, vehicleDate) {
+	let vehicle = {"category":categoryId, "name":vehicleName, "num":vehicleNum, "vNum":vehicleDate};
 	vehicles.push(vehicle);
 	localStorage.setItem("vehicles", JSON.stringify(vehicles));
 }
@@ -123,52 +123,52 @@ function AddToCategorys(categoryId, categoryName) {
 	localStorage.setItem("categorys", JSON.stringify(categorys));
 }
 
-function CreateVehicle(vehicleTitle, vehiclePage, vehicleDescription, tbody, vehicleIndex) {
-	let bNameContainer = document.createElement("td");
-	let bName = document.createElement("input");
-	bName.value = vehicleTitle;
-	bName.id = "vehicle-name-"+vehicleIndex;
-	bName.type = "text";
-	bNameContainer.appendChild(bName);
-	let bLkContainer = document.createElement("td");
-	let bLk = document.createElement("input");
-	bLk.value = vehiclePage;
-	bLk.id = "vehicle-lk-"+vehicleIndex;
-	bLk.type = "text";
-	bLkContainer.appendChild(bLk);
-	let bDescContainer = document.createElement("td");
-	let bDesc = document.createElement("input");
-	bDesc.value = vehicleDescription;
-	bDesc.id = "vehicle-desc-"+vehicleIndex;
-	bDesc.type = "text";
-	bDescContainer.appendChild(bDesc);
-	let bBtnContainer = document.createElement("td");
-	let bEdit = document.createElement("input");
-	bBtnContainer.appendChild(bEdit);
-	bEdit.type = "button";
-	bEdit.value = "✓";
-	bEdit.addEventListener("click", function() {
-		vehicles[vehicleIndex].name = bName.value;
-		vehicles[vehicleIndex].lk = bLk.value;
-		vehicles[vehicleIndex].description = bDesc.value;
+function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex) {
+	let vNameContainer = document.createElement("td");
+	let vName = document.createElement("input");
+	vName.value = vehicleName;
+	vName.id = "vehicle-name-"+vehicleIndex;
+	vName.type = "text";
+	vNameContainer.appendChild(vName);
+	let vNumContainer = document.createElement("td");
+	let vNum = document.createElement("input");
+	vNum.value = vehicleNum;
+	vNum.id = "vehicle-num-"+vehicleIndex;
+	vNum.type = "text";
+	vNumContainer.appendChild(vNum);
+	let vDateContainer = document.createElement("td");
+	let vDate = document.createElement("date");
+	vDate.value = vehicleDate;
+	vDate.id = "vehicle-date-"+vehicleIndex;
+	vDate.type = "text";
+	vDateContainer.appendChild(vDate);
+	let vBtnContainer = document.createElement("td");
+	let vEdit = document.createElement("input");
+	vBtnContainer.appendChild(vEdit);
+	vEdit.type = "button";
+	vEdit.value = "✓";
+	vEdit.addEventListener("click", function() {
+		vehicles[vehicleIndex].name = vName.value;
+		vehicles[vehicleIndex].num = vNum.value;
+		vehicles[vehicleIndex].vNum = vDate.value;
 		localStorage.setItem("vehicles", JSON.stringify(vehicles));
 	});
-	let bDelete = document.createElement("input");
-	bBtnContainer.appendChild(bDelete);
-	bDelete.type = "button";
-	bDelete.value = "X";
-	bDelete.addEventListener("click", function() {
+	let vDelete = document.createElement("input");
+	vBtnContainer.appendChild(vDelete);
+	vDelete.type = "button";
+	vDelete.value = "X";
+	vDelete.addEventListener("click", function() {
 		vehicles.splice(vehicleIndex, 1);
 		localStorage.setItem("vehicles", JSON.stringify(vehicles));
 		RenderVehicles();
 	});
-	let bRow = document.createElement("tr");
-	bRow.className = "vehicle";
-	bRow.appendChild(bNameContainer);
-	bRow.appendChild(bLkContainer);
-	bRow.appendChild(bDescContainer);
-	bRow.appendChild(bBtnContainer);
-	tbody.appendChild(bRow);
+	let vRow = document.createElement("tr");
+	vRow.className = "vehicle";
+	vRow.appendChild(vNameContainer);
+	vRow.appendChild(vNumContainer);
+	vRow.appendChild(vDateContainer);
+	vRow.appendChild(vBtnContainer);
+	tbody.appendChild(vRow);
 }
 
 function RenderCategorys() {
@@ -178,9 +178,9 @@ function RenderCategorys() {
 }
 
 function DeleteAllVehicleDOMs() {
-	let buuks = document.querySelectorAll(".vehicle");
-	for(let i = 0, b; b = buuks[i]; i++) {
-		b.parentElement.removeChild(b);
+	let vhcl = document.querySelectorAll(".vehicle");
+	for(let i = 0, v; v = vhcl[i]; i++) {
+		v.parentElement.removeChild(v);
 	}
 }
 
@@ -188,7 +188,13 @@ function RenderVehicles() {
 	DeleteAllVehicleDOMs();
 	for(let i = 0, vehicle; vehicle = vehicles[i]; i++) {
 		let tbodyElement = document.querySelector("#category-"+vehicle.category+" table tbody");
-		CreateVehicle(vehicle.name, vehicle.lk, vehicle.description, tbodyElement, i);
+		let date = new Date();
+		let today = date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, '0') + "-" + String(date.getDate()).padStart(2, '0');
+		if(today == vehicle.vNum){
+			document.getElementById("vehicle-tabs").style.color = "red";
+			console.log("t2na");
+		}
+		CreateVehicle(vehicle.name, vehicle.num, vehicle.vNum, tbodyElement, i);
 	}
 }
 

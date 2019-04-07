@@ -1,7 +1,11 @@
 /* jshint esversion:6 */
 
 const tasksDiv = "taskList";
+
+// Style variables
 const taskDoneBg = "green";
+const taskDoneDeco = "line-through";
+const taskTodayBord = "2px solid red";
 
 class Task {
     constructor(title, description, date) {
@@ -22,8 +26,6 @@ class TaskList {
 
     loadTasks() {
         this.tasks = JSON.parse(window.localStorage.getItem('tasks')) || [];
-
-        // TODO: If localstorage is empty, load from file
     }
 
     render() {
@@ -37,19 +39,13 @@ class TaskList {
         this.tasks.forEach((task, taskIndex) => {
             const li = document.createElement('li');
             const removeTaskButton = document.createElement('div');
-            const removeIcon = document.createTextNode('\u00D7');
+            const removeIcon = document.createTextNode('❌');
 
             li.classList.add('task');
-            removeTaskButton.className = "delete-task-button";
 
             li.addEventListener('click', (event) => {
-                event.target.classList.add('task-completed');
-
-                if (task.done) {
-                    task.done = false;
-                } else {
-                    task.done = true;
-                }
+                event.target.classList.add('completedTask');
+                task.done = !task.done; // toggle done status
 
                 this.saveToAll();
                 this.loadAndRender();
@@ -63,27 +59,15 @@ class TaskList {
 
             if (task.done) {
                 li.style.backgroundColor = taskDoneBg;
-                li.style.textDecoration = "line-through";
+                li.style.textDecoration = taskDoneDeco;
             }
 
-            let today = new Date();
-            let dd = today.getDate();
-            let mm = today.getMonth() + 1; //January is 0!
-            let yyyy = today.getFullYear();
-
-            if (dd < 10) {
-                dd = '0' + dd;
-            }
-
-            if (mm < 10) {
-                mm = '0' + mm;
-            }
-
-            today = yyyy + '-' + mm + '-' + dd;
+            let today = new Date().toLocaleString("se-SE", { day: 'numeric', month: 'numeric', year: 'numeric' }); // yyyy-mm-dd
             if (task.date == today) {
-                li.style.border = "2px solid red";
+                li.style.border = taskTodayBord;
             }
-
+            
+            removeTaskButton.className = "removeButton";
             removeTaskButton.appendChild(removeIcon);
             li.innerHTML = `${task.title} <br> ${task.description} <br> ${task.date}`;
             li.appendChild(removeTaskButton);

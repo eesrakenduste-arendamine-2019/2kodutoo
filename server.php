@@ -1,12 +1,14 @@
 <?php
-
-if(isset($_POST["save"]) && !empty($_POST["save"])){
+if(isset($_POST["save"])){
     saveToFile($_POST["save"]);
 }
+
 function saveToFile($stringToSave){
     $object = new StdClass();
     $object -> last_modified = time();
-    $object -> content = $stringToSave;
+    if ($stringToSave != null){ // Whether there are tasks to save
+        $object -> content = $stringToSave;
+    }
     $jsonString = json_encode($object);
     if(file_put_contents("database.json", $jsonString)){
         echo "success";

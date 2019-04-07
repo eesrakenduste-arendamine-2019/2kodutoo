@@ -110,13 +110,24 @@ class TaskList {
     }
 
     saveToFile() {
-        $.post("server.php", {
-            save: this.tasks
-        }).done(function () {
-            console.log("Successfully saved to file");
-        }).fail(function () {
-            console.log("Failed to save to file");
-        });
+        if(this.tasks.length > 0){
+            $.post("server.php", {
+                save: this.tasks
+            }).done(function () {
+                console.log("Successfully saved to file");
+            }).fail(function () {
+                console.log("Failed to save to file");
+            });
+        }
+        else {
+            $.post("server.php", {
+                save: null
+            }).done(function () {
+                console.log("Successfully cleared the file");
+            }).fail(function () {
+                console.log("Failed to cleared the file");
+            });
+        }
     }
 
     saveToAll() {

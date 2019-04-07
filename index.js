@@ -1,11 +1,10 @@
 /* jshint esversion:6 */
 
-$(document).ready(function() {
-    render();
-});
+const tasksDiv = "taskList";
+const taskDoneBg = "green";
 
-class ToDo{
-    constructor(title, description, date){
+class Task {
+    constructor(title, description, date) {
         this.title = title;
         this.description = description;
         this.date = date;
@@ -13,47 +12,134 @@ class ToDo{
     }
 }
 
-let todos = [];
+class TaskList {
+    constructor() {
+        document.querySelector('#addButton').addEventListener('click', () => this.addTask());
 
-$("#saveButton").on("click", () => addEntry());
-function render(){
-    $("#todos").html(""); // Clear the view before loading items
-    $.get("database.txt", function(data){
-        let content = JSON.parse(data).content;
+        this.loadTasks();
+        this.render();
+    }
 
-        content.forEach(function(todo, todoIndex){
-            console.log(todoIndex);
-            $("#todos").append("<ul class='" + todoIndex + "'><li>" + todo.title + "</li><li>" + todo.description + "</li><li>" + todo.date + '</li></ul> <button id="deleteButton">X</button> <input type="checkbox" name="doneCheckbox">');
+    loadTasks() {
+        this.tasks = JSON.parse(window.localStorage.getItem('tasks')) || [];
+
+        // TODO: If localstorage is empty, load from file
+    }
+
+    render() {
+        if (document.querySelector('.' + tasksDiv)) {
+            document.body.removeChild(document.querySelector('.' + tasksDiv));
+        }
+
+        const ul = document.createElement('ul');
+        ul.className = tasksDiv;
+
+        this.tasks.forEach((task, taskIndex) => {
+            const li = document.createElement('li');
+            const removeTaskButton = document.createElement('div');
+            const removeIcon = document.createTextNode('\u00D7');
+
+            li.classList.add('task');
+            removeTaskButton.className = "delete-task-button";
+
+            li.addEventListener('click', (event) => {
+                event.target.classList.add('task-completed');
+
+                if (task.done) {
+                    task.done = false;
+                } else {
+                    task.done = true;
+                }
+
+                this.saveToAll();
+                this.loadAndRender();
+            });
+
+            removeTaskButton.addEventListener('click', () => {
+                ul.removeChild(li);
+                this.tasks = this.tasks.slice(0, taskIndex).concat(this.tasks.slice(taskIndex + 1, this.tasks.length));
+                this.saveToAll();
+            });
+
+            if (task.done) {
+                li.style.backgroundColor = taskDoneBg;
+                li.style.textDecoration = "line-through";
+            }
+
+            let today = new Date();
+            let dd = today.getDate();
+            let mm = today.getMonth() + 1; //January is 0!
+            let yyyy = today.getFullYear();
+
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+
+            today = yyyy + '-' + mm + '-' + dd;
+            if (task.date == today) {
+                li.style.border = "2px solid red";
+            }
+
+            removeTaskButton.appendChild(removeIcon);
+            li.innerHTML = `${task.title} <br> ${task.description} <br> ${task.date}`;
+            li.appendChild(removeTaskButton);
+            ul.appendChild(li);
+
         });
-    });
+
+        document.body.appendChild(ul);
+    }
+
+    addTask() {
+        const titleValue = document.querySelector('#title').value;
+        const descriptionValue = document.querySelector('#description').value;
+        const dateValue = document.querySelector('#date').value;
+
+        this.tasks.push(new Task(titleValue, descriptionValue, dateValue));
+
+        this.saveToAll();
+        this.loadAndRender();
+    }
+
+    saveInLocalStorage() {
+        window.localStorage.setItem('tasks', JSON.stringify(this.tasks));
+    }
+
+    saveToFile() {
+        $.post("server.php", {
+            save: this.tasks
+        }).done(function () {
+            console.log("Successfully saved to file");
+        }).fail(function () {
+            console.log("Failed to save to file");
+        });
+    }
+
+    saveToAll() {
+        this.saveInLocalStorage();
+        this.saveToFile();
+    }
+
+    loadAndRender() {
+        this.loadTasks();
+        this.render();
+    }
 }
 
-function addEntry(){
-    const titleValue = $("#title").val();
-    const descriptionValue = $("#description").val();
-    const dateValue = $("#date").val();
-
-    todos.push(new ToDo(titleValue, descriptionValue, dateValue));
-
-    saveAndRender();
+function forceHttps() {
+    // Ensures that the Greeny page is loaded over HTTPS - https://stackoverflow.com/a/4597085
+    if (window.location.href.indexOf("greeny.cs.tlu.ee") != -1) {
+        if (location.protocol == 'http:') {
+            location.href = 'https:' + window.location.href.substring(window.location.protocol.length);
+        }
+    }
 }
 
-function saveToFile(){
-    $.post("server.php", {
-        save: todos
-    }).done(function(){
-        console.log("Successfully saved to file");
-    }).fail(function(){
-        console.log("Failed to save to file");
-    });
-}
-
-function saveToLocalStorage(){
-    $(todos).val(localStorage);
-}
-
-function saveAndRender(){
-    saveToFile();
-    saveToLocalStorage();
-    render();
-}
+window.onload = function () {
+    forceHttps();
+    const taskList = new TaskList();
+};

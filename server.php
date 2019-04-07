@@ -8,7 +8,7 @@ function saveToFile($stringToSave){
     $object -> last_modified = time();
     $object -> content = $stringToSave;
     $jsonString = json_encode($object);
-    if(file_put_contents("database.txt", $jsonString)){
+    if(file_put_contents("database.json", $jsonString)){
         echo "success";
     }
 }

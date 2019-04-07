@@ -26,6 +26,12 @@ class TaskList {
 
     loadTasks() {
         this.tasks = JSON.parse(window.localStorage.getItem('tasks')) || [];
+
+        /* if (this.tasks == null || this.tasks == "[]"){ // If LS is empty, load from file
+            $.post("server.php", {
+                load: null
+            }); // Need to get the results and put them to LS - https://api.jquery.com/jquery.post/#example-4 https://stackoverflow.com/a/1152922
+        } */
     }
 
     render() {
@@ -66,7 +72,7 @@ class TaskList {
             if (task.date == today) {
                 li.style.border = taskTodayBord;
             }
-            
+
             removeTaskButton.className = "removeButton";
             removeTaskButton.appendChild(removeIcon);
             li.innerHTML = `${task.title} <br> ${task.description} <br> ${task.date}`;

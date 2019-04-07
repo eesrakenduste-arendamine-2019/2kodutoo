@@ -20,14 +20,14 @@ function saveToFile($stringToSave){
 }
 
 function readFromFile(){ // WIP
-    $file = file_get_contents("database.json")
-    if($file != null){
+    /*$file = file_get_contents("database.json")
+    if($file != null){ // This if is broken
         $object = new StdClass();
         $jsonString = json_decode($file);
         $tasks = $jsonString -> content;
     }
 
-    return $tasks;
+    return $tasks;*/
 }
 
 ?>

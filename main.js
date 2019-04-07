@@ -23,7 +23,7 @@ if(categoryAdd !== null && categoryAdd !== undefined) {
 function CreateCategory(categoryId, categoryName) {
 	let existingBlock = document.querySelector("#category-"+categoryId);
 	if(existingBlock !== null && existingBlock !== undefined) {
-		alert("Selline category on juba olemas!");
+		alert("Selline sõidukitüüp on juba olemas!");
 		return;
 	}
 
@@ -62,7 +62,7 @@ function CreateCategory(categoryId, categoryName) {
 	// Raamatu lisamise inputid.
 	let vehicleName = document.createElement("input");
 	vehicleName.type = "text";
-	vehicleName.className = "vehicle-title";
+	vehicleName.className = "vehicle-name";
 	vehicleName.placeholder = "Sõiduki nimi";
 	let vehicleNum = document.createElement("input");
 	vehicleNum.className = "vehicle-num";

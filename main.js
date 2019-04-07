@@ -3,7 +3,7 @@
 ﻿let categoryAdd = document.querySelector("#category");
 let vehicleType = document.querySelector("#vehicle-type");
 let vehicleList = document.querySelector("#veh-list");
-let vehicleTabs = document.querySelector("#vehicle-tabs");
+let categoryTabs = document.querySelector("#category-tabs");
 
 let categorys = JSON.parse(localStorage.getItem("categorys"));
 let vehicles = JSON.parse(localStorage.getItem("vehicles"));
@@ -99,7 +99,7 @@ function CreateCategory(categoryId, categoryName) {
 
 	let inputContainer = document.createElement("div");
 	inputContainer.className = "vehicle-inputs-container";
-	vehicleTabs.appendChild(categoryLabel);
+	categoryTabs.appendChild(categoryLabel);
 	inputContainer.appendChild(vehicleName);
 	inputContainer.appendChild(vehicleNum);
 	inputContainer.appendChild(vehicleDate);
@@ -210,7 +210,7 @@ function HideCategorys() {
 		}
 	}
 
-	let tabs = document.querySelectorAll("#vehicle-tabs span");
+	let tabs = document.querySelectorAll("#category-tabs span");
 	for(let i = 0, tab; tab = tabs[i]; i++) {
 		if(tab.classList.contains("active")) {
 			tab.classList.remove("active");

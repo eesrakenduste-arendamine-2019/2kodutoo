@@ -1,9 +1,9 @@
 /*jshint esversion:6*/
 
-let categoryAdd = document.querySelector("#vehicle");
-let categoryValue = document.querySelector("#vehicle-type");
-let vehList = document.querySelector("#veh-list");
-let categoryTabs = document.querySelector("#vehicle-tabs");
+﻿let categoryAdd = document.querySelector("#category");
+let vehicleType = document.querySelector("#vehicle-type");
+let vehicleList = document.querySelector("#veh-list");
+let vehicleTabs = document.querySelector("#vehicle-tabs");
 
 let categorys = JSON.parse(localStorage.getItem("categorys"));
 let vehicles = JSON.parse(localStorage.getItem("vehicles"));
@@ -11,15 +11,12 @@ let vehicles = JSON.parse(localStorage.getItem("vehicles"));
 if(categorys === null || categorys === undefined) { categorys = []; }
 if(vehicles === null || vehicles === undefined) { vehicles = []; }
 
-console.log(categorys);
-console.log(vehicles);
-
 if(categoryAdd !== null && categoryAdd !== undefined) {
 	categoryAdd.addEventListener("click", function() {
-		let categoryId = categoryValue.value.replace(/[^a-z0-9]/gi,'');
+		let categoryId = vehicleType.value.replace(/[^a-z0-9]/gi,'');
 		// kontroll kas juba on olemas.
-		CreateCategory(categoryId, categoryValue.value);
-		AddToCategorys(categoryId, categoryValue.value);
+		CreateCategory(categoryId, vehicleType.value);
+		AddToCategorys(categoryId, vehicleType.value);
 	});
 }
 
@@ -43,33 +40,33 @@ function CreateCategory(categoryId, categoryName) {
 	vehiclesContainer.class = "vehicles";
 
 	let vehiclesTable = document.createElement("table");
-	let vehicleThead = document.createElement("thead");
-	let vehicleTr = document.createElement("tr");
-	let vehicleTh = document.createElement("th");
-	vehicleTh.innerText = "Sõiduki nimi";
-	vehicleTr.appendChild(vehicleTh);
-	vehicleTh = document.createElement("th");
-	vehicleTh.innerText = "Sõiduki numbrimärk";
-	vehicleTr.appendChild(vehicleTh);
-	vehicleTh = document.createElement("th");
-	vehicleTh.innerText = "Töö tähtaeg";
-	vehicleTr.appendChild(vehicleTh);
-	vehicleTh = document.createElement("th"); // btnite jaoks
-	vehicleTr.appendChild(vehicleTh);
-	vehicleThead.appendChild(vehicleTr);
-	vehiclesTable.appendChild(vehicleThead);
+	let vehiclesThead = document.createElement("thead");
+	let vehiclesTr = document.createElement("tr");
+	let vehiclesTh = document.createElement("th");
+	vehiclesTh.innerText = "Sõiduki nimi";
+	vehiclesTr.appendChild(vehiclesTh);
+	vehiclesTh = document.createElement("th");
+	vehiclesTh.innerText = "Numbrimärk";
+	vehiclesTr.appendChild(vehiclesTh);
+	vehiclesTh = document.createElement("th");
+	vehiclesTh.innerText = "Töö tähtaeg";
+	vehiclesTr.appendChild(vehiclesTh);
+	vehiclesTh = document.createElement("th"); // btnite jaoks
+	vehiclesTr.appendChild(vehiclesTh);
+	vehiclesThead.appendChild(vehiclesTr);
+	vehiclesTable.appendChild(vehiclesThead);
 	let vehicleTbody = document.createElement("tbody");
 	vehiclesTable.appendChild(vehicleTbody);
 	vehiclesContainer.appendChild(vehiclesTable);
 
-	// Sõiduki lisamise inputid.
+	// Raamatu lisamise inputid.
 	let vehicleName = document.createElement("input");
 	vehicleName.type = "text";
 	vehicleName.className = "vehicle-title";
 	vehicleName.placeholder = "Sõiduki nimi";
 	let vehicleNum = document.createElement("input");
 	vehicleNum.className = "vehicle-num";
-	vehicleNum.placeholder = "Sõiduki numbrimärk";
+	vehicleNum.placeholder = "Numbrimärk";
 	vehicleNum.type = "text";
 	let vehicleDate = document.createElement("input");
 	vehicleDate.className = "vehicle-date";
@@ -81,7 +78,7 @@ function CreateCategory(categoryId, categoryName) {
 	let br = document.createElement("br");
 	categoryLabel.classList.add("active");
 
-	// Sõiduki lisamine
+	// Raamatu lisamine
 	vehicleAdd.addEventListener("click", function() {
 		CreateVehicle(vehicleName.value, vehicleNum.value, vehicleDate.value, vehicleTbody, vehicles.length);
 		AddToVehicles(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value);
@@ -91,7 +88,7 @@ function CreateCategory(categoryId, categoryName) {
 		vehicleDate.value = "";
 	});
 
-	// categoryi ja selle tabi aktiveerimine
+	// Zanri ja selle tabi aktiveerimine
 	categoryLabel.addEventListener("click", function() {
 		HideCategorys();
 		categoryBlock.classList.add("active");
@@ -100,7 +97,7 @@ function CreateCategory(categoryId, categoryName) {
 
 	let inputContainer = document.createElement("div");
 	inputContainer.className = "vehicle-inputs-container";
-	categoryTabs.appendChild(categoryLabel);
+	vehicleTabs.appendChild(categoryLabel);
 	inputContainer.appendChild(vehicleName);
 	inputContainer.appendChild(vehicleNum);
 	inputContainer.appendChild(vehicleDate);
@@ -108,12 +105,12 @@ function CreateCategory(categoryId, categoryName) {
 	categoryBlock.appendChild(inputContainer);
 
 	categoryBlock.appendChild(vehiclesContainer);
-	vehList.appendChild(categoryBlock);
+	vehicleList.appendChild(categoryBlock);
 }
 
 function AddToVehicles(categoryId, vehicleName, vehicleNum, vehicleDate) {
-	let vehicle = {"category":categoryId, "name":vehicleName, "num":vehicleNum, "vNum":vehicleDate};
-	vehicles.push(vehicle);
+	let vhcl = {"category":categoryId, "name":vehicleName, "num":vehicleNum, "date":vehicleDate};
+	vehicles.push(vhcl);
 	localStorage.setItem("vehicles", JSON.stringify(vehicles));
 }
 
@@ -137,7 +134,7 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	vNum.type = "text";
 	vNumContainer.appendChild(vNum);
 	let vDateContainer = document.createElement("td");
-	let vDate = document.createElement("date");
+	let vDate = document.createElement("input");
 	vDate.value = vehicleDate;
 	vDate.id = "vehicle-date-"+vehicleIndex;
 	vDate.type = "text";
@@ -150,7 +147,7 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	vEdit.addEventListener("click", function() {
 		vehicles[vehicleIndex].name = vName.value;
 		vehicles[vehicleIndex].num = vNum.value;
-		vehicles[vehicleIndex].vNum = vDate.value;
+		vehicles[vehicleIndex].date = vDate.value;
 		localStorage.setItem("vehicles", JSON.stringify(vehicles));
 	});
 	let vDelete = document.createElement("input");
@@ -163,7 +160,7 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 		RenderVehicles();
 	});
 	let vRow = document.createElement("tr");
-	vRow.className = "vehicles";
+	vRow.className = "vhcl";
 	vRow.appendChild(vNameContainer);
 	vRow.appendChild(vNumContainer);
 	vRow.appendChild(vDateContainer);
@@ -177,24 +174,18 @@ function RenderCategorys() {
 	}
 }
 
-function DeleteAllVehicleDOMs() {
-	let vhcl = document.querySelectorAll(".vehicle");
-	for(let i = 0, v; v = vhcl[i]; i++) {
-		v.parentElement.removeChild(v);
+function DeleteAllBookDOMs() {
+	let vhcls = document.querySelectorAll(".vhcl");
+	for(let i = 0, b; b = vhcls[i]; i++) {
+		b.parentElement.removeChild(b);
 	}
 }
 
 function RenderVehicles() {
-	DeleteAllVehicleDOMs();
-	for(let i = 0, vehicle; vehicle = vehicles[i]; i++) {
-		let tbodyElement = document.querySelector("#category-"+vehicle.category+" table tbody");
-		let date = new Date();
-		let today = date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, '0') + "-" + String(date.getDate()).padStart(2, '0');
-		if(today == vehicle.vNum){
-			document.getElementById("vehicle-tabs").style.color = "red";
-			console.log("t2na");
-		}
-		CreateVehicle(vehicle.name, vehicle.num, vehicle.vNum, tbodyElement, i);
+	DeleteAllBookDOMs();
+	for(let i = 0, vhcl; vhcl = vehicles[i]; i++) {
+		let tbodyElement = document.querySelector("#category-"+vhcl.category+" table tbody");
+		CreateVehicle(vhcl.name, vhcl.num, vhcl.date, tbodyElement, i);
 	}
 }
 

@@ -16,7 +16,7 @@ body {
 	margin: 20px 0;
 }
 
-.vehicle {
+.category {
     display: none;
     background: #333;
     color: #FFF;
@@ -41,7 +41,7 @@ body {
     padding: 4px 12px;
 }
 
-.vehicle.active {
+.category.active {
 	display: block;
 }
 

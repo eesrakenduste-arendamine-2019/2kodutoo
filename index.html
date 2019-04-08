@@ -6,57 +6,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="panel">
-        <div class="panel-header">
-            <p>Lisa ülesanne</p>
-        </div>
-        <div class="panel-content">
-            <form>
-                
-                
-                <div class="form-row">
-                    <label>Pealkiri:</label>
-                    <input type="text" id="title">
-                    <label>Sisu:</label>
-                    <input type="text" id="description">
-                    <label>Tähtaeg:</label>
-                    <input type="date" id="date">
-                    <label>Kategooria:</label>
-                    <select>
-                        <option value="Kool">Kool</option>
-                        <option value="Töö">Töö</option>
-                        <option value="Isiklik">Isiklik</option>
-                        <option value="Muu">Muu</option>
-                    </select>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="card mt-4">
+                    <div class="card-header">
+                        Lisa ülesanne
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="title" >Pealkiri:</label>
+                                    <input type="text" class="form-control" id="title">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="description" >Sisu:</label>
+                                    <input type="text" class="form-control" id="description">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="date" >Tähtaeg:</label>
+                                    <input type="date" class="form-control" id="date">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="category" >Kategooria:</label>
+                                    <select id="category" class="form-control">
+                                        <option value="Kool">Kool</option>
+                                        <option value="Töö">Töö</option>
+                                        <option value="Isiklik">Isiklik</option>
+                                        <option value="Muu">Muu</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button id="addButton" class="btn btn-info mr-1" >Lisa</button>
+                            <button id="saveButton" class="btn btn-info mx-1" >Salvesta</button>
+                            <button id="loadButton" class="btn btn-info mx-1">Lae Serverist</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="form-row">
-                    <button id="addButton">Lisa</button>
-                    <button id="saveButton">Salvesta</button>
-                    <button id="loadButton">Lae Serverist</button>
-                </div>
-            </form>
+                
+                <hr>
+                <div id="todos">Siia tulevad todod</div>
+                <table id="todo" class="table">
+                    <tr id="header">
+                        <th>Tehtud</th>
+                        <th>Pealkiri</th>
+                        <th>Sisutekst</th>
+                        <th>Tähtaeg</th>
+                        <th>Kategooria</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
-    
-    <hr>
-    <div id="todos">Siia tulevad todod</div>
-    <table id="todo">
-        <tr id="header">
-            <th>Pealkiri</th>
-            <th>Sisutekst</th>
-            <th>Tähtaeg</th>
-            <th>Kategooria</th>
-            <th>Tehtud</th>
-            <th>(muuda)</th>
-            <th>(kustuta)</th>
-        </tr>
-    </table>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="index.js"></script>
 </body>
 

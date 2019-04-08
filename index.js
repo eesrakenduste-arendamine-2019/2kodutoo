@@ -31,6 +31,7 @@ $(function() { // Same as $(document).ready();
     });
     $('#loadButton').on('click', () => loadFromFile());
     $('#todo').on('click', '.deleteButton', removeEntry);
+    $('#todo').on('change', '.doneCheckbox', toggleDone);
     //$('#todo').on('change', '.doneCheckbox', removeEntry);
 
     loadFromLocalStorage();
@@ -47,13 +48,13 @@ function render() {
             checked = 'checked';
         }
         $('#todo').append('<tr>' + 
+            '<td><input type="checkbox" class="doneCheckbox" data-id="' + todoIndex + '" name="done" value="1" ' + checked + '></td>' +
             '<td>' + todo.title + '</td>' + 
             '<td>' + todo.description + '</td>' +
             '<td>' + todo.date + '</td>' +
             '<td>' + todo.category + '</td>' +
-            '<td><input type="checkbox" class="doneCheckbox" name="done" value="1" ' + checked + '></td>' +
-            '<td><button class="editButton">Muuda</button></td>' +
-            '<td><button class="deleteButton" data-id="' + todoIndex + '" >Kustuta</button></td>' +
+            '<td><button class="editButton btn btn-sm btn-info">Muuda</button></td>' +
+            '<td><button class="deleteButton btn btn-sm btn-danger" data-id="' + todoIndex + '" >Kustuta</button></td>' +
         '</tr>');
     });
 }
@@ -69,6 +70,11 @@ function addEntry() {
 
     console.log(todos);
     render();
+}
+
+function toggleDone(e) {
+    let id = $(this).data('id');
+    todos[id].done = this.checked;
 }
 
 function removeEntry(e) {
@@ -110,7 +116,7 @@ function loadFromLocalStorage() {
 function arrayToTodoItems(items) {
     let objects = [];
     items.forEach(todo => {
-        objects.push(new Todo(todo.title, todo.description, title.date, title.done));
+        objects.push(new Todo(todo.title, todo.description, todo.date, todo.category, todo.done));
     });
     return objects;
 }

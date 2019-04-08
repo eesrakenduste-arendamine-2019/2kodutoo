@@ -116,9 +116,31 @@ function AddToVehicles(categoryId, vehicleName, vehicleNum, vehicleDate) {
 	localStorage.setItem("vehicles", JSON.stringify(vehicles));
 }
 
+// function AddToCategorys(categoryId, categoryName) {
+// 	let category = {"id":categoryId, "name":categoryName};
+// 	categorys.push(category);
+// 	localStorage.setItem("categorys", JSON.stringify(categorys));
+// }
+
 function AddToCategorys(categoryId, categoryName) {
 	let category = {"id":categoryId, "name":categoryName};
 	categorys.push(category);
+	var data = new FormData();
+		data.append("name", htmlElement.value);
+
+		var req = new XMLHttpRequest();
+		req.open('POST', "/url-kuhu-saata-info.php");
+		req.onload = function() {
+			if (req.status == 200) {
+				console.log(req.response);
+			}
+		};
+
+		req.onerror = function() {
+			console.log("Error Network Error");
+		};
+
+		req.send(data);
 	localStorage.setItem("categorys", JSON.stringify(categorys));
 }
 
@@ -207,25 +229,23 @@ function HideCategorys() {
 	}
 }
 
-function saveCategory(){
-	var data = new FormData();
-		data.append("name", vehicle-type.value);
+function GetCategories(){
+	$.get('categories.txt', function(data){
+    let content = JSON.parse(data).content;
+    content.forEach(function(categoryId, categoryName){
+      console.log(categoryId);
+      $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
+  });
+});
 
-		var req = new XMLHttpRequest();
-		req.open('POST', "server.php");
-		req.onload = function() {
-			if (req.status == 200) {
-				console.log(req.response);
-			}
-		};
-
-		req.onerror = function() {
-			console.log("Error: Network Error");
-		};
-
-		req.send(data);
-  //$.post('server.php', {save: category});
-}
+function GetVehicles(){
+	$.get('vehicles.txt', function(data){
+    let content = JSON.parse(data).content;
+    content.forEach(function(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value){
+      console.log(todoIndex);
+      $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
+  });
+});
 
 (function() {
    RenderCategorys();

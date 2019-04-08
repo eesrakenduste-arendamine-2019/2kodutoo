@@ -61,7 +61,7 @@ function CreateCategory(categoryId, categoryName) {
 	vehiclesTable.appendChild(vehicleTbody);
 	vehiclesContainer.appendChild(vehiclesTable);
 
-	// Raamatu lisamise inputid.
+	// Sõiduki lisamise inputid.
 	let vehicleName = document.createElement("input");
 	vehicleName.type = "text";
 	vehicleName.className = "vehicle-name";
@@ -80,7 +80,7 @@ function CreateCategory(categoryId, categoryName) {
 	let br = document.createElement("br");
 	categoryLabel.classList.add("active");
 
-	// Raamatu lisamine
+	// Sõiduki lisamine
 	vehicleAdd.addEventListener("click", function() {
 		CreateVehicle(vehicleName.value, vehicleNum.value, vehicleDate.value, vehicleTbody, vehicles.length);
 		AddToVehicles(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value);
@@ -173,6 +173,7 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 		vehicles[vehicleIndex].num = vNum.value;
 		vehicles[vehicleIndex].date = vDate.value;
 		localStorage.setItem("vehicles", JSON.stringify(vehicles));
+		RenderVehicles();
 	});
 	let vDelete = document.createElement("input");
 	vBtnContainer.appendChild(vDelete);
@@ -183,12 +184,22 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 		localStorage.setItem("vehicles", JSON.stringify(vehicles));
 		RenderVehicles();
 	});
+	let date = new Date();
+	let today = date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, '0') + "-" + String(date.getDate()).padStart(2, '0');
+	let vAlertContainer = document.createElement("td");
+	let vAlert = document.createElement("p"); //this shit aint working
+	vAlertContainer.appendChild(vAlert);
+	if(today == vDate.value){
+		console.log(vName.value);
+		vAlert.innerHTML = "TÄNA!";
+	}
 	let vRow = document.createElement("tr");
 	vRow.className = "vhcl";
 	vRow.appendChild(vNameContainer);
 	vRow.appendChild(vNumContainer);
 	vRow.appendChild(vDateContainer);
 	vRow.appendChild(vBtnContainer);
+	vRow.appendChild(vAlertContainer);
 	tbody.appendChild(vRow);
 }
 
@@ -200,8 +211,8 @@ function RenderCategorys() {
 
 function DeleteAllBookDOMs() {
 	let vhcls = document.querySelectorAll(".vhcl");
-	for(let i = 0, b; b = vhcls[i]; i++) {
-		b.parentElement.removeChild(b);
+	for(let i = 0, v; v = vhcls[i]; i++) {
+		v.parentElement.removeChild(v);
 	}
 }
 

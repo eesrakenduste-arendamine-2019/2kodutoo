@@ -29,7 +29,7 @@ $(function() { // Same as $(document).ready();
         saveToFile();
         saveToLocalStorage();
     });
-    $('#loadButton').on('click', () => loadFromFile());
+    $('#loadButton').on('click', (e) => loadFromFile(e));
     $('#todo').on('click', '.deleteButton', removeEntry);
     $('#todo').on('change', '.doneCheckbox', toggleDone);
     //$('#todo').on('change', '.doneCheckbox', removeEntry);
@@ -51,7 +51,7 @@ function render() {
             '<td><input type="checkbox" class="doneCheckbox" data-id="' + todoIndex + '" name="done" value="1" ' + checked + '></td>' +
             '<td>' + todo.title + '</td>' + 
             '<td>' + todo.description + '</td>' +
-            '<td>' + todo.date + '</td>' +
+            '<td class="text-nowrap">' + todo.date + '</td>' +
             '<td>' + todo.category + '</td>' +
             '<td><button class="editButton btn btn-sm btn-info">Muuda</button></td>' +
             '<td><button class="deleteButton btn btn-sm btn-danger" data-id="' + todoIndex + '" >Kustuta</button></td>' +
@@ -86,12 +86,13 @@ function removeEntry(e) {
 }
 
 function saveToFile() {
-    $.post('server.php', { save: todos }).fail(function () {
+    $.post('server.php', { save: JSON.stringify(todos) }).fail(function () {
         alert('Failed to save to the server!');
     });
 }
 
-function loadFromFile() {
+function loadFromFile(e) {
+    e.preventDefault();
     $.getJSON('database.txt', function (data) {
         todos = arrayToTodoItems(data.content);
         console.log(todos);

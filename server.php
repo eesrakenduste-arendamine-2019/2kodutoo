@@ -5,12 +5,12 @@
 
     function saveToFile($stringToSave)
     {
-        $object=new StdClass();
-        $object->last_modified=time();
-        $object->content =$stringToSave;
+        $object = [];
+        $object['last_modified'] = time();
+        $object['content'] = json_decode($stringToSave);
         $jsonString=json_encode($object);
         if (file_put_contents("database.txt",$jsonString)) {
-            echo "SUCCess";
+            echo "SUCCESS";
         }
     }
  ?>

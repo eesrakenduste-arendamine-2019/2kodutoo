@@ -28,11 +28,13 @@ class TaskList {
     loadTasks() {
         this.tasks = JSON.parse(window.localStorage.getItem('tasks')) || [];
 
-        /* if (this.tasks == null || this.tasks == "[]"){ // If LS is empty, load from file
-            $.post("server.php", {
-                load: null
-            }); // Need to get the results and put them to LS - https://api.jquery.com/jquery.post/#example-4 https://stackoverflow.com/a/1152922
-        } */
+        // Load from database if localstorage is empty
+        if (this.tasks == null || this.tasks == "[]"){
+            // https://api.jquery.com/jquery.post/#example-4 https://stackoverflow.com/a/1152922
+            $.post("server.php", { load: null }).done(function(data) {
+                console.log("Data Loaded: " + data);
+            });
+        }
     }
 
     render() {
@@ -116,7 +118,7 @@ class TaskList {
             }).done(function () {
                 console.log("Successfully cleared the file");
             }).fail(function () {
-                console.log("Failed to cleared the file");
+                console.log("Failed to clear the file");
             });
         }
     }

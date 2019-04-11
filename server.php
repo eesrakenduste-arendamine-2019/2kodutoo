@@ -4,7 +4,7 @@ if(isset($_POST["save"])){
 }
 
 if(isset($_POST["load"])){
-    readFromFile();
+    loadFromFile();
 }
 
 function saveToFile($stringToSave){
@@ -19,15 +19,15 @@ function saveToFile($stringToSave){
     }
 }
 
-function readFromFile(){ // WIP
-    /*$file = file_get_contents("database.json")
-    if($file != null){ // This if is broken
+function loadFromFile(){
+    $file = file_get_contents("database.json");
+    if(!empty($file)){
         $object = new StdClass();
         $jsonString = json_decode($file);
         $tasks = $jsonString -> content;
     }
 
-    return $tasks;*/
+    return $tasks;
 }
 
 ?>

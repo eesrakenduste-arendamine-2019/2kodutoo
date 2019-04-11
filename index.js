@@ -19,6 +19,7 @@ class Task {
 class TaskList {
     constructor() {
         document.querySelector('#addButton').addEventListener('click', () => this.addTask());
+        document.querySelector('#sortButton').addEventListener('click', () => this.sort());
 
         this.loadTasks();
         this.render();
@@ -127,6 +128,19 @@ class TaskList {
 
     loadAndRender() {
         this.loadTasks();
+        this.render();
+    }
+
+    sort(){
+        const sortProperty = document.querySelector('#sortProperty').value;
+        const sortDirection = document.querySelector('#sortDirection').value;
+
+        if (sortDirection == "asc") {
+            this.tasks.sort((a,b) => a[sortProperty] > b[sortProperty] ? 1 : -1);
+        } else if (sortDirection == "desc") {
+            this.tasks.sort((a,b) => a[sortProperty] < b[sortProperty] ? 1 : -1);
+        }
+
         this.render();
     }
 }

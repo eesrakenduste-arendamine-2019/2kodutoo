@@ -13,6 +13,21 @@
     <input type="text" id="description">
     <input type="date" id="date">
     <button id="addButton">+</button>
+    
+    <div id="sort">
+        <label for="sortProperty">Sorteeri:</label>
+        <select id="sortProperty">
+            <option value="title">Nime järgi</option>
+            <option value="description">Kirjelduse järgi</option>
+            <option value="date">Kuupäeva järgi</option>
+            <option value="done">Valmimise järgi</option>
+        </select>
+        <select id="sortDirection">
+            <option value="asc">kasvavalt</option>
+            <option value="desc">kahanevalt</option>
+        </select>
+        <button id="sortButton">></button>
+    </div>
 
     <div id="taskList"></div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"

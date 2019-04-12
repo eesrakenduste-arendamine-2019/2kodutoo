@@ -116,33 +116,33 @@ function AddToVehicles(categoryId, vehicleName, vehicleNum, vehicleDate) {
 	localStorage.setItem("vehicles", JSON.stringify(vehicles));
 }
 
-// function AddToCategorys(categoryId, categoryName) {
-// 	let category = {"id":categoryId, "name":categoryName};
-// 	categorys.push(category);
-// 	localStorage.setItem("categorys", JSON.stringify(categorys));
-// }
-
 function AddToCategorys(categoryId, categoryName) {
 	let category = {"id":categoryId, "name":categoryName};
 	categorys.push(category);
-	var data = new FormData();
-		data.append("name", htmlElement.value);
-
-		var req = new XMLHttpRequest();
-		req.open('POST', "/url-kuhu-saata-info.php");
-		req.onload = function() {
-			if (req.status == 200) {
-				console.log(req.response);
-			}
-		};
-
-		req.onerror = function() {
-			console.log("Error Network Error");
-		};
-
-		req.send(data);
 	localStorage.setItem("categorys", JSON.stringify(categorys));
 }
+
+// function AddToCategorys(categoryId, categoryName) {
+// 	let category = {"id":categoryId, "name":categoryName};
+// 	categorys.push(category);
+// 	var data = new FormData();
+// 		data.append("name", htmlElement.value);
+//
+// 		var req = new XMLHttpRequest();
+// 		req.open('POST', "/url-kuhu-saata-info.php");
+// 		req.onload = function() {
+// 			if (req.status == 200) {
+// 				console.log(req.response);
+// 			}
+// 		};
+//
+// 		req.onerror = function() {
+// 			console.log("Error Network Error");
+// 		};
+//
+// 		req.send(data);
+// 	localStorage.setItem("categorys", JSON.stringify(categorys));
+// }
 
 function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex) {
 	let vNameContainer = document.createElement("td");

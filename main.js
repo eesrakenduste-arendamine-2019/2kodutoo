@@ -161,7 +161,7 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	let vDate = document.createElement("input");
 	vDate.value = vehicleDate;
 	vDate.id = "vehicle-date-"+vehicleIndex;
-	vDate.type = "text";
+	vDate.type = "date";
 	vDateContainer.appendChild(vDate);
 	let vBtnContainer = document.createElement("td");
 	let vEdit = document.createElement("input");
@@ -185,19 +185,16 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 		RenderVehicles();
 	});
 	let date = new Date();
-	let date2 = new Date(vDate.value);
-	//console.log(date2);
-	//console.log(date);
-	//let today = date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, '0') + "-" + String(date.getDate()).padStart(2, '0');
+	let today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+	let date2 = vDate.value.split("-");
+	let dueDate = new Date(date2[0], date2[1] - 1, date2[2]);
 	let vAlertContainer = document.createElement("td");
-	let vAlert = document.createElement("p"); //this shit aint working
+	let vAlert = document.createElement("p");
 	vAlertContainer.appendChild(vAlert);
-	if(date2 === vDate.value){
-		//console.log(vDate.value);
+	if(dueDate.getTime() == today.getTime()){
 		vAlert.innerHTML = "TÄNA!";
 	}
-	if(date2 < vDate.value){
-		//console.log(vDate.value);
+	else if(dueDate.getTime() < today.getTime()){
 		vAlert.innerHTML = "MÖÖDUNUD!";
 	}
 	let vRow = document.createElement("tr");

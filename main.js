@@ -185,13 +185,20 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 		RenderVehicles();
 	});
 	let date = new Date();
-	let today = date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, '0') + "-" + String(date.getDate()).padStart(2, '0');
+	let date2 = new Date(vDate.value);
+	//console.log(date2);
+	//console.log(date);
+	//let today = date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, '0') + "-" + String(date.getDate()).padStart(2, '0');
 	let vAlertContainer = document.createElement("td");
 	let vAlert = document.createElement("p"); //this shit aint working
 	vAlertContainer.appendChild(vAlert);
-	if(today == vDate.value){
-		console.log(vName.value);
+	if(date2 === vDate.value){
+		//console.log(vDate.value);
 		vAlert.innerHTML = "TÄNA!";
+	}
+	if(date2 < vDate.value){
+		//console.log(vDate.value);
+		vAlert.innerHTML = "MÖÖDUNUD!";
 	}
 	let vRow = document.createElement("tr");
 	vRow.className = "vhcl";
@@ -209,7 +216,7 @@ function RenderCategorys() {
 	}
 }
 
-function DeleteAllBookDOMs() {
+function DeleteAllVehicleDOMs() {
 	let vhcls = document.querySelectorAll(".vhcl");
 	for(let i = 0, v; v = vhcls[i]; i++) {
 		v.parentElement.removeChild(v);
@@ -217,7 +224,7 @@ function DeleteAllBookDOMs() {
 }
 
 function RenderVehicles() {
-	DeleteAllBookDOMs();
+	DeleteAllVehicleDOMs();
 	for(let i = 0, vhcl; vhcl = vehicles[i]; i++) {
 		let tbodyElement = document.querySelector("#category-"+vhcl.category+" table tbody");
 		CreateVehicle(vhcl.name, vhcl.num, vhcl.date, tbodyElement, i);
@@ -239,8 +246,8 @@ function HideCategorys() {
 		}
 	}
 }
-
-function GetCategories(){
+/*
+function GetCategories(){ //siin forEach loopi kasutades on max 2 väärtust, kus esimene on item(nt categoryId), teine on index. Vt: https://www.w3schools.com/jsref/jsref_foreach.asp
 	$.get('categories.txt', function(data){
     let content = JSON.parse(data).content;
     content.forEach(function(categoryId, categoryName){
@@ -248,16 +255,17 @@ function GetCategories(){
       $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
   });
 });
-
+}
 function GetVehicles(){
 	$.get('vehicles.txt', function(data){
     let content = JSON.parse(data).content;
-    content.forEach(function(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value){
+    content.forEach(function(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value){ //seepärast see siin ei tööta
       console.log(todoIndex);
       $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
   });
 });
-
+}
+*/
 (function() {
    RenderCategorys();
    RenderVehicles();

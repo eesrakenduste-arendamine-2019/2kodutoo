@@ -23,10 +23,15 @@ function loadFromFile(){
     $file = file_get_contents("database.json");
     if(!empty($file)){
         $object = new StdClass();
-        $jsonString = json_decode($file);
-        $tasks = $jsonString -> content;
+        $jsonString = json_decode($file); // decode as array
+        $tasks = $jsonString -> content; // get the content
+        $tasks = json_encode($tasks); // encode as json again
+    }
+    else {
+        $tasks = "[]";
     }
 
+    print_r($tasks);
     return $tasks;
 }
 

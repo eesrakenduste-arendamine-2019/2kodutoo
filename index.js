@@ -26,13 +26,15 @@ class TaskList {
     }
 
     loadTasks() {
-        this.tasks = JSON.parse(window.localStorage.getItem('tasks')) || [];
+        this.tasks = JSON.parse(window.localStorage.getItem('tasks'));
 
-        // Load from database if localstorage is empty
-        if (this.tasks == null || this.tasks == "[]"){
-            // https://api.jquery.com/jquery.post/#example-4 https://stackoverflow.com/a/1152922
-            $.post("server.php", { load: null }).done(function(data) {
-                console.log("Data Loaded: " + data);
+        // Load from database if localstorage is empty - https://api.jquery.com/jquery.post/#example-4
+        if (this.tasks == null || this.tasks == "[]") {
+            $.post("server.php", {
+                load: null
+            }).done(function (data) {
+                this.tasks = data;
+                console.log("Loaded tasks from database: " + this.tasks);
             });
         }
     }
@@ -103,7 +105,7 @@ class TaskList {
     }
 
     saveToFile() {
-        if(this.tasks.length > 0){
+        if (this.tasks.length > 0) {
             $.post("server.php", {
                 save: this.tasks
             }).done(function () {
@@ -111,8 +113,7 @@ class TaskList {
             }).fail(function () {
                 console.log("Failed to save to file");
             });
-        }
-        else {
+        } else {
             $.post("server.php", {
                 save: null
             }).done(function () {
@@ -133,14 +134,14 @@ class TaskList {
         this.render();
     }
 
-    sort(){
+    sort() {
         const sortProperty = document.querySelector('#sortProperty').value;
         const sortDirection = document.querySelector('#sortDirection').value;
 
         if (sortDirection == "asc") {
-            this.tasks.sort((a,b) => a[sortProperty] > b[sortProperty] ? 1 : -1);
+            this.tasks.sort((a, b) => a[sortProperty] > b[sortProperty] ? 1 : -1);
         } else if (sortDirection == "desc") {
-            this.tasks.sort((a,b) => a[sortProperty] < b[sortProperty] ? 1 : -1);
+            this.tasks.sort((a, b) => a[sortProperty] < b[sortProperty] ? 1 : -1);
         }
 
         this.render();

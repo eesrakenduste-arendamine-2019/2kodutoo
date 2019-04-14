@@ -4,9 +4,8 @@
     $serverPassword = "ifikas18";
     $database = "if18_eesrakenduste_todo";
     session_start();
-    if(isset($_POST["save"]) && !empty($_POST["save"])){
-        saveToFile($_POST["save"]);
-
+    if(isset($_POST["title"]) && !empty($_POST["title"])){
+        saveToFile($_POST["title"],$_POST["desc"],$_POST["time"]);
     }
 /*     function saveToFile($stringToSave){
         $object = new StdClass();
@@ -23,20 +22,16 @@
         echo $object->content;
         echo "Success";
     }*/
-    function saveToFile($stringToSave){
+    function saveToFile($title, $description,$dateT){
         echo "Töötab!";
-        $lo = json_decode($stringToSave);
-        $jsonString = json_encode($lo[0]->title);
+        $myTitle = json_encode($title);
+        $myDesc = json_encode($description);
+        $myDate = json_encode($dateT);
         $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-        $stmt = $mysqli->prepare("INSERT INTO todo (content) VALUES (?)");
+        $stmt = $mysqli->prepare("INSERT INTO todo (title, descriptionT, dateT) VALUES (?,?,?)");
         echo $mysqli->error;
-        $stmt->bind_param("s", $jsonString);//s - string, i - integer, d - decimal
-        if ($stmt->execute()) {
-            echo 'Info "'. $jsonString .'"'; 
-        } 
-        else { 
-            echo "Sõnumi salvestamisel tekkis tõrge: ". $stmt->error; 
-        }
+        $stmt->bind_param("sss", $myTitle, $myDesc, $myDate);//s - string, i - integer, d - decimal
+        $stmt->execute();
         $stmt->close();
         $mysqli->close();
     }

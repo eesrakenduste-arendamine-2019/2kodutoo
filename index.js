@@ -11,10 +11,10 @@ class Todo{
 let todos = [];
 
 $('#addButton').on("click", ()=> addEntry());
-$('#saveButton').on("click", ()=> saveToFile());
+//$('#saveButton').on("click", ()=> saveToFile());
 $('#loadButton').on("click", ()=> render());
 let content;
-function render(){
+/*function render(){
     $('#todos').html("");
     $.get("database.txt", function(data){
         content = JSON.parse(data).content;
@@ -26,26 +26,48 @@ function render(){
          });
 
     });
+}*/
+function render(){
+    $('#todos').html("");
+    $.get("test.php", function(data) {
+        console.log(data);
+        
+        content = JSON.parse(data).content;
+        console.log(content);
+        
+        content.forEach(function(todo){
+            //prepend on ette
+            $('#todos').append('<ul><li>'+todo.title+'</li><li>'+todo.description+'</li><div class="delete-task-button">×</div></ul>');
+            saveInLocalStorage();
+         });
+
+    });
 }
 function saveInLocalStorage(){
     window.localStorage.setItem('content', JSON.stringify(content));
 }
 function addEntry(){
+    todos = [];
     const titleValue = $('#title').val();
     const descriptionValue = $('#description').val();
     const dateValue = $('#date').val();
 
     todos.push(new Todo(titleValue,descriptionValue,dateValue));
-
+    saveToFile();
     console.log(todos);    
 }
 function saveToFile(){
-    $.post("server.php", {save: todos}).done(function(){
+    todos.forEach(function(todo){
+        $.post("server.php", {title: todo.title, desc:todo.description, time: todo.date});
+    });
+    
+    /*$.post("server.php", {save: todos}).done(function(){
+        //$.post("server.php", {save: todos});
         console.log("done");
     }).fail(function(){
         console.log("fail");
     }).always(function(){
         console.log("always");
         
-    });
+    });*/
 }

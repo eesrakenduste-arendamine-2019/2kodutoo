@@ -1,4 +1,4 @@
-/* jshint esversion:6 */
+/* jshint esversion:8 */
 
 const tasksDiv = "taskList";
 
@@ -21,22 +21,29 @@ class TaskList {
         document.querySelector('#addButton').addEventListener('click', () => this.addTask());
         document.querySelector('#sortButton').addEventListener('click', () => this.sort());
 
-        this.loadTasks();
-        this.render();
+        this.loadAndRender();
     }
 
-    loadTasks() {
+    async loadTasks() {
         this.tasks = JSON.parse(window.localStorage.getItem('tasks'));
 
-        // Load from database if localstorage is empty - https://api.jquery.com/jquery.post/#example-4
-        if (this.tasks == null || this.tasks == "[]") {
-            $.post("server.php", {
-                load: null
-            }).done(function (data) {
-                this.tasks = data;
-                console.log("Loaded tasks from database: " + this.tasks);
-            });
-        }
+        await new Promise((resolve) => {
+            // Load from database if localstorage is empty - https://api.jquery.com/jquery.post/#example-4
+            if (this.tasks == null || this.tasks == "[]") {
+                $.post("server.php", {
+                    load: null
+                }).done(data => {
+                    this.tasks = JSON.parse(data);
+                    console.log("Loaded tasks from database.");
+                    resolve();
+                });
+            }
+            else {
+                resolve();
+            }
+        }).then(() => {
+            this.saveInLocalStorage();
+        });
     }
 
     render() {
@@ -48,6 +55,14 @@ class TaskList {
         ul.className = tasksDiv;
 
         this.tasks.forEach((task, taskIndex) => {
+            // Normalize booleans that get saved incorrectly by the parser
+            if (task.done === "true"){
+                task.done = true;
+            }
+            else if (task.done === "false"){
+                task.done = false;
+            }
+
             const li = document.createElement('li');
             const removeTaskButton = document.createElement('div');
             const removeIcon = document.createTextNode('❌');
@@ -59,7 +74,7 @@ class TaskList {
                 task.done = !task.done; // toggle done status
 
                 this.saveToAll();
-                this.loadAndRender();
+                this.render();
             });
 
             removeTaskButton.addEventListener('click', () => {
@@ -68,7 +83,7 @@ class TaskList {
                 this.saveToAll();
             });
 
-            if (task.done) {
+            if (task.done) { 
                 li.style.backgroundColor = taskDoneBg;
                 li.style.textDecoration = taskDoneDeco;
             }
@@ -97,7 +112,12 @@ class TaskList {
         this.tasks.push(new Task(titleValue, descriptionValue, dateValue));
 
         this.saveToAll();
-        this.loadAndRender();
+        this.render();
+    }
+
+    async loadAndRender(){
+        await this.loadTasks();
+        this.render();
     }
 
     saveInLocalStorage() {
@@ -127,11 +147,6 @@ class TaskList {
     saveToAll() {
         this.saveInLocalStorage();
         this.saveToFile();
-    }
-
-    loadAndRender() {
-        this.loadTasks();
-        this.render();
     }
 
     sort() {

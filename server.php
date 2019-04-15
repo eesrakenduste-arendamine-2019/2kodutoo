@@ -11,4 +11,8 @@
       echo "success";
     }
   }
+
+  function deleteFromFile(){
+    
+  }
  ?>

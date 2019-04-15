@@ -10,6 +10,8 @@ class Todo{
 let todos = [];
 let test = [];
 
+$('#todos').on('tap', '#deleteTaskBtn', deleteTask);
+
 $('#addButton').on("click", ()=> addEntry());
 $('#loadButton').on("click", ()=> render());
 let content;
@@ -31,6 +33,8 @@ let content;
 window.onload = function(){
     render();
 };
+
+
 
 function render(){
     $('#displayTasks').html("");
@@ -62,6 +66,28 @@ function addEntry(){
     todos.push(new Todo(titleValue,descriptionValue,dateValue));
     saveToFile();
     console.log(todos);    
+}
+
+function deleteTask() {
+    localStorage.setItem('#title', $(this).data('#title'));
+    localStorage.setItem('#description', $(this).data('#description'));
+    localStorage.setItem('#date', $(this).data('#date'));
+
+    let currentTitle = localStorage.getItem('#title');
+    let currentDescription = localStorage.getItem('#descripton');
+    let currentDate = localStorage.getItem('#date');
+
+    for (let i = 0; i < todos.length; i++) {
+        if (todos[i].title == currentTitle && todos[i].date == currentDate && todos[i].description == currentDescription) {
+            todos.splice(i, 1);
+        }
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    alert("Ülesanne kustutatud!");
+
+    window.location.href = "index.html";
+    return false;
 }
 
 function saveToFile(){

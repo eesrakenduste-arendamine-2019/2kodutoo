@@ -13,7 +13,7 @@ let test = [];
 $('#todos').on('tap', '#deleteTaskBtn', deleteTask);
 
 $('#addButton').on("click", ()=> addEntry());
-$('#loadButton').on("click", ()=> render());
+//$('#loadButton').on("click", ()=> render());
 let content;
 
 /*function render(){
@@ -34,22 +34,16 @@ window.onload = function(){
     render();
 };
 
-
-
 function render(){
     $('#displayTasks').html("");
-    $.ajax({
-        url: "loaddata.php",
-        type: 'GET',
-        success: function(res) {
-            content = JSON.parse(res).content;
-            //console.log(content);
-            content.forEach(function(todo){
-                //prepend on ette
-                $('#displayTasks').append('<div class="task"><h5>'+todo.title+'</h5><p class="taskDesc">'+todo.description+'</p><div class="taskDate">'+todo.date+'</div><img class="deleteTaskBtn" src=deleteIcon.svg></div>');
-                saveInLocalStorage();
-             });
-        }
+    $.get("server.php?function=data", function(data){
+        content = JSON.parse(data).content;
+        //console.log(content);
+        content.forEach(function(todo){
+            //prepend on ette
+            $('#displayTasks').append('<div class="task"><h5>'+todo.title+'</h5><p class="taskDesc">'+todo.description+'</p><div class="taskDate">'+todo.date+'</div><img class="deleteTaskBtn" src=deleteIcon.svg></div>');
+            saveInLocalStorage();
+        });
     });
 }
         
@@ -94,7 +88,7 @@ function saveToFile(){
     let messageR = 0;
     todos.forEach(function(todo){
         if(todo.title != "" && todo.description != "" && todo.date != ""){
-        $.post("server.php", {title: todo.title, desc:todo.description, time: todo.date}).done(function(){
+        $.post("server.php?function=save", {title: todo.title, desc:todo.description, time: todo.date}).done(function(){
             console.log("done");
         }).fail(function(){
             console.log("fail");
@@ -108,32 +102,5 @@ function saveToFile(){
     } else {
         $("#message").html("Palun täida kõik väljad ja kontrolli andmeid!");
     }
-/*     $.ajax({
-        url: "server.php",
-        cache: false,
-        type: 'GET',
-        success: function(res) {
-            console.log(res);
-            if(res == "korras"){
-                $('#title').val("");
-                $('#description').val("");
-                $('#date').val("");
-                $("#message").html("Salvestamine läks edukalt!");
-            } else {
-                $("#message").html("Palun täida kõik väljad ja kontrolli andmeid!");
-                
-            }
-        } 
-    });*/
     render();
-    
-    /*$.post("server.php", {save: todos}).done(function(){
-        //$.post("server.php", {save: todos});
-        console.log("done");
-    }).fail(function(){
-        console.log("fail");
-    }).always(function(){
-        console.log("always");
-        
-    });*/
 }

@@ -11,6 +11,7 @@ class Todo {
 }
 
 let todos = [];
+let notificationTimeout = null;
 
 $(function() { // Same as $(document).ready();
     var now = new Date();
@@ -22,12 +23,12 @@ $(function() { // Same as $(document).ready();
 
     $('#addButton').on('click', (e) => {
         e.preventDefault();
-        addEntry()
+        addEntry();
+        saveToLocalStorage();
     });
     $('#saveButton').on('click', (e) => {
         e.preventDefault();
         saveToFile();
-        saveToLocalStorage();
     });
     $('#loadButton').on('click', (e) => loadFromFile(e));
     $('#todo').on('click', '.deleteButton', removeEntry);
@@ -86,17 +87,25 @@ function removeEntry(e) {
 }
 
 function saveToFile() {
-    $.post('server.php', { save: JSON.stringify(todos) }).fail(function () {
-        alert('Failed to save to the server!');
-    });
+    showNotification('Saving tasks to server...', false);
+    $.post('server.php', { save: JSON.stringify(todos) })
+        .success(function() {
+            showNotification('Saved successfully...');
+        })
+        .fail(function () {
+            alert('Failed to save to the server!');
+        });
 }
 
 function loadFromFile(e) {
     e.preventDefault();
+    showNotification('Updating tasks from the server...', false);
     $.getJSON('database.txt', function (data) {
         todos = arrayToTodoItems(data.content);
         console.log(todos);
         render();
+        
+        showNotification('Loaded tasks from the server.');
     });
 }
 
@@ -120,4 +129,20 @@ function arrayToTodoItems(items) {
         objects.push(new Todo(todo.title, todo.description, todo.date, todo.category, todo.done));
     });
     return objects;
+}
+
+function showNotification(message, autoHide = true) {
+    $('#notification').show();
+    $('#notification').text(message);
+    if (notificationTimeout != null) {
+        clearTimeout(notificationTimeout);
+    }
+    if (autoHide) {
+        notificationTimeout = setTimeout(hideNotification, 4000);
+    }
+}
+
+function hideNotification() {
+    $('#notification').hide();
+    notificationTimeout = null;
 }

@@ -7,11 +7,20 @@ class Todo{
     this.done = false;
   }
 }
+class ToDo2{
+  constructor() {
+    this.entries = JSON.parse(window.localStorage.getItem('entries')) || [];   /*JSON.parse(window.localStorage.getItem('entries') et see ei kirjutaks entriese üle*/
+    document.querySelector('#addButton').addEventListener('click', ()=>this.addEntry());
+    this.render(this.entries); //kutsub välja
+  }
+}
 
 let todos = [];
 $('#addButton').on('click', addEntry);
-$('#saveButton').on('click', saveToFile);//()=>{saveToFile();saveToLocalStorage();});
+$('#saveButton').on('click', ()=>{saveToFile();saveToLocalStorage();});
 $('#loadButton').on('click', render);
+$('#doneButton').on('click', markAsDone);
+
 $('#todos').on('click', '.deleteButton', removeEntry);
 
 function render(){
@@ -20,16 +29,26 @@ function render(){
     let content = JSON.parse(data).content;
 
     content.forEach(function(todo, todoIndex){
-      console.log(todoIndex);
-      $('#todos').append('<ul id="' + todoIndex + '" ><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+todo.date+'</li><button class="deleteButton">KUSTUTA</button></ul>').css({
+      //console.log(todoIndex);
+      $('#todos').append('<ul id="' + todoIndex + '" style="border:1px solid #000000;"><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+todo.date+'</li><button class="deleteButton">KUSTUTA</button><button class="doneButton">TEHTUD</button></ul>')/*.css({
         "width":"20vw",
         "border":"3px solid black",
         "margin":"3px"
-      });
-
+      })*/;
     });
-  });
+    });
+
 }
+function markAsDone(){
+  li.style.textDecoration = "line-through";
+  li.style.backgroundColor = "lightgreen";
+  todos.push(new Todo(titleValue, descriptionValue, dateValue));
+}
+
+function saveToLocalStorage() {
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
+
 
 function removeEntry(){
   console.log("kustutamise funk");
@@ -37,6 +56,7 @@ function removeEntry(){
   let index = parseInt(row.prop('id'));
   let list = document.getElementById('todos');
 
+  list.splice(index, 1);
   render();
   console.log(index);
 }
@@ -49,17 +69,6 @@ function addEntry(){
   todos.push(new Todo(titleValue, descriptionValue, dateValue));
   console.log(todos);
 }
-function saveToLocalStorage() {
-    localStorage.setItem('todos', JSON.stringify(todos));
-}
-/*function loadFromLocalStorage() {
-    let content = localStorage.getItem('todos');
-    if (items) {
-        todos = arrayToTodoItems(JSON.parse(content));
-        console.log(todos);
-        render();
-    }
-}*/
 
 
 function saveToFile(){

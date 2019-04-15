@@ -7,11 +7,10 @@ class Todo{
         this.done = false;
     }
 }
-
 let todos = [];
+let test = [];
 
 $('#addButton').on("click", ()=> addEntry());
-//$('#saveButton').on("click", ()=> saveToFile());
 $('#loadButton').on("click", ()=> render());
 let content;
 /*function render(){
@@ -27,20 +26,24 @@ let content;
 
     });
 }*/
-function render(){
-    $('#todos').html("");
-    $.get("test.php", function(data) {
-        console.log(data);
-        
-        content = JSON.parse(data).content;
-        console.log(content);
-        
-        content.forEach(function(todo){
-            //prepend on ette
-            $('#todos').append('<ul><li>'+todo.title+'</li><li>'+todo.description+'</li><div class="delete-task-button">×</div></ul>');
-            saveInLocalStorage();
-         });
+window.onload = function(){
+    render();
+};
 
+function render(){
+    $('#displayTasks').html("");
+    $.ajax({
+        url: "test.php",
+        type: 'GET',
+        success: function(res) {
+            content = JSON.parse(res).content;
+            //console.log(content);
+            content.forEach(function(todo){
+                //prepend on ette
+                $('#displayTasks').append('<ul><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li><div class="delete-task-button">×</div></ul>');
+                saveInLocalStorage();
+             });
+        }
     });
 }
 function saveInLocalStorage(){
@@ -57,9 +60,41 @@ function addEntry(){
     console.log(todos);    
 }
 function saveToFile(){
+    let messageR = 0;
     todos.forEach(function(todo){
-        $.post("server.php", {title: todo.title, desc:todo.description, time: todo.date});
-    });
+        if(todo.title != "" && todo.description != "" && todo.date != ""){
+        $.post("server.php", {title: todo.title, desc:todo.description, time: todo.date}).done(function(){
+            console.log("done");
+        }).fail(function(){
+            console.log("fail");
+        });
+    } else { messageR = 1;}});
+    if(messageR == 0){
+        $('#title').val("");
+        $('#description').val("");
+        $('#date').val("");
+        $("#message").html("Salvestamine läks edukalt!");
+    } else {
+        $("#message").html("Palun täida kõik väljad ja kontrolli andmeid!");
+    }
+/*     $.ajax({
+        url: "server.php",
+        cache: false,
+        type: 'GET',
+        success: function(res) {
+            console.log(res);
+            if(res == "korras"){
+                $('#title').val("");
+                $('#description').val("");
+                $('#date').val("");
+                $("#message").html("Salvestamine läks edukalt!");
+            } else {
+                $("#message").html("Palun täida kõik väljad ja kontrolli andmeid!");
+                
+            }
+        } 
+    });*/
+    render();
     
     /*$.post("server.php", {save: todos}).done(function(){
         //$.post("server.php", {save: todos});

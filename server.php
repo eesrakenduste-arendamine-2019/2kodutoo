@@ -3,9 +3,13 @@
     $serverUsername = "if18";
     $serverPassword = "ifikas18";
     $database = "if18_eesrakenduste_todo";
-    session_start();
-    if(isset($_POST["title"]) && !empty($_POST["title"])){
+    //session_start();
+    // && isset($_POST["desc"]) && !empty($_POST["desc"]) && isset($_POST["time"]) && !empty($_POST["time"])
+    if(isset($_POST["title"]) && !empty($_POST["title"]) && isset($_POST["desc"]) && !empty($_POST["desc"]) && isset($_POST["time"]) && !empty($_POST["time"])){
+        echo 2;
         saveToFile($_POST["title"],$_POST["desc"],$_POST["time"]);
+    } else {
+        echo 1;
     }
 /*     function saveToFile($stringToSave){
         $object = new StdClass();
@@ -23,7 +27,8 @@
         echo "Success";
     }*/
     function saveToFile($title, $description,$dateT){
-        echo "Töötab!";
+        //echo "Töötab!";
+        $test =  "korras";
         $myTitle = json_encode($title);
         $myDesc = json_encode($description);
         $myDate = json_encode($dateT);
@@ -34,5 +39,7 @@
         $stmt->execute();
         $stmt->close();
         $mysqli->close();
+        echo $test;
+        return $test;
     }
 ?>

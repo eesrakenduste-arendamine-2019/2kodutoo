@@ -13,6 +13,9 @@ $('#addButton').on('click', addEntry);
 $('#saveButton').on('click', saveToFile);
 $('#loadButton').on('click', render);
 $('#todos').on('click', '.deleteButton', removeEntry);
+window.onload = function(){
+  render();
+};
 
 function render(){
   todos = [];

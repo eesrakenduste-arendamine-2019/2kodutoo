@@ -13,6 +13,7 @@ let test = [];
 $('#addButton').on("click", ()=> addEntry());
 $('#loadButton').on("click", ()=> render());
 let content;
+
 /*function render(){
     $('#todos').html("");
     $.get("database.txt", function(data){
@@ -26,6 +27,7 @@ let content;
 
     });
 }*/
+
 window.onload = function(){
     render();
 };
@@ -40,15 +42,17 @@ function render(){
             //console.log(content);
             content.forEach(function(todo){
                 //prepend on ette
-                $('#displayTasks').append('<ul><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li><div class="delete-task-button">×</div></ul>');
+                $('#displayTasks').append('<div class="task"><h5>'+todo.title+'</h5><p class="taskDesc">'+todo.description+'</p><div class="taskDate">'+todo.date+'</div><img class="deleteTaskBtn" src=deleteIcon.svg></div>');
                 saveInLocalStorage();
              });
         }
     });
 }
+        
 function saveInLocalStorage(){
     window.localStorage.setItem('content', JSON.stringify(content));
 }
+
 function addEntry(){
     todos = [];
     const titleValue = $('#title').val();
@@ -59,6 +63,7 @@ function addEntry(){
     saveToFile();
     console.log(todos);    
 }
+
 function saveToFile(){
     let messageR = 0;
     todos.forEach(function(todo){

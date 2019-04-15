@@ -33,7 +33,7 @@ window.onload = function(){
 function render(){
     $('#displayTasks').html("");
     $.ajax({
-        url: "test.php",
+        url: "loaddata.php",
         type: 'GET',
         success: function(res) {
             content = JSON.parse(res).content;

@@ -11,6 +11,7 @@
     } else if($_GET["function"] == "data"){
         echo loadData();
     }
+
     function saveToFile($title, $description,$dateT){
         //echo "Töötab!";
         $test =  "korras";
@@ -49,8 +50,5 @@
         $stmt->close();
         $mysqli->close();
         return $notice;
-    }
-    function taskDone(){
-        echo "Vahur lisab enda funktsiooni siia";
     }
 ?>

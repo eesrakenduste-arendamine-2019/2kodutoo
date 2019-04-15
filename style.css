@@ -17,7 +17,7 @@ body {
     width: 50%;
     min-width: 336px;
     padding: 0px 0px 10px 0px;
-    box-shadow: 0px 20px 100px #00000069;
+    box-shadow: 0px 50px 60px #00000069;
     overflow: hidden;
 }
 
@@ -59,6 +59,7 @@ button {
     right: 12px;
     bottom: 15px;
     margin: 0px;
+    box-shadow: none;
 }
 
 .task {

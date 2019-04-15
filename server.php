@@ -10,6 +10,18 @@
         }
     } else if($_GET["function"] == "data"){
         echo loadData();
+    } else if($_GET["function"] == "swapStatus") {
+        swapStatus();
+    }
+
+    function swapStatus($taskId) {
+        $myId = json_encode($taskId);
+        $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+        $stmt = $mysqli->prepare("UPDATE todo SET doneT=1 WHERE id=?");
+        $stmt->bind_param("i", $myId);
+        $stmt->execute();
+        $stmt->close();
+        $mysqli->close();
     }
 
     function saveToFile($title, $description,$dateT){
@@ -28,6 +40,7 @@
         echo $test;
         return $test;
     }
+
     function loadData(){
         $notFirst = 0;
         $notice = '{"content":[';

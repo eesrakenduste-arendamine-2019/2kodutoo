@@ -23,7 +23,10 @@ window.onload = function(){
 function changeStatus(taskID){
 /*     console.log("id on: " + taskId); */
     console.log(taskID);
-}
+    let taskId = JSON.parse('{ "taskId": ' + taskID + '}');
+    $.post("server.php?function=swapStatus", {taskId});
+    console.log(taskId);
+};
 
 function render(){
     $('#displayTasks').html("");

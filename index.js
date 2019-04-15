@@ -12,6 +12,7 @@ let test = [];
 
 $('#addButton').on("click", ()=> addEntry());
 $('#loadButton').on("click", ()=> render());
+$('#taskDone').on("click", ()=> changeStatus());
 let content;
 
 /*function render(){
@@ -32,6 +33,11 @@ window.onload = function(){
     render();
 };
 
+function changeStatus(){
+/*     console.log("id on: " + taskId); */
+    console.log("nuppu klikiti");
+}
+
 function render(){
     $('#displayTasks').html("");
     $.ajax({
@@ -42,7 +48,7 @@ function render(){
             //console.log(content);
             content.forEach(function(todo){
                 //prepend on ette
-                $('#displayTasks').append('<div class="task"><h5>'+todo.title+'</h5><p class="taskDesc">'+todo.description+'</p><div class="taskDate">'+todo.date+'</div><img class="deleteTaskBtn" src=deleteIcon.svg></div>');
+                $('#displayTasks').append('<div class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date +'</div><img class="deleteTaskBtn" src=deleteIcon.svg><button id="taskDone" class="' + todo.id + '">TEHTUD</button></div>');
                 saveInLocalStorage();
              });
         }
@@ -68,7 +74,7 @@ function saveToFile(){
     let messageR = 0;
     todos.forEach(function(todo){
         if(todo.title != "" && todo.description != "" && todo.date != ""){
-        $.post("server.php", {title: todo.title, desc:todo.description, time: todo.date}).done(function(){
+        $.post("server.php", {title: todo.title, desc: todo.description, time: todo.date}).done(function(){
             console.log("done");
         }).fail(function(){
             console.log("fail");

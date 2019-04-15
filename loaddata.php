@@ -6,16 +6,16 @@
 	$notFirst = 0;
 	$notice = '{"content":[';
     $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-	$stmt = $mysqli->prepare("SELECT title, descriptionT, dateT, doneT FROM todo");
+	$stmt = $mysqli->prepare("SELECT title, descriptionT, dateT, doneT, id FROM todo");
 	echo $mysqli->error;
-	$stmt->bind_result($title, $description, $dateT, $done);
+	$stmt->bind_result($title, $description, $dateT, $done, $taskId);
 	$stmt->execute();
 	while($stmt->fetch()){
 		if($notFirst == 1){
 			$notice .= ",";
-			$notice .= '{"title":' .$title .',"description":'.$description .',"date": '. $dateT .',"done": ' .$done. '}';
+			$notice .= '{"title":' .$title .',"description":'.$description .',"date": '. $dateT .',"done": ' .$done .',"id": ' .$taskId. '}';
 		} else {
-			$notice .= '{"title":' .$title .',"description":'.$description .',"date": '. $dateT .',"done": ' .$done. '}';
+			$notice .= '{"title":' .$title .',"description":'.$description .',"date": '. $dateT .',"done": ' .$done .',"id": ' .$taskId. '}';
 			$notFirst = 1;
 		}
 

@@ -9,9 +9,10 @@ class Todo{
 }
 
 let todos = [];
-$('#addButton').on('click', ()=>addEntry());
-$('#saveButton').on('click', ()=>saveToFile());
-$('#loadButton').on('click', ()=>render());
+$('#addButton').on('click', addEntry);
+$('#saveButton').on('click', saveToFile);//()=>{saveToFile();saveToLocalStorage();});
+$('#loadButton').on('click', render);
+$('#todos').on('click', '.deleteButton', removeEntry);
 
 function render(){
   $('#todos').html("");
@@ -20,26 +21,45 @@ function render(){
 
     content.forEach(function(todo, todoIndex){
       console.log(todoIndex);
-      $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+todo.date+'</li></ul>');
+      $('#todos').append('<ul id="' + todoIndex + '" ><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+todo.date+'</li><button class="deleteButton">KUSTUTA</button></ul>').css({
+        "width":"20vw",
+        "border":"3px solid black",
+        "margin":"3px"
+      });
+
     });
   });
+}
+
+function removeEntry(){
+  console.log("kustutamise funk");
+  let row = $(this).parent();
+  let index = parseInt(row.prop('id'));
+  let list = document.getElementById('todos');
+
+  render();
+  console.log(index);
 }
 
 function addEntry(){
   const titleValue = $('#title').val();
   const dateValue = $('#date').val();
   const descriptionValue = $('#description').val();
-  var table = document.getElementById("table");
-  var row = table.insertRow(-1);
-  var cell1 = row.insertCell(0);
-  var cell2 = row.insertCell(1);
-  var cell3 = row.insertCell(2);
-  cell1.innerHTML = titleValue;
-  cell2.innerHTML = descriptionValue;
-  cell3.innerHTML = dateValue;
+
   todos.push(new Todo(titleValue, descriptionValue, dateValue));
   console.log(todos);
 }
+function saveToLocalStorage() {
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
+/*function loadFromLocalStorage() {
+    let content = localStorage.getItem('todos');
+    if (items) {
+        todos = arrayToTodoItems(JSON.parse(content));
+        console.log(todos);
+        render();
+    }
+}*/
 
 
 function saveToFile(){

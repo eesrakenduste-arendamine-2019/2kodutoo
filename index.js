@@ -1,4 +1,22 @@
 /*jshint esversion:6*/
+let clockContainer
+let dateContaier
+
+window.onload = function () {
+  init()
+}
+
+function init () {
+  dateContainer = document.querySelector('#date')
+  console.log(clockContainer)
+  console.log(dateContainer)
+  startDate()
+}
+function startDate(){
+  let date = new Date()
+  let kuud = ['jaanuar', '  veebruar  ', 'märts', 'aprill', 'mai', 'juuni', 'juuli', 'august', 'september', 'oktoober', 'november', 'detsember'];
+  dateContainer.innerHTML =date.getFullYear()date.getDate()+" "+kuud[date.getMonth()]+" "+date.getDate()
+}
 class Entry{
   constructor(title, description, date){
     this.title = title;
@@ -51,7 +69,7 @@ class ToDo{
         this.entries = this.entries.slice(0, entryIndex).concat(this.entries.slice(entryIndex + 1, this.entries.length));
         this.saveInLocalStorage();
       });
-      if(entry.date == "2019-03-05"){
+      if(entry.date<"2019-04-09"){
         li.style.backgroundColor = "red";
       }
 

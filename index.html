@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+
+  <style>
+    .controls{
+      float: right;
+    }
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="index.js"></script>
+  <title>ToDo</title>
+</head>
+<body>
+
+  <!-- HOME PAGE -->
+  <div data-role="page" id="home">
+    <header data-role="header" data-theme="b">
+      <h1>ToDoApp</h1>
+    </header>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="slide" data-icon="home">Avaleht</a></li>
+        <li><a href="#add" data-transition="flow" data-icon="plus">Lisa</a></li>
+        <li><a href="#help" data-transition="flip" data-icon="comment">Abileht</a></li>
+        <li><a href="#settings" data-transition="turn" data-icon="gear">Sätete leht</a></li>
+      </ul>
+    </div>
+    <div data-role="content">
+      <h3>Tere tulemast</h3>
+      <p>Selle rakendusega saab kõik asjad tehtud.</p>
+
+      <ul id="todos" data-role="listview" data-filter="true" data-filter-placeholder="Otsi kuupäeva või nime järgi..." data-inset="true"></ul>
+      <a href="#popup" data-rel="popup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline">Autori nimi</a>
+      <div data-role="popup" id="popup" class="ui-content">
+        <p><strong>Kert</strong> Liinat</p>
+      </div>
+    </div>
+    <footer data-role="footer" data-theme="b">
+      <h4>TodoApp 2019</h4>
+    </footer>
+  </div>
+
+  <!-- ADD PAGE -->
+  <div data-role="page" id="add">
+    <header data-role="header" data-theme="b">
+      <h1>ToDoApp</h1>
+    </header>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="slide" data-icon="home">Avaleht</a></li>
+        <li><a href="#add" data-transition="flow" data-icon="plus">Lisa</a></li>
+        <li><a href="#help" data-transition="flip" data-icon="comment">Abileht</a></li>
+        <li><a href="#settings" data-transition="turn" data-icon="gear">Sätete leht</a></li>
+      </ul>
+    </div>
+    <div data-role="content">
+      <form id="addForm">
+        <label for="addTask">Siseta ülesande nimi: </label>
+        <input type="text" id="addTask">
+
+        <label for="addDate">Sisesta kuupäev:</label>
+        <input type="text" data-role="date" class="date" id="addDate" data-inline="true">
+
+        <button id="submitAdd" class="ui-btn ui-btn-b ui-corner-all">LISA</button>
+      </form>
+    </div>
+    <footer data-role="footer" data-theme="b">
+      <h4>TodoApp 2019</h4>
+    </footer>
+  </div>
+
+
+  <!-- EDIT PAGE -->
+  <div data-role="page" id="edit">
+    <header data-role="header" data-theme="b">
+      <h1>ToDoApp</h1>
+    </header>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="slide" data-icon="home">Avaleht</a></li>
+        <li><a href="#add" data-transition="flow" data-icon="plus">Lisa</a></li>
+        <li><a href="#help" data-transition="flip" data-icon="comment">Abileht</a></li>
+        <li><a href="#settings" data-transition="turn" data-icon="gear">Sätete leht</a></li>
+      </ul>
+    </div>
+    <div data-role="content">
+      <form id="editForm">
+        <label for="editTask">Siseta ülesande nimi: </label>
+        <input type="text" id="editTask">
+        <label for="editDate">Sisesta kuupäev:</label>
+        <input type="text" data-role="date" class="date" id="editDate" data-inline="true">
+        <button id="submitEdit" class="ui-btn ui-btn-b ui-corner-all">LISA</button>
+      </form>
+    </div>
+    <footer data-role="footer" data-theme="b">
+      <h4>TodoApp 2019</h4>
+    </footer>
+  </div>
+
+  <!-- HELP PAGE -->
+  <div data-role="page" id="help">
+    <header data-role="header" data-theme="b">
+      <h1>ToDoApp</h1>
+    </header>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="slide" data-icon="home">Avaleht</a></li>
+        <li><a href="#add" data-transition="flow" data-icon="plus">Lisa</a></li>
+        <li><a href="#help" data-transition="flip" data-icon="comment">Abileht</a></li>
+        <li><a href="#settings" data-transition="turn" data-icon="gear">Sätete leht</a></li>
+      </ul>
+    </div>
+    <div data-role="content">
+      <p>See on minu ning ka hiljem minu tiimikaaslaste Andri ja Sandri kodune ülesanne, teine sellist sorti
+      </p>
+      <p>Võibolla lisan ka siia mingit abimaterjali, kuid tõenäoliselt mitte
+         <a href="#popupInfo" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-info ui-btn-icon-notext" title="Learn more">Abilehe abimees</a>
+      </p>
+      <div data-role="popup" id="popupInfo" class="ui-content" data-theme="a" style="max-width:350px;">
+        <p>Siia tegelt kirjutaks midagi tarka</p>
+      </div>
+    </div>
+    <footer data-role="footer" data-theme="b">
+      <h4>TodoApp 2019</h4>
+    </footer>
+  </div>
+
+
+
+  <!-- SETTINGS PAGE -->
+  <div data-role="page" data-theme="a" id="settings">
+    <header data-role="header" data-theme="b">
+      <h1>ToDoApp</h1>
+    </header>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="slide" data-icon="home">Avaleht</a></li>
+        <li><a href="#add" data-transition="flow" data-icon="plus">Lisa</a></li>
+        <li><a href="#help" data-transition="flip" data-icon="comment">Abileht</a></li>
+        <li><a href="#settings" data-transition="turn" data-icon="gear">Sätete leht</a></li>
+      </ul>
+    </div>
+    <div data-role="content">
+      <form>
+        <label for="flip-2">Flip toggle switch:</label>
+        <select name="flip-2" id="flip-2" data-role="flipswitch" data-theme="b">
+            <option value="off">Tume</option>
+            <option value="on">Hele</option>
+        </select>
+      </form>
+    </div>
+    <footer data-role="footer" data-theme="b">
+      <h4>TodoApp 2019</h4>
+    </footer>
+  </div>
+
+
+
+</body>
+</html>

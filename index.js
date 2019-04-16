@@ -23,9 +23,8 @@ window.onload = function(){
 function changeStatus(taskID){
 /*     console.log("id on: " + taskId); */
     console.log(taskID);
-    let taskId = JSON.parse('{ "taskId": ' + taskID + '}');
-    $.post("server.php?function=swapStatus", {taskId});
-    console.log(taskId);
+    $.post("server.php?function=swapStatus", {task_id:taskID});
+    console.log(taskID);
 };
 
 function render(){
@@ -35,8 +34,13 @@ function render(){
         //console.log(content);
         content.forEach(function(todo){
             //prepend on ette
-            $('#displayTasks').append('<div class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date +'</div><img class="deleteTaskBtn" src=deleteIcon.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ')">TEHTUD</button></div>');
-            saveInLocalStorage();
+            if (todo.done == 0) {
+                $('#displayTasks').append('<div class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date +'</div><img class="deleteTaskBtn" src=deleteIcon.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ')">TEHTUD</button></div>');
+                saveInLocalStorage();
+            } else {
+                $('#displayTasksDone').append('<div class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" src=deleteIcon.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ')">TEHTUD</button></div>');
+                saveInLocalStorage();
+            }
             });
     });
 }

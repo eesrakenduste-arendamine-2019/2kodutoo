@@ -11,14 +11,13 @@
     } else if($_GET["function"] == "data"){
         echo loadData();
     } else if($_GET["function"] == "swapStatus") {
-        swapStatus();
+        swapStatus($_POST["task_id"]);
     }
 
-    function swapStatus($taskId) {
-        $myId = json_encode($taskId);
+    function swapStatus($task_id) {
         $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
         $stmt = $mysqli->prepare("UPDATE todo SET doneT=1 WHERE id=?");
-        $stmt->bind_param("i", $myId);
+        $stmt->bind_param("i", $task_id);
         $stmt->execute();
         $stmt->close();
         $mysqli->close();

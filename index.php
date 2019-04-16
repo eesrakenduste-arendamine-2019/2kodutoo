@@ -1,6 +1,6 @@
 <?php
     require("functions.php");
-	echo "<body style='background-color:#428cf4'>";
+	echo "<body style='background-color:#438ef7'>";
     $notice = "";
     $email = "";
     $emailError = "";

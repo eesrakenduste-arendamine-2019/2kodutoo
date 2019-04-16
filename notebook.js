@@ -1,40 +1,58 @@
 /*jshint esversion:6*/
 
 class Todo{
-    constructor(title, description, date){
-        this.title = title;
-        this.description = description;
+    constructor(task, date){
+        this.task = task;
         this.date = date;
         this.done = false;
     }
 }
 
+
+
 let todos = [];
 
 $('#addButton').on('click', ()=>addEntry());
 $('#saveButton').on('click', ()=>saveToFile());
-$('#loadButton').on('click', ()=>render());
+$('#loadButton').on('click', ()=>showTodos());
 $('#delButton').on('click', ()=>del());
 
-function render(){
+function showTodos() {
     $('#todos').html("");
-    $.get('database.txt', function(data){
-        let content = JSON.parse(data).content;
+    todos = getTodoObject();
 
-        content.forEach(function(todo, todoIndex){
-            console.log(todoIndex);
-            $('#todos').append('<ul><li>' + todo.title + '</li><li>' + todo.description +'</li><li>' + todo.date +'</li></ul>');
-        });
-    });
+    if (todos != "" && todos != null) {
+        for (let i = 0; i < todos.length; i++) {
+            $("#todos").append('<li>' + todos[i].task + '<br>' + todos[i].date + '</li>');
+        }
+    }
+}
+
+
+function getTodoObject() {
+    let currentTodos = localStorage.getItem('todos');
+
+    if (currentTodos != null) {
+        todos = JSON.parse(currentTodos);
+    } else {
+        todos = [];
+    }
+
+    return todos;
 }
 
 function addEntry(){
-    const titleValue = $('#title').val();
-    const descValue = $('#description').val();
+    const taskValue = $('#task').val();
     const dateValue = $('#date').val();
 
-    todos.push(new Todo(titleValue, descValue, dateValue));
+    todos.push(new Todo(taskValue, dateValue));
     console.log(todos);
+
+    localStorage.setItem('todos', JSON.stringify(todos));
+
+    window.location.href = "main.php";
+
+    return false;
 }
 
 function saveToFile(){
@@ -56,3 +74,6 @@ function del(){
       alert("HAA-HAA!");
   });
 }
+
+//laetakse sisse kui leht tõmbab lahti
+showTodos();

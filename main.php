@@ -33,12 +33,10 @@ if(isset($_GET["logout"])){
     <br><br><br><br><br>
     <div id="mySidenav" class="sidenav">
         <h1>Menüü</h1>
-            <a href="notebook.html">Märkmik</a>
             <a href="?logout=1">Logi välja</a>
     </div>
     <div class="notebook">
-        <input type="text" id="title">
-        <input type="text" id="description">
+        <input type="text" id="task">
         <input type="date" id="date">
         <br>
         <button id="addButton">LISA</button>

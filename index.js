@@ -58,6 +58,8 @@ function addEntry(){
     todos.push(new Todo(titleValue,descriptionValue,dateValue));
     saveToFile();
     console.log(todos);    
+    window.location.href = "index.html";
+    return false;
 }
 
 function saveToFile(){

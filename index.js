@@ -6,13 +6,11 @@ $(document).one('pageinit', function(){
   $('#todos').on('tap', '#editLink', setCurrent);
   $('#submitEdit').on('tap', editTask);
   $('#todos').on('tap', '#deleteLink', deleteTask);
-
-  $('#flip-2').on('change', function() {
-    setTheme();
+  $('#toggleTheme').on('change', function() {
+        setTheme();
   });
 
   let whichTheme = true;
-
 
   $(function(){
     $('.date').each(function(){
@@ -20,26 +18,27 @@ $(document).one('pageinit', function(){
     });
   });
 
-
-function setTheme(){
-      if (whichTheme){
-          $("div").removeClass("ui-bar-b");
-          $("div").addClass("ui-bar-a");
-          whichTheme = !whichTheme;
-      }
-      else {
-          $("div").removeClass("ui-bar-a");
-          $("div").addClass("ui-bar-b");
-          whichTheme = !whichTheme;
+  function setTheme(){
+        if (whichTheme){
+            $("header").removeClass("ui-bar-b");
+            $("footer").removeClass("ui-bar-b");
+            $("header").addClass("ui-bar-a");
+            $("footer").addClass("ui-bar-a");
+            whichTheme = !whichTheme;
         }
-      }
+        else {
+            $("header").removeClass("ui-bar-a");
+            $("footer").removeClass("ui-bar-a");
+            $("header").addClass("ui-bar-b");
+            $("footer").addClass("ui-bar-b");
+            whichTheme = !whichTheme;
+        }
 
-
-
+    }
 
   function deleteTask(){
     localStorage.setItem('currentTask', $(this).data('task'));
-    localStorage.setItem('currentDate', $(this).data('date'));
+    localStorage.setItem('currentDate', $(this).data('dateF'));
 
     let currentTask = localStorage.getItem('currentTask');
     let currentDate = localStorage.getItem('currentDate');
@@ -48,14 +47,21 @@ function setTheme(){
       if(todos[i].task == currentTask && todos[i].date == currentDate){
         todos.splice(i, 1);
       }
+
       localStorage.setItem('todos', JSON.stringify(todos));
     }
 
-    alert("Ülesanne kustutatud!");
+    let update_todo = {
+      task: task,
+      date: date
+    };
 
+    alert("ülesanne kustutatud!");
     window.location.href = "index.html";
     return false;
   }
+
+
 
   function editTask(){
     let currentTask = localStorage.getItem('currentTask');
@@ -65,18 +71,26 @@ function setTheme(){
       if(todos[i].task == currentTask && todos[i].date == currentDate){
         todos.splice(i, 1);
       }
+
       localStorage.setItem('todos', JSON.stringify(todos));
     }
+
     let task = $('#editTask').val();
     let date = $('#editDate').val();
+
     let update_todo = {
       task: task,
       date: date
     };
+
     todos.push(update_todo);
+
     alert("ülesanne muudetud!");
+
     localStorage.setItem('todos', JSON.stringify(todos));
+
     window.location.href = "index.html";
+
     return false;
   }
 
@@ -111,7 +125,7 @@ function setTheme(){
 
     todos.push(todo);
 
-    alert("Ülesanne lisatud");
+    alert("ülesanne lisatud");
 
     localStorage.setItem('todos', JSON.stringify(todos));
 

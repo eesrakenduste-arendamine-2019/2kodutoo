@@ -63,6 +63,10 @@ function CreateCategory(categoryId, categoryName) {
 	vehiclesTr.appendChild(vehiclesTh);
 	vehiclesThead.appendChild(vehiclesTr);
 	vehiclesTable.appendChild(vehiclesThead);
+	vehiclesTh = document.createElement("th"); // alertide jaoks
+	vehiclesTr.appendChild(vehiclesTh);
+	vehiclesThead.appendChild(vehiclesTr);
+	vehiclesTable.appendChild(vehiclesThead);
 	let vehicleTbody = document.createElement("tbody");
 	vehiclesTable.appendChild(vehicleTbody);
 	vehiclesContainer.appendChild(vehiclesTable);
@@ -184,7 +188,7 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	let vDelete = document.createElement("input");
 	vBtnContainer.appendChild(vDelete);
 	vDelete.type = "button";
-	vDelete.value = "X";
+	vDelete.value = "✖";
 	vDelete.addEventListener("click", function() {
 		vehicles.splice(vehicleIndex, 1);
 		localStorage.setItem("vehicles", JSON.stringify(vehicles));

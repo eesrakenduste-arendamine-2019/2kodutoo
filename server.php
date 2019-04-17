@@ -12,6 +12,8 @@
         echo loadData();
     } else if($_GET["function"] == "swapStatus") {
         swapStatus($_POST["task_id"]);
+    } else if($_GET["function"] == "deleteTask") {
+        deleteTask($_POST["delete_id"]);
     }
 
     function swapStatus($task_id) {
@@ -62,5 +64,14 @@
         $stmt->close();
         $mysqli->close();
         return $notice;
+    }
+
+    function deleteTask($task_id) {
+        $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
+        $stmt = $mysqli->prepare("DELETE FROM todo WHERE id=?");
+        $stmt->bind_param("i", $task_id);
+        $stmt->execute();
+        $stmt->close();
+        $mysqli->close();
     }
 ?>

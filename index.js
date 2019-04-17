@@ -32,20 +32,20 @@ function changeStatus(taskID){
     setTimeout(render(), 3000);
 };
 
-function render(){
+function render() {
     $('#displayTasks').html("");
-    $.get("server.php?function=data", function(data){
+    $.get("server.php?function=data", function (data) {
         content = JSON.parse(data).content;
         //console.log(content);
-        content.forEach(function(todo){
+        content.forEach(function (todo) {
             //prepend on ette
             if (todo.done == 0) {
-                $('#displayTasks').append('<div class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date +'</div><img class="deleteTaskBtn" src=deleteIcon.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ')">TEHTUD</button></div>');
-                saveInLocalStorage();
+                $('#displayTasks').append('<div class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" src="deleteIcon.svg" onclick="deleteTask(' + todo.id + ')"><button id="taskDone" onclick="changeStatus(' + todo.id + ')">TEHTUD</button></div>');
             } else {
-                $('#displayTasksDone').append('<div class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" src=deleteIcon.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ')">TEHTUD</button></div>');
-                saveInLocalStorage();
+                $('#displayTasksDone').append('<div class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" src="deleteIcon.svg" onclick="deleteTask(' + todo.id + ')"><button id="taskDone" onclick="changeStatus(' + todo.id + ')">TEHTUD</button></div>');
+
             }
+            saveInLocalStorage();
         });
     });
 }
@@ -89,3 +89,16 @@ function saveToFile(){
         setTimeout(render(), 3000);
         
     }
+
+ function deleteTask(taskID) {
+     let conf = confirm('Kas oled kindel, et tahad ülesannet kustutada?');
+     if (conf == true) {
+         console.log(taskID);
+         $.post("server.php?function=deleteTask", {
+             delete_id: taskID
+         });
+         window.location.href = "index.html";
+     } else {
+         return;
+     }
+ }

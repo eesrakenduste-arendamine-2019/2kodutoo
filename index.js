@@ -11,6 +11,11 @@ let todos = [];
 let test = [];
 
 $('#addButton').on("click", ()=> addEntry());
+
+$("li.fade").hover(function () {
+    $(this).fadeOut(100);
+    $(this).fadeIn(500);
+});
 //$('#loadButton').on("click", ()=> render());
 
 let content;

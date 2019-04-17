@@ -89,3 +89,42 @@ h5 {
     right: 12px;
 
 }
+
+#taskTabs {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    height: 40px;
+    margin-top: 10px;
+    width: 50%;
+    min-width: 336px;
+    z-index: 5;
+    color: #ababab;
+}
+
+.statusTab {
+    text-align: center;
+    width: 50%;
+    padding: 10px 0px;
+    border-radius: 5px 5px 0px 0px;
+    background-color: #3f3f3f;
+    display: relative;
+    z-index: 2;
+}
+
+.notSelected {
+    background-color: #2d2d2d;
+    color: #808080;
+    transition: background-color ease-in 250ms;
+}
+
+.notSelected:hover {
+    background-color: #3a3a3a;
+    transition: background-color ease-in 250ms;
+}
+
+#taskSection {
+    margin-top: 0px;
+    border-radius: 0px 0px 5px 5px;
+    padding-bottom: 0px;
+}

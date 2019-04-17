@@ -16,13 +16,8 @@ let sortBy = 'title';
 let sortDesc = true;
 
 $(function() { // Same as $(document).ready();
-    var now = new Date();
-    var day = ("0" + now.getDate()).slice(-2);
-    var month = ("0" + (now.getMonth() + 1)).slice(-2);
-    today = now.getFullYear()+"-"+(month)+"-"+(day) ;
 
-    $('#date').val(today);
-
+    resetDateValue();
     $('#addButton').on('click', (e) => {
         e.preventDefault();
         addEntry();
@@ -51,6 +46,15 @@ $(function() { // Same as $(document).ready();
         sortTodos(this.value, checkedElement.data('desc') == 1 ? true : false);
     });
 });
+
+function resetDateValue() {
+    var now = new Date();
+    var day = ("0" + now.getDate()).slice(-2);
+    var month = ("0" + (now.getMonth() + 1)).slice(-2);
+    today = now.getFullYear()+"-"+(month)+"-"+(day) ;
+
+    $('#date').val(today);
+}
 
 function render() {
     $('#todo tr').remove();
@@ -105,7 +109,13 @@ function addEntry() {
 
     todos.push(new Todo(titleValue, descriptionValue, dateValue,categoryValue));
 
-    console.log(todos);
+    // Reset inputs
+    $('#title').val('');
+    $('#description').val('');
+    $("#category")[0].selectedIndex = 0;
+    resetDateValue();
+
+    //console.log(todos);
     render();
     save();
 }

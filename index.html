@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -44,25 +45,95 @@
                                 </div>
                             </div>
                             <button id="addButton" class="btn btn-info mr-1" >Lisa</button>
-                            <button id="saveButton" class="btn btn-info mx-1" >Salvesta serverisse</button>
-                            <button id="loadButton" class="btn btn-info mx-1">Lae serverist</button>
                         </form>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mt-2">
                 <div id="notification" class="alert alert-info" role="alert" style="display: none;">
                     Loading...
                 </div>
-                <hr>
-                <div id="todos">Siia tulevad todod</div>
-                <table id="todo" class="table">
-                    <tr id="header">
-                        <th>Tehtud</th>
-                        <th>Pealkiri</th>
-                        <th>Sisutekst</th>
-                        <th>Tähtaeg</th>
-                        <th>Kategooria</th>
-                        <th></th>
-                        <th></th>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5>Ülesanded:</h5>
+                <table class="table">
+                    <thead>
+                        <tr id="header">
+                            <th>
+                                Tehtud
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-sm btn-outline-primary">
+                                        <input type="radio" name="options" id="done-sort-asc" value="done" data-desc="0" autocomplete="off">
+                                        <i class="fas fa-angle-up"></i>
+                                    </label>
+                                    <label class="btn btn-sm btn-outline-primary">
+                                        <input type="radio" name="options" id="done-sort-desc" value="done" data-desc="1" autocomplete="off">
+                                        <i class="fas fa-angle-down"></i>
+                                    </label>
+                                </div>
+                            </th>
+                            <th>
+                                Pealkiri
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-sm btn-outline-primary">
+                                        <input type="radio" name="options" id="title-sort-asc" value="title" data-desc="0" autocomplete="off">
+                                        <i class="fas fa-angle-up"></i>
+                                    </label>
+                                    <label class="btn btn-sm btn-outline-primary active">
+                                        <input type="radio" name="options" id="title-sort-desc" value="title" data-desc="1" autocomplete="off" checked>
+                                        <i class="fas fa-angle-down"></i>
+                                    </label>
+                                </div> 
+                            </th>
+                            <th>
+                                Sisutekst
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-sm btn-outline-primary">
+                                        <input type="radio" name="options" id="content-sort-asc" value="description" data-desc="0" autocomplete="off">
+                                        <i class="fas fa-angle-up"></i>
+                                    </label>
+                                    <label class="btn btn-sm btn-outline-primary">
+                                        <input type="radio" name="options" id="content-sort-desc" value="description" data-desc="1" autocomplete="off">
+                                        <i class="fas fa-angle-down"></i>
+                                    </label>
+                                </div>
+                            </th>
+                            <th>
+                                Tähtaeg
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-sm btn-outline-primary">
+                                        <input type="radio" name="options" id="time-sort-asc" value="date" data-desc="0" autocomplete="off">
+                                        <i class="fas fa-angle-up"></i>
+                                    </label>
+                                    <label class="btn btn-sm btn-outline-primary">
+                                        <input type="radio" name="options" id="time-sort-desc" value="date" data-desc="1" autocomplete="off">
+                                        <i class="fas fa-angle-down"></i>
+                                    </label>
+                                </div> 
+                            </th>
+                            <th>
+                                Kategooria
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-sm btn-outline-primary">
+                                        <input type="radio" name="options" id="category-sort-asc" value="category" data-desc="0" autocomplete="off">
+                                        <i class="fas fa-angle-up"></i>
+                                    </label>
+                                    <label class="btn btn-sm btn-outline-primary">
+                                        <input type="radio" name="options" id="category-sort-desc" value="category" data-desc="1" autocomplete="off">
+                                        <i class="fas fa-angle-down"></i>
+                                    </label>
+                                </div>
+                            </th>
+                            <th></th>
+                            <th></th>
+                        </thead>
+                        <tbody id="todo">
+
+                        </tbody>
                     </tr>
                 </table>
             </div>

@@ -1,7 +1,7 @@
 /* jshint esversion:6 */
 
 class Todo {
-    constructor(title, description, date, category,done = false) {
+    constructor(title, description, date, category, done = false) {
         this.title = title;
         this.description = description;
         this.date = date;
@@ -12,6 +12,8 @@ class Todo {
 
 let todos = [];
 let notificationTimeout = null;
+let sortBy = 'title';
+let sortDesc = true;
 
 $(function() { // Same as $(document).ready();
     var now = new Date();
@@ -35,15 +37,43 @@ $(function() { // Same as $(document).ready();
     $('#todo').on('change', '.doneCheckbox', toggleDone);
     //$('#todo').on('change', '.doneCheckbox', removeEntry);
 
+    // Load from cache
     loadFromLocalStorage();
+    // Update from server
+    loadFromFile();
+
+    // Sorting
+    $('input[name=options]').change(function() {
+        $('input[name=options]').parent().removeClass('active');
+        //$('input[name=options]:checked').parent().addClass('active');
+        let checkedElement = $('input[name=options]:checked')
+        console.log(this.value + $('input[name=options]:checked').data('desc'));
+        sortTodos(this.value, checkedElement.data('desc') == 1 ? true : false);
+    });
 });
 
-
-
 function render() {
-    $('#todo tr:not(#header)').remove();
+    $('#todo tr').remove();
+
+    // Sort
+    todos.sort((a, b) => {
+        if (sortDesc) {
+            let temp = a;
+            a = b;
+            b = temp;
+        }
+        switch(sortBy) {
+            case 'date':
+                return new Date(a.date) - new Date(b.date);
+            case 'done':
+                return a.done - b.done;
+            default:
+                return a[sortBy].localeCompare(b[sortBy]);
+        }
+    })
+
     todos.forEach(function (todo, todoIndex) {
-        console.log(todoIndex);
+        //console.log(todo);
         let checked = '';
         if (todo.done) {
             checked = 'checked';
@@ -61,6 +91,12 @@ function render() {
 }
 
 
+function sortTodos(attribute, desc) {
+    sortBy = attribute;
+    sortDesc = desc;
+    render();
+}
+
 function addEntry() {
     const titleValue = $('#title').val();
     const dateValue = $('#date').val();
@@ -71,11 +107,18 @@ function addEntry() {
 
     console.log(todos);
     render();
+    save();
 }
 
-function toggleDone(e) {
+function save() {
+    saveToLocalStorage();
+    saveToFile();
+}
+
+function toggleDone() {
     let id = $(this).data('id');
     todos[id].done = this.checked;
+    save();
 }
 
 function removeEntry(e) {
@@ -84,12 +127,13 @@ function removeEntry(e) {
     console.log(id);
     todos.splice(id, 1);
     render();
+    save();
 }
 
 function saveToFile() {
     showNotification('Saving tasks to server...', false);
-    $.post('server.php', { save: JSON.stringify(todos) })
-        .success(function() {
+    $.post('server.php', { save: JSON.stringify(todos)})
+        .done(function() {
             showNotification('Saved successfully...');
         })
         .fail(function () {
@@ -97,16 +141,25 @@ function saveToFile() {
         });
 }
 
-function loadFromFile(e) {
-    e.preventDefault();
+function loadFromFile() {
     showNotification('Updating tasks from the server...', false);
-    $.getJSON('database.txt', function (data) {
-        todos = arrayToTodoItems(data.content);
-        console.log(todos);
-        render();
-        
-        showNotification('Loaded tasks from the server.');
+    $.ajax({
+        cache: false,
+        url: "database.txt",
+        dataType: "json",
+        success: function (data) {
+            console.log(data.content);
+            todos = arrayToTodoItems(data.content);
+            console.log(todos);
+            render();
+            
+            showNotification('Loaded tasks from the server.');
+
+            // Update cache
+            saveToLocalStorage();
+        }
     });
+    return false;
 }
 
 function saveToLocalStorage() {

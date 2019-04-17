@@ -25,7 +25,7 @@
     * ~~Ülesannete salvestamiseks ja kuvamiseks kasutatakse AJAX-it~~
     * ~~Kui kasutaja tuleb lehele, siis näidatakse varem salvestatud ülesandeid~~
     * Lisa ise 2 funktsionaalsust juurde. Võib ise mõelda või valida antud listist:
-         * Võimalus lisada kategooriad ja nende alusel jagada ülesandeid
+         * ~~Võimalus lisada kategooriad ja nende alusel jagada ülesandeid~~
          * Möödunud ja/või tänase kuupäevaga tegemata ülesanded märkida erinevalt
 1. Väljanägemine ja animatsioonid
     * ~~Rakendus näeb kena välja~~

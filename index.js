@@ -14,23 +14,26 @@ let todos = [];
 let notificationTimeout = null;
 let sortBy = 'title';
 let sortDesc = true;
+let categories = new Categories('#category', '#categories-list', '#input-category', '#add-category', '#save-categories', saveToFile);
 
 $(function() { // Same as $(document).ready();
 
     resetDateValue();
+
     $('#addButton').on('click', (e) => {
         e.preventDefault();
         addEntry();
         saveToLocalStorage();
     });
+
     $('#saveButton').on('click', (e) => {
         e.preventDefault();
         saveToFile();
     });
+
     $('#loadButton').on('click', (e) => loadFromFile(e));
     $('#todo').on('click', '.deleteButton', removeEntry);
     $('#todo').on('change', '.doneCheckbox', toggleDone);
-    //$('#todo').on('change', '.doneCheckbox', removeEntry);
 
     // Load from cache
     loadFromLocalStorage();
@@ -76,8 +79,18 @@ function render() {
         }
     })
 
+    // Group by categories
+    todos.sort((a, b) => {
+        return a.category.localeCompare(b.category);
+    })
+
+    let lastGroup = null;
     todos.forEach(function (todo, todoIndex) {
-        //console.log(todo);
+        if (todo.category != lastGroup) {
+            $('#todo').append('<tr class="table-sm table-secondary"><th colspan="6">' + todo.category + '</th></tr>');
+        }
+        lastGroup = todo.category;
+        
         let checked = '';
         if (todo.done) {
             checked = 'checked';
@@ -87,7 +100,6 @@ function render() {
             '<td>' + todo.title + '</td>' + 
             '<td>' + todo.description + '</td>' +
             '<td class="text-nowrap">' + todo.date + '</td>' +
-            '<td>' + todo.category + '</td>' +
             '<td><button class="editButton btn btn-sm btn-info">Muuda</button></td>' +
             '<td><button class="deleteButton btn btn-sm btn-danger" data-id="' + todoIndex + '" >Kustuta</button></td>' +
         '</tr>');
@@ -142,7 +154,7 @@ function removeEntry(e) {
 
 function saveToFile() {
     showNotification('Saving tasks to server...', false);
-    $.post('server.php', { save: JSON.stringify(todos)})
+    $.post('server.php', { save: JSON.stringify({ todos: todos, categories: categories.categories })})
         .done(function() {
             showNotification('Saved successfully...');
         })
@@ -158,10 +170,10 @@ function loadFromFile() {
         url: "database.txt",
         dataType: "json",
         success: function (data) {
-            console.log(data.content);
-            todos = arrayToTodoItems(data.content);
-            console.log(todos);
+            todos = arrayToTodoItems(data.todos);
+            categories.addCategories(data.categories);
             render();
+
             
             showNotification('Loaded tasks from the server.');
 
@@ -180,7 +192,6 @@ function loadFromLocalStorage() {
     let items = localStorage.getItem('todos');
     if (items) {
         todos = arrayToTodoItems(JSON.parse(items));
-        console.log(todos);
         render();
     }
 

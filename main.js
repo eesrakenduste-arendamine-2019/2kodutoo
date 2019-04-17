@@ -1,6 +1,6 @@
 /*jshint esversion:6*/
 
-﻿let categoryAdd = document.querySelector("#category");
+let categoryAdd = document.querySelector("#category");
 let vehicleType = document.querySelector("#vehicle-type");
 let vehicleList = document.querySelector("#veh-list");
 let categoryTabs = document.querySelector("#category-tabs");
@@ -46,12 +46,18 @@ function CreateCategory(categoryId, categoryName) {
 	let vehiclesTr = document.createElement("tr");
 	let vehiclesTh = document.createElement("th");
 	vehiclesTh.innerText = "Sõiduki nimi";
+	vehiclesTh.className = "veh-name-head";
+	vehiclesTh.setAttribute("onclick", "sortTableByName()");
 	vehiclesTr.appendChild(vehiclesTh);
 	vehiclesTh = document.createElement("th");
 	vehiclesTh.innerText = "Numbrimärk";
+	vehiclesTh.className = "veh-num-head";
+	vehiclesTh.setAttribute("onclick", "sortTableByNum()");
 	vehiclesTr.appendChild(vehiclesTh);
 	vehiclesTh = document.createElement("th");
 	vehiclesTh.innerText = "Töö tähtaeg";
+	vehiclesTh.className = "veh-date-head";
+	vehiclesTh.setAttribute("onclick", "sortTableByDate()");
 	vehiclesTr.appendChild(vehiclesTh);
 	vehiclesTh = document.createElement("th"); // btnite jaoks
 	vehiclesTr.appendChild(vehiclesTh);
@@ -263,6 +269,91 @@ function GetVehicles(){
 });
 }
 */
+let dirN = "asc";
+let dirNum = "asc";
+let dirD = "asc";
+
+function sortTableByName() {
+	let thName = document.querySelector(".veh-name-head");
+	let thNum = document.querySelector(".veh-num-head");
+	let thDate = document.querySelector(".veh-date-head");
+	if(dirN == "asc"){
+		vehicles.sort(function (a, b) {
+			thName.innerText = "Sõiduki nimi ↓";
+			thNum.innerText = "Numbrimärk";
+			thDate.innerText = "Töö tähtaeg";
+			return a.name.localeCompare(b.name);
+		});
+	} else if(dirN == "desc") {
+		vehicles.sort(function (a, b) {
+			thName.innerText = "Sõiduki nimi ↑";
+			thNum.innerText = "Numbrimärk";
+			thDate.innerText = "Töö tähtaeg";
+			return a.name.localeCompare(b.name);
+		}).reverse();
+	}
+	if(dirN == "asc"){
+		dirN = "desc";
+	} else if(dirN == "desc"){
+		dirN = "asc";
+	}
+	RenderVehicles();	
+}
+
+function sortTableByNum() {
+	let thName = document.querySelector(".veh-name-head");
+	let thNum = document.querySelector(".veh-num-head");
+	let thDate = document.querySelector(".veh-date-head");
+	if(dirNum == "asc"){
+		vehicles.sort(function (a, b) {
+			thName.innerText = "Sõiduki nimi";
+			thNum.innerText = "Numbrimärk ↓";
+			thDate.innerText = "Töö tähtaeg";
+			return a.num.localeCompare(b.num);
+		});
+	} else if(dirNum == "desc") {
+		vehicles.sort(function (a, b) {
+			thName.innerText = "Sõiduki nimi";
+			thNum.innerText = "Numbrimärk ↑";
+			thDate.innerText = "Töö tähtaeg";
+			return a.num.localeCompare(b.num);
+		}).reverse();
+	}
+	if(dirNum == "asc"){
+		dirNum = "desc";
+	} else if(dirNum == "desc"){
+		dirNum = "asc";
+	}
+	RenderVehicles();	
+}
+
+function sortTableByDate() {
+	let thName = document.querySelector(".veh-name-head");
+	let thNum = document.querySelector(".veh-num-head");
+	let thDate = document.querySelector(".veh-date-head");
+	if(dirD == "asc"){
+		vehicles.sort(function (a, b) {
+			thName.innerText = "Sõiduki nimi";
+			thNum.innerText = "Numbrimärk";
+			thDate.innerText = "Töö tähtaeg ↓";
+			return a.date.localeCompare(b.date);
+		});
+	} else if(dirD == "desc") {
+		vehicles.sort(function (a, b) {
+			thName.innerText = "Sõiduki nimi";
+			thNum.innerText = "Numbrimärk";
+			thDate.innerText = "Töö tähtaeg ↑";
+			return a.date.localeCompare(b.date);
+		}).reverse();
+	}
+	if(dirD == "asc"){
+		dirD = "desc";
+	} else if(dirD == "desc"){
+		dirD = "asc";
+	}
+	RenderVehicles();	
+}
+
 (function() {
    RenderCategorys();
    RenderVehicles();

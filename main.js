@@ -199,13 +199,13 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	let date2 = vDate.value.split("-");
 	let dueDate = new Date(date2[0], date2[1] - 1, date2[2]);
 	let vAlertContainer = document.createElement("td");
-	let vAlert = document.createElement("p");
-	vAlertContainer.appendChild(vAlert);
+	//let vAlertContainer = document.createElement("p");
+	//vAlertContainerContainer.appendChild(vAlertContainer);
 	if(dueDate.getTime() == today.getTime()){
-		vAlert.innerHTML = "TÄNA!";
+		vAlertContainer.innerHTML = "TÄNA!";
 	}
 	else if(dueDate.getTime() < today.getTime()){
-		vAlert.innerHTML = "MÖÖDUNUD!";
+		vAlertContainer.innerHTML = "MÖÖDUNUD!";
 	}
 	let vRow = document.createElement("tr");
 	vRow.className = "vhcl";
@@ -336,6 +336,7 @@ function sortTableByDate() {
 	let thNum = document.querySelector(".veh-num-head");
 	let thDate = document.querySelector(".veh-date-head");
 	if(dirD == "asc"){
+		dirD = "desc";
 		vehicles.sort(function (a, b) {
 			thName.innerText = "Sõiduki nimi";
 			thNum.innerText = "Numbrimärk";
@@ -343,17 +344,13 @@ function sortTableByDate() {
 			return a.date.localeCompare(b.date);
 		});
 	} else if(dirD == "desc") {
+		dirD = "asc";
 		vehicles.sort(function (a, b) {
 			thName.innerText = "Sõiduki nimi";
 			thNum.innerText = "Numbrimärk";
 			thDate.innerText = "Töö tähtaeg ↑";
 			return a.date.localeCompare(b.date);
 		}).reverse();
-	}
-	if(dirD == "asc"){
-		dirD = "desc";
-	} else if(dirD == "desc"){
-		dirD = "asc";
 	}
 	RenderVehicles();	
 }

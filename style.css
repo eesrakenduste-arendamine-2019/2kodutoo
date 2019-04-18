@@ -246,6 +246,7 @@ h5 {
 }
 
 .sort select {
+    position: relative;
     display: inline-block;
     width: 50%;
     cursor: pointer;
@@ -273,3 +274,21 @@ h5 {
     opacity: .5;
 }
 
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;
+    /* Footer height */
+}
+
+#footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;
+    text-align: center;
+    /* Footer height */
+}

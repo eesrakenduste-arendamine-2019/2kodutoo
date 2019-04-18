@@ -1,24 +1,18 @@
 /*jshint esversion:6*/
 class Todo{
-    constructor(title, description, date){
+    constructor(title, description, date, importance){
         this.title = title;
         this.description = description;
         this.date = date;
+        this.importance = importance;
         this.done = false;
     }
 }
 let todos = [];
-let test = [];
 
 $('#addButton').on("click", ()=> addEntry());
 $('#done').on("click", () => switchTab('#done'));
 $('#notDone').on("click", () => switchTab('#notDone'));
-
-$("li.fade").hover(function () {
-    $(this).fadeOut(100);
-    $(this).fadeIn(500);
-});
-//$('#loadButton').on("click", ()=> render());
 
 let content;
 
@@ -42,8 +36,6 @@ function switchTab(clickedTab) {
 }
 
 function changeStatus(taskID){
-/*     console.log("id on: " + taskId); */
-    console.log(taskID);
     $.post("server.php?function=swapStatus", {task_id:taskID});
     setTimeout(render(), 3000);
 }
@@ -58,13 +50,14 @@ function render() {
             //prepend on ette
             if ($('.notSelected').attr('id') == 'done') {
                 if (todo.done == 0) {
-                    $('#displayTasks').append('<div class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" onclick="deleteTask(' + todo.id + ')" src=deleteIcon.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ')">TEHTUD</button></div>');
+                    $('#displayTasks').append('<div id="task'+todo.id+'" class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" onclick="deleteTask(' + todo.id + ')" src=deleteIcon.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ')">TEHTUD</button></div>');
                 }
             } else {
                 if (todo.done == 1) {
-                    $('#displayTasks').append('<div class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" onclick="deleteTask(' + todo.id + ')" src=deleteIcon.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ')">TEGEMATA</button></div>');
+                    $('#displayTasks').append('<div id="task'+todo.id+'" class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" onclick="deleteTask(' + todo.id + ')" src=deleteIcon.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ')">TEGEMATA</button></div>');
                 }
             }
+            if(todo.importance == 1){ $('#task'+todo.id+'').addClass("important"); } else {$('#t'+todo.id+'').removeClass("important"); }
             saveInLocalStorage();
         });
     });
@@ -79,8 +72,9 @@ function addEntry(){
     const titleValue = $('#title').val();
     const descriptionValue = $('#description').val();
     const dateValue = $('#date').val();
+    const importValue = 1;
     
-    todos.push(new Todo(titleValue,descriptionValue,dateValue));
+    todos.push(new Todo(titleValue,descriptionValue,dateValue,importValue));
     saveToFile();
     console.log(todos);    
     window.location.href = "index.html";
@@ -90,8 +84,8 @@ function addEntry(){
 function saveToFile(){
     let messageR = 0;
     todos.forEach(function(todo){
-        if(todo.title != "" && todo.description != "" && todo.date != ""){
-            $.post("server.php?function=save", {title: todo.title, desc: todo.description, time: todo.date}).done(function(){
+        if(todo.title != "" && todo.description != "" && todo.date != "" && todo.importance != ""){
+            $.post("server.php?function=save", {title: todo.title, desc: todo.description, time: todo.date, importance: todo.importance}).done(function(){
                 console.log("done");
             }).fail(function(){
                 console.log("fail");

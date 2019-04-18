@@ -8,6 +8,9 @@ body {
     padding: 0px;
     margin: 0px;
 }
+.important{
+    background-color: rgb(216, 99, 99);
+}
 .section {
     background-color: #3f3f3f;
     border-radius: 5px;

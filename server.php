@@ -6,7 +6,7 @@
 
     if($_GET["function"] == "save"){
         if(isset($_POST["title"]) && !empty($_POST["title"]) && isset($_POST["desc"]) && !empty($_POST["desc"]) && isset($_POST["time"]) && !empty($_POST["time"])){
-            saveToFile($_POST["title"],$_POST["desc"],$_POST["time"]);
+            saveToFile($_POST["title"],$_POST["desc"],$_POST["time"],$_POST["importance"]);
         }
     } else if($_GET["function"] == "data"){
         echo loadData();
@@ -25,16 +25,17 @@
         $mysqli->close();
     }
 
-    function saveToFile($title, $description,$dateT){
+    function saveToFile($title, $description,$dateT,$importance){
         //echo "Töötab!";
         $test =  "korras";
         $myTitle = json_encode($title);
         $myDesc = json_encode($description);
         $myDate = json_encode($dateT);
+        $myImportance = json_encode($importance);
         $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-        $stmt = $mysqli->prepare("INSERT INTO todo (title, descriptionT, dateT) VALUES (?,?,?)");
+        $stmt = $mysqli->prepare("INSERT INTO todo (title, descriptionT, dateT, importance) VALUES (?,?,?,?)");
         echo $mysqli->error;
-        $stmt->bind_param("sss", $myTitle, $myDesc, $myDate);//s - string, i - integer, d - decimal
+        $stmt->bind_param("sssi", $myTitle, $myDesc, $myDate, $myImportance);//s - string, i - integer, d - decimal
         $stmt->execute();
         $stmt->close();
         $mysqli->close();
@@ -46,16 +47,16 @@
         $notFirst = 0;
         $notice = '{"content":[';
         $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-        $stmt = $mysqli->prepare("SELECT title, descriptionT, dateT, doneT, id FROM todo ORDER BY dateT");
+        $stmt = $mysqli->prepare("SELECT id, title, descriptionT, dateT, doneT, importance FROM todo ORDER BY dateT");
         echo $mysqli->error;
-        $stmt->bind_result($title, $description, $dateT, $done, $taskId);
+        $stmt->bind_result($taskId,$title, $description, $dateT, $done, $import);
         $stmt->execute();
         while($stmt->fetch()){
             if($notFirst == 1){
                 $notice .= ",";
-                $notice .= '{"title":' .$title .',"description":'.$description .',"date": '. $dateT .',"done": ' .$done .',"id": ' .$taskId. '}';
+                $notice .= '{"id":'.$taskId.',"title":' .$title .',"description":'.$description .',"date": '. $dateT .',"done": ' .$done .',"importance": ' .$import. '}';
             } else {
-                $notice .= '{"title":' .$title .',"description":'.$description .',"date": '. $dateT .',"done": ' .$done .',"id": ' .$taskId. '}';
+                $notice .= '{"id":'.$taskId.',"title":' .$title .',"description":'.$description .',"date": '. $dateT .',"done": ' .$done .',"importance": ' .$import. '}';
                 $notFirst = 1;
             }
 

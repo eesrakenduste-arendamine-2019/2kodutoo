@@ -50,11 +50,11 @@ function render() {
             //prepend on ette
             if ($('.notSelected').attr('id') == 'done') {
                 if (todo.done == 0) {
-                    $('#displayTasks').append('<div id="task'+todo.id+'" class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" onclick="deleteTask(' + todo.id + ')" src=deleteIcon.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ',1)">TEHTUD</button></div>');
+                    $('#displayTasks').append('<div id="task'+todo.id+'" class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" onclick="deleteTask(' + todo.id + ')" src=clear.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ',1)">TEHTUD</button></div>');
                 }
             } else {
                 if (todo.done == 1) {
-                    $('#displayTasks').append('<div id="task'+todo.id+'" class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" onclick="deleteTask(' + todo.id + ')" src=deleteIcon.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ',0)">TEGEMATA</button></div>');
+                    $('#displayTasks').append('<div id="task'+todo.id+'" class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" onclick="deleteTask(' + todo.id + ')" src=clear.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ',0)">TEGEMATA</button></div>');
                 }
             }
             if(todo.importance == 1){ $('#task'+todo.id+'').addClass("important"); } else {$('#t'+todo.id+'').removeClass("important"); }

@@ -28,13 +28,15 @@
         <div class="statusTab" id="notDone">Tegemata</div>
         <div class="statusTab notSelected" id="done">Tehtud</div>
         <div class="sort">
-        <select onchange="render()" id="sort">
-            <option disabled>Sorteeri:</option>
-            <option value="none" >Loodud</option>
-            <option value="title">Pealkirja järgi</option>
-            <option value="date">Kuupäeva järgi</option>
-            <option value="priority">Tähtsuse järgi</option>
-        </select></div>
+            <select onchange="render()" id="sort">
+                <option disabled>Valikud:</option>
+             <option value="none" >Sorteeri:</option>
+                <option value="title">Pealkirja järgi</option>
+                <option value="date">Kuupäeva järgi</option>
+                <option value="priority">Tähtsuse järgi</option>
+        </select>
+        
+        </div>
     </div>
     <div class="section" id="taskSection">
         <div id="displayTasks"></div>

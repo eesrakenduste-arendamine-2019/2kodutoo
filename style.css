@@ -237,3 +237,39 @@ h5 {
 .onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
     right: 0px;
 }
+
+.sort {
+    position: relative;
+    display: inline-block;
+    width: 50%;
+    
+}
+
+.sort select {
+    display: inline-block;
+    width: 50%;
+    cursor: pointer;
+    color: #7b7b7b;
+    border: 0;
+    border-radius: 0;
+    outline: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.sort select::-ms-expand {
+    display: none;
+}
+
+.sort select:hover,
+.sort select:focus {
+    color: #000;
+    background: #ccc;
+}
+
+.sort select:disabled {
+    pointer-events: none;
+    opacity: .5;
+}
+

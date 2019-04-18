@@ -90,17 +90,16 @@ function render() {
             $('#todo').append('<tr class="table-sm table-secondary"><th colspan="6">' + todo.category + '</th></tr>');
         }
         lastGroup = todo.category;
-        
+
         let checked = '';
         if (todo.done) {
             checked = 'checked';
         }
-        $('#todo').append('<tr>' + 
+        $('#todo').append('<tr>' +
             '<td><input type="checkbox" class="doneCheckbox" data-id="' + todoIndex + '" name="done" value="1" ' + checked + '></td>' +
-            '<td>' + todo.title + '</td>' + 
+            '<td>' + todo.title + '</td>' +
             '<td>' + todo.description + '</td>' +
             '<td class="text-nowrap">' + todo.date + '</td>' +
-            '<td><button class="editButton btn btn-sm btn-info">Muuda</button></td>' +
             '<td><button class="deleteButton btn btn-sm btn-danger" data-id="' + todoIndex + '" >Kustuta</button></td>' +
         '</tr>');
     });
@@ -174,11 +173,14 @@ function loadFromFile() {
             categories.addCategories(data.categories);
             render();
 
-            
+
             showNotification('Loaded tasks from the server.');
 
             // Update cache
             saveToLocalStorage();
+        },
+        error: function() {
+          showNotification('Failed to load tasks from the server');
         }
     });
     return false;
@@ -206,7 +208,7 @@ function arrayToTodoItems(items) {
 }
 
 function showNotification(message, autoHide = true) {
-    $('#notification').show();
+    $('#notification').slideDown(500);
     $('#notification').text(message);
     if (notificationTimeout != null) {
         clearTimeout(notificationTimeout);
@@ -217,6 +219,6 @@ function showNotification(message, autoHide = true) {
 }
 
 function hideNotification() {
-    $('#notification').hide();
+    $('#notification').slideUp(500);
     notificationTimeout = null;
 }

@@ -121,7 +121,7 @@ function CreateCategory(categoryId, categoryName) {
 }
 
 function AddToVehicles(categoryId, vehicleName, vehicleNum, vehicleDate) {
-	let vhcl = {"category":categoryId, "name":vehicleName, "num":vehicleNum, "date":vehicleDate};
+	let vhcl = {"category":categoryId, "name":vehicleName, "num":vehicleNum, "date":vehicleDate , "isDone":0};
 	vehicles.push(vhcl);
 	localStorage.setItem("vehicles", JSON.stringify(vehicles));
 }
@@ -174,14 +174,29 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	vDate.type = "date";
 	vDateContainer.appendChild(vDate);
 	let vBtnContainer = document.createElement("td");
+	let vAlertContainer = document.createElement("td");
 	let vEdit = document.createElement("input");
 	vBtnContainer.appendChild(vEdit);
 	vEdit.type = "button";
-	vEdit.value = "✓";
+	vEdit.value = "Uuenda";
 	vEdit.addEventListener("click", function() {
 		vehicles[vehicleIndex].name = vName.value;
 		vehicles[vehicleIndex].num = vNum.value;
 		vehicles[vehicleIndex].date = vDate.value;
+		localStorage.setItem("vehicles", JSON.stringify(vehicles));
+		RenderVehicles();
+	});
+	let vComplete = document.createElement("input");
+	vBtnContainer.appendChild(vComplete);
+	vComplete.type = "button";
+	vComplete.value = "✓";
+	vComplete.addEventListener("click", function() {
+		// vehicles[vehicleIndex].name = vName.value;
+		// vehicles[vehicleIndex].num = vNum.value;
+		// vehicles[vehicleIndex].date = vDate.value;
+		// localStorage.setItem("vehicles", JSON.stringify(vehicles));
+		console.log("tehtud");
+		vehicles[vehicleIndex].isDone = 1;
 		localStorage.setItem("vehicles", JSON.stringify(vehicles));
 		RenderVehicles();
 	});
@@ -198,14 +213,16 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	let today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	let date2 = vDate.value.split("-");
 	let dueDate = new Date(date2[0], date2[1] - 1, date2[2]);
-	let vAlertContainer = document.createElement("td");
-	//let vAlertContainer = document.createElement("p");
-	//vAlertContainerContainer.appendChild(vAlertContainer);
-	if(dueDate.getTime() == today.getTime()){
-		vAlertContainer.innerHTML = "TÄNA!";
-	}
-	else if(dueDate.getTime() < today.getTime()){
-		vAlertContainer.innerHTML = "MÖÖDUNUD!";
+	
+	if(vehicles[vehicleIndex].isDone != 1){
+		if(dueDate.getTime() == today.getTime()){
+			vAlertContainer.innerHTML = "TÄNA!";
+		}
+		else if(dueDate.getTime() < today.getTime()){
+			vAlertContainer.innerHTML = "MÖÖDUNUD!";
+		}
+	} else if(vehicles[vehicleIndex].isDone == 1){
+		vAlertContainer.innerHTML = "TEHTUD!";
 	}
 	let vRow = document.createElement("tr");
 	vRow.className = "vhcl";

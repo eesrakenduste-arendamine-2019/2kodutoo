@@ -22,35 +22,49 @@ $('#loadButton').on('click', ()=>render());
 function render(){
   $('#todos').html("");
   $('#right').html("");
-  $.get('database.txt', function(data){
-    let content = JSON.parse(data).content;
+  if(localStorage.getItem("ToDoList") != null && localStorage.getItem("ToDoList") != undefined){
+    var content = JSON.parse(localStorage.getItem("ToDoList"));
+    console.log(content);
     todos = content;
-    localStorage.setItem('ToDoList', JSON.stringify(todos));
-    console.log(todos);
+    printToDO(content);
+  } else {
+    $.get('database.txt', function(data){
+      console.log(data);
+      var content = JSON.parse(data).content;
+      console.log(content);
+      todos = content;
+      printToDO(content);
+    });
+  }
+  //$.get('database.txt', function(data){
+  function printToDO(content){
+    console.log(content);
     content.forEach(function(todo, todoIndex){
-      if(todo.status == 'false'){
+
+      if(todo.status == false || todo.status == 'false'){
         $('#todos').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button onclick="deleteB('+todoIndex+');" id=delete'+(todoIndex+1)+'>KUSTUTA</button></ul>');
       } else if (todo.status == 'true') {
         $('#right').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button onclick="deleteB('+todoIndex+');" id=delete'+(todoIndex+1)+'>KUSTUTA</button></ul>');
       }
-      if(todo.done == 'true'){
+      if(todo.done == true || todo.status == 'true'){
         $("#"+todoIndex+"").css("background-color","lightgreen");
       } else {
         $("#"+todoIndex+"").css("background-color","red");
       }
         $("li").css("display","inline-block");
         $("li").css("padding","5px");
-    });
+  //  });
   });
+}
 }
 
 function deleteB(todoIndex){
   todos.splice(todoIndex, 1);
-  console.log(todoIndex);
   console.log(todos);
+  console.log("test");
   localStorage.setItem('ToDoList', JSON.stringify(todos));
-  saveToFile()
-  //render();
+  //saveToFile();
+  render();
 }
 
 function addEntry(){
@@ -58,8 +72,7 @@ function addEntry(){
   const descriptionValue = $('#description').val();
   const dateValue = $('#date').val();
   todos.push(new Todo(titleValue, descriptionValue, dateValue));
-
-  console.log(todos);
+  localStorage.setItem('ToDoList', JSON.stringify(todos));
 }
 
 function saveToFile(){

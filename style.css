@@ -114,6 +114,16 @@ h5 {
     display: relative;
     z-index: 2;
 }
+.sort {
+    text-align: center;
+    width: 30%;
+    padding: 10px 0px;
+    align-items: center;
+    border-radius: 5px 5px 0px 0px;
+    background-color: #2d2d2d;
+    display: relative;
+    z-index: auto;
+}
 
 .notSelected {
     background-color: #2d2d2d;

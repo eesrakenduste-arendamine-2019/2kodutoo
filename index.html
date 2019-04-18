@@ -15,6 +15,7 @@
         <div id="message"></div>
         <div class="buttonRow">
             <button id="addButton">LISA</button>
+            <input type="checkbox" id="importantCheck" value="0">
             <!--<button id="loadButton">LAADI</button>-->
         </div>
     </div>
@@ -22,6 +23,14 @@
     <div id="taskTabs">
         <div class="statusTab" id="notDone">Tegemata</div>
         <div class="statusTab notSelected" id="done">Tehtud</div>
+        <div class="sort">
+        <select onchange="render()" id="sort">
+            <option disabled>Sorteeri:</option>
+            <option value="none" >Loodud</option>
+            <option value="title">Pealkirja järgi</option>
+            <option value="date">Kuupäeva järgi</option>
+            <option value="priority">Tähtsuse järgi</option>
+        </select></div>
     </div>
     <div class="section" id="taskSection">
         <div id="displayTasks"></div>

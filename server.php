@@ -9,17 +9,23 @@
             saveToFile($_POST["title"],$_POST["desc"],$_POST["time"],$_POST["importance"]);
         }
     } else if($_GET["function"] == "data"){
-        echo loadData();
+        echo loadData($_GET["sort"]);
     } else if($_GET["function"] == "swapStatus") {
-        swapStatus($_POST["task_id"]);
+        swapStatus($_POST["task_id"],$_POST["action"]);
     } else if($_GET["function"] == "deleteTask") {
         deleteTask($_POST["delete_id"]);
     }
 
-    function swapStatus($task_id) {
+    function swapStatus($task_id, $action) {
+        $myAction = json_encode($action);
+        if($myAction == '"1"'){
+            $myAction = 1;
+        } else if($myAction == '"0"'){
+            $myAction = 0;
+        }
         $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-        $stmt = $mysqli->prepare("UPDATE todo SET doneT=1 WHERE id=?");
-        $stmt->bind_param("i", $task_id);
+        $stmt = $mysqli->prepare("UPDATE todo SET doneT=? WHERE id=?");
+        $stmt->bind_param("ii",$myAction, $task_id);
         $stmt->execute();
         $stmt->close();
         $mysqli->close();
@@ -32,6 +38,8 @@
         $myDesc = json_encode($description);
         $myDate = json_encode($dateT);
         $myImportance = json_encode($importance);
+        if($myImportance == '"1"'){ $myImportance = 1;}
+        else if($myImportance == '"0"'){ $myImportance = 0;}
         $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
         $stmt = $mysqli->prepare("INSERT INTO todo (title, descriptionT, dateT, importance) VALUES (?,?,?,?)");
         echo $mysqli->error;
@@ -43,11 +51,16 @@
         return $test;
     }
 
-    function loadData(){
+    function loadData($sortTasks){
+        $sortBy = json_encode($sortTasks);
         $notFirst = 0;
         $notice = '{"content":[';
         $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-        $stmt = $mysqli->prepare("SELECT id, title, descriptionT, dateT, doneT, importance FROM todo ORDER BY dateT");
+        if($sortBy == '"none"'){ $stmt = $mysqli->prepare("SELECT id, title, descriptionT, dateT, doneT, importance FROM todo"); }
+        else if($sortBy == '"title"'){ $stmt = $mysqli->prepare("SELECT id, title, descriptionT, dateT, doneT, importance FROM todo ORDER BY title"); }
+        else if($sortBy == '"date"'){ $stmt = $mysqli->prepare("SELECT id, title, descriptionT, dateT, doneT, importance FROM todo ORDER BY dateT"); }
+        else if($sortBy == '"priority"'){ $stmt = $mysqli->prepare("SELECT id, title, descriptionT, dateT, doneT, importance FROM todo ORDER BY importance DESC"); }
+        //$stmt = $mysqli->prepare("SELECT id, title, descriptionT, dateT, doneT, importance FROM todo". $sortBy);
         echo $mysqli->error;
         $stmt->bind_result($taskId,$title, $description, $dateT, $done, $import);
         $stmt->execute();

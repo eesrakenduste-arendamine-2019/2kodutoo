@@ -12,6 +12,13 @@ body {
     background-color: rgba(206, 202, 236, 0.26);
     opacity: 1;
 }
+.importantPin {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 40px;
+    right: 12px;
+}
 .section {
     background-color: #3f3f3f;
     border-radius: 5px;
@@ -94,6 +101,18 @@ h5 {
     right: 12px;
 
 }
+.deleteTaskBtn:hover, .taskDone:hover, .importantPin:hover {
+    opacity: .7;
+}
+.taskDone {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 65px;
+    right: 12px;
+
+}
+
 
 #taskTabs {
     display: flex;
@@ -173,4 +192,44 @@ h5 {
     padding: 0;
     background-color: #efefef;
     text-align: center;
+}
+
+input#importantCheck {
+    position: absolute;
+    top: 0px;
+    left: 100px;
+    opacity: 0;
+}
+input#importantCheck:checked + label svg path {
+    stroke-dashoffset: 0;
+}
+input#importantCheck:focus + label {
+    transform: scale(1.03);
+}
+
+#importantCheck + label {
+    display: block;
+    border: 2px solid #808080;
+    width: var(--d);
+    height: var(--d);
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+#importantCheck + label:active {
+    transform: scale(1.05);
+    border-radius: 3px;
+}
+#importantCheck + label svg {
+    pointer-events: none;
+}
+#importantCheck + label svg path {
+    fill: none;
+    stroke: #808080;
+    stroke-width: 4px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 101;
+    transition: all 350ms cubic-bezier(1, 0, 0.37, 0.91);
 }

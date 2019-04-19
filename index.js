@@ -19,6 +19,7 @@ let content;
 
 
 window.onload = function(){
+    document.querySelector("#displayTasks").style.opacity = "0";
     render();
 };
 
@@ -41,23 +42,35 @@ function changeStatus(taskID, act){
 
 function render() {
     sortValue = $('#sort').val();
+    document.querySelector("#displayTasks").style.opacity = "0";
+     $( "#displayTasks" ).animate({
+        width: "104%",
+        marginLeft: "-0.15in",
+      }, 500 ); 
     $('#displayTasks').html("");
     $.get("server.php?function=data&sort="+ sortValue, function (data) {
         
         content = JSON.parse(data).content;
-        //console.log(content);
+        $( "#displayTasks" ).animate({
+            width: "100%",
+            opacity: 1,
+            marginLeft: "0in",
+          }, 500 );
         content.forEach(function (todo) {
             //prepend on ette
             if ($('.notSelected').attr('id') == 'done') {
                 if (todo.done == 0) {
-                    $('#displayTasks').append('<div id="task'+todo.id+'" class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" onclick="deleteTask(' + todo.id + ')" src=clear1.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ',1)">TEHTUD</button></div>');
+                    $('#displayTasks').append('<div id="task'+todo.id+'" class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" onclick="deleteTask(' + todo.id + ')" src=img/deleteIcon.svg><img class="taskDone" onclick="changeStatus(' + todo.id + ',1)" src=img/undone.svg></div>');
                 }
             } else {
                 if (todo.done == 1) {
-                    $('#displayTasks').append('<div id="task'+todo.id+'" class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" onclick="deleteTask(' + todo.id + ')" src=clear1.svg><button id="taskDone" onclick="changeStatus(' + todo.id + ',0)">TEGEMATA</button></div>');
+                    $('#displayTasks').append('<div id="task'+todo.id+'" class="task"><h5>' + todo.title + '</h5><p class="taskDesc">' + todo.description + '</p><div class="taskDate">' + todo.date + '</div><img class="deleteTaskBtn" onclick="deleteTask(' + todo.id + ')" src=img/deleteIcon.svg><img class="taskDone" onclick="changeStatus(' + todo.id + ',0)" src=img/done.svg></div>');
                 }
             }
-            if(todo.importance == 1){ $('#task'+todo.id+'').addClass("important"); } else {$('#t'+todo.id+'').removeClass("important"); }
+            if(todo.importance == 1){ 
+                $('#task'+todo.id+'').addClass("important bouncy"); 
+                $('#task'+todo.id+'').append('<img class="importantPin" onclick="changeStatus(' + todo.id + ',3)" src=img/pin.svg></img>');
+            }
             saveInLocalStorage();
         });
     });

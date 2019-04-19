@@ -22,10 +22,17 @@
             $myAction = 1;
         } else if($myAction == '"0"'){
             $myAction = 0;
+        } else if($myAction == '"3"'){
+            $myAction = 3;
         }
         $mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-        $stmt = $mysqli->prepare("UPDATE todo SET doneT=? WHERE id=?");
-        $stmt->bind_param("ii",$myAction, $task_id);
+        if($myAction == 3){  
+            $stmt = $mysqli->prepare("UPDATE todo SET importance=0 WHERE id=?");
+            $stmt->bind_param("i",$task_id); 
+        } else { 
+            $stmt = $mysqli->prepare("UPDATE todo SET doneT=? WHERE id=?");
+            $stmt->bind_param("ii",$myAction, $task_id);
+        }
         $stmt->execute();
         $stmt->close();
         $mysqli->close();

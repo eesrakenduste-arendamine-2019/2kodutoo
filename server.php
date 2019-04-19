@@ -2,7 +2,6 @@
   if(isset($_POST["save"]) && !empty($_POST["save"])){
     saveToFile($_POST["save"]);
   }
-
   function saveToFile($stringToSave){
     echo "funk";
     $object = new StdClass();
@@ -13,5 +12,4 @@
       echo "success";
     }
   }
-
 ?>

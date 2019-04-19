@@ -1,24 +1,25 @@
 body {
-    background-color: #2A1B3D;
+    background-color: #2e2e2e;
     display: flex;
     flex-direction: column;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
     align-items: center;
-    color: #C5C6C7;
+    color: #ffffff;
     padding: 0px;
     margin: 0px;
 }
 .important{
-    background-color: #D83F87;
+    background-color: rgba(201, 21, 21, 0.26);
+    opacity: 1;
 }
 .section {
-    background-color: whitesmoke;
+    background-color: #3f3f3f;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     margin: 10px 0px;
     width: 50%;
-    min-width: 336px;
+    min-width: 600px;
     padding: 0px 0px 10px 0px;
     box-shadow: 0px 50px 60px #00000069;
     overflow: hidden;
@@ -29,7 +30,7 @@ body {
 }
 
 .section input{
-    background-color: #44318D;
+    background-color: #727272;
     border: none;
     height: 35px;
     padding: 5px 10px;
@@ -47,7 +48,7 @@ body {
 }
 
 button {
-    background-color: rgb(145, 103, 141);
+    background-color: #a038e9;
     cursor: pointer;
     border-radius: 20px;
     border: none;
@@ -100,7 +101,7 @@ h5 {
     align-content: stretch;
     height: 40px;
     margin-top: 10px;
-    width: 50%;
+    width: 100%;
     min-width: 336px;
     z-index: 5;
     color: #ababab;
@@ -164,131 +165,6 @@ h5 {
     100% { top: 0em; }
 }
 
-.onoffswitch {
-    position: absolute;
-    width: 9px;
-    height: 30px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-}
 
-.onoffswitch-checkbox {
-    display: none;
-}
 
-.onoffswitch-label {
-    display: block;
-    overflow: hidden;
-    cursor: pointer;
-    border-radius: 20px;
-}
 
-.onoffswitch-inner {
-    display: block;
-    width: 200%;
-    margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
-}
-
-.onoffswitch-inner:before,
-.onoffswitch-inner:after {
-    display: block;
-    float: left;
-    width: 50%;
-    height: 30px;
-    padding: 0;
-    line-height: 30px;
-    font-size: 10px;
-    color: white;
-    font-family: Trebuchet, Arial, sans-serif;
-    font-weight: bold;
-    box-sizing: border-box;
-}
-
-.onoffswitch-inner:before {
-    content: "TÄHTIS";
-    background-color: #D83F87;
-    color: #FFFFFF;
-    text-align: center;
-}
-
-.onoffswitch-inner:after {
-    content: "TÄHTIS?";
-    background-color: #D83F87;
-    color: #FFFFFF;
-    text-align: center;
-}
-
-.onoffswitch-switch {
-    display: unset;
-    width: 20px;
-    margin: 20px;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    transition: all 0.3s ease-in 0s;
-}
-
-.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-inner {
-    margin-left: 0;
-}
-
-.onoffswitch-checkbox:checked+.onoffswitch-label .onoffswitch-switch {
-    right: 0px;
-}
-
-.sort {
-    position: relative;
-    display: inline-block;
-    width: 50%;
-    
-}
-
-.sort select {
-    position: relative;
-    display: inline-block;
-    width: 50%;
-    cursor: pointer;
-    color: #7b7b7b;
-    border: 0;
-    border-radius: 0;
-    outline: 0;
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-.sort select::-ms-expand {
-    display: none;
-}
-
-.sort select:hover,
-.sort select:focus {
-    color: #000;
-    background: #ccc;
-}
-
-.sort select:disabled {
-    pointer-events: none;
-    opacity: .5;
-}
-
-#page-container {
-    position: relative;
-    min-height: 100vh;
-}
-
-#content-wrap {
-    padding-bottom: 2.5rem;
-    /* Footer height */
-}
-
-#footer {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem;
-    text-align: center;
-    /* Footer height */
-}

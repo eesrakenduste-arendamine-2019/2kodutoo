@@ -9,6 +9,7 @@ Tekkinud keerukused:
 
 Funktsionaalsused:
    ** Saab lisada ja kustutada ülesandeid
+   
    ** Saab märkida ülesandeid tehtuks
    ** Saab järjestada kuupäeva ja nime järgi
    ** Ülesanded salvestatakse localStorage'isse ja andmebaasi

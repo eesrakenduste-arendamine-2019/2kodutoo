@@ -153,9 +153,9 @@ class TaskList {
         const sortProperty = document.querySelector('#sortProperty').value;
         const sortDirection = document.querySelector('#sortDirection').value;
 
-        if (sortDirection == "desc") {
+        if (sortDirection == "asc") {
             this.tasks.sort((a, b) => a[sortProperty] > b[sortProperty] ? 1 : -1);
-        } else if (sortDirection == "asc") {
+        } else if (sortDirection == "desc") {
             this.tasks.sort((a, b) => a[sortProperty] < b[sortProperty] ? 1 : -1);
         }
 

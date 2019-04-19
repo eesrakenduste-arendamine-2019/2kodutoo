@@ -25,6 +25,15 @@
     animation-duration: 4s;
 }
 
+.task.completedTask{
+    background-color: green; 
+    text-decoration: line-through;
+}
+
+.task.todayTask{
+    border: 2px solid red;
+}
+
 body {
     background: #8188AF;
     color: #fff;

@@ -2,11 +2,6 @@
 
 const tasksDiv = "taskList";
 
-// Style variables
-const taskDoneBg = "green";
-const taskDoneDeco = "line-through";
-const taskTodayBord = "2px solid red";
-
 class Task {
     constructor(title, description, date) {
         this.title = title;
@@ -69,8 +64,7 @@ class TaskList {
 
             li.classList.add('task');
 
-            li.addEventListener('click', (event) => {
-                event.target.classList.add('completedTask');
+            li.addEventListener('click', () => {
                 task.done = !task.done; // toggle done status
 
                 this.saveToAll();
@@ -79,18 +73,23 @@ class TaskList {
 
             removeTaskButton.addEventListener('click', () => {
                 ul.removeChild(li);
-                this.tasks = this.tasks.slice(0, taskIndex).concat(this.tasks.slice(taskIndex + 1, this.tasks.length));
-                this.saveToAll();
+                this.tasks = this.tasks.slice(0, taskIndex).concat(this.tasks.slice(taskIndex + 1, this.tasks.length));                    
+                this.saveToAll(); 
             });
 
             if (task.done) { 
-                li.style.backgroundColor = taskDoneBg;
-                li.style.textDecoration = taskDoneDeco;
+                li.classList.add('completedTask');
+            }
+            else {
+                li.classList.remove('completedTask');
             }
 
             let today = new Date().toLocaleString("se-SE", { day: 'numeric', month: 'numeric', year: 'numeric' }); // yyyy-mm-dd
             if (task.date == today) {
-                li.style.border = taskTodayBord;
+                li.classList.add('todayTask');
+            }
+            else {
+                li.classList.remove('todayTask');
             }
 
             removeTaskButton.className = "removeButton";

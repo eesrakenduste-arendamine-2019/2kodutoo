@@ -127,12 +127,14 @@ $(document).one('pageinit', function(){
 
 
   $("#flip-2").change(function(){
-    let color = $("#content").css("background-color");
-    if(color === 'rgba(0, 0, 0, 0)'){
-      console.log(color);
-      $("[id=content]").css({"background-color": "black"});
-    }else if ($("[id=content]").css({"background-color": "black"})) {
-        $("[id=content]").css({"background-color": "white"});
+    let color = $("[id=content]").css('background-color');
+    if(color == "rgb(255, 255, 255)"){
+      console.log('must');
+      color  = $("[id=content]").css({"background-color": "black"});
+  
+    }else{
+      console.log('valge');
+      color = $("[id=content]").css({"background-color": "white"});
     }
     });
 

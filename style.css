@@ -4,3 +4,6 @@ tr.redBackground td{
 tr.greenBackground td{
   background-color: #99ff66;
 }
+tr.yellowBackground td{
+  background-color: yellow;
+}

@@ -96,31 +96,26 @@ function render() {
         if (todo.done) {
             checked = 'checked';
         }
+        let toAdd='';
         if(todo.date<today && todo.done == false){
-          $('#todo').append('<tr class="redBackground">' +
-              '<td><input type="checkbox" class="doneCheckbox" data-id="' + todoIndex + '" name="done" value="1" ' + checked + '></td>' +
-              '<td>' + todo.title + '</td>' +
-              '<td>' + todo.description + '</td>' +
-              '<td class="text-nowrap">' + todo.date + '</td>' +
-              '<td><button class="deleteButton btn btn-sm btn-danger" data-id="' + todoIndex + '" >Kustuta</button></td>' +
-          '</tr>');
+          toAdd='<tr class="redBackground">';
         } else if(todo.done==true){
-          $('#todo').append('<tr class="greenBackground">' +
-              '<td><input type="checkbox" class="doneCheckbox" data-id="' + todoIndex + '" name="done" value="1" ' + checked + '></td>' +
-              '<td>' + todo.title + '</td>' +
-              '<td>' + todo.description + '</td>' +
-              '<td class="text-nowrap">' + todo.date + '</td>' +
-              '<td><button class="deleteButton btn btn-sm btn-danger" data-id="' + todoIndex + '" >Kustuta</button></td>' +
-          '</tr>');
-        } else {$('#todo').append('<tr>' +
+          toAdd='<tr class="greenBackground">';
+        } else if(todo.date==today && todo.done==false){
+          toAdd='<tr class="yellowBackground">';
+        } else {
+          toAdd= '<tr>';
+        }
+        $('#todo').append(toAdd +
             '<td><input type="checkbox" class="doneCheckbox" data-id="' + todoIndex + '" name="done" value="1" ' + checked + '></td>' +
             '<td>' + todo.title + '</td>' +
             '<td>' + todo.description + '</td>' +
             '<td class="text-nowrap">' + todo.date + '</td>' +
             '<td><button class="deleteButton btn btn-sm btn-danger" data-id="' + todoIndex + '" >Kustuta</button></td>' +
         '</tr>');}
-    });
-}
+    );}
+
+
 
 
 function sortTodos(attribute, desc) {
@@ -157,6 +152,7 @@ function toggleDone() {
     let id = $(this).data('id');
     todos[id].done = this.checked;
     save();
+    render();
 }
 
 function removeEntry(e) {

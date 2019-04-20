@@ -270,34 +270,20 @@ function HideCategorys() {
 		}
 	}
 }
-<<<<<<< HEAD
 
-
-(function() {
-   RenderCategorys();
-   RenderVehicles();
-})();
-
-/*
-function GetCategories(){
-=======
 /*
 function GetCategories(){ //siin forEach loopi kasutades on max 2 väärtust, kus esimene on item(nt categoryId), teine on index. Vt: https://www.w3schools.com/jsref/jsref_foreach.asp
->>>>>>> 267b3eb756dacedcb9a6dd61197a9f1e31043fab
 	$.get('categories.txt', function(data){
     let content = JSON.parse(data).content;
     content.forEach(function(categoryId, categoryName){
       console.log(categoryId);
       $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
   });
-<<<<<<< HEAD
 	});
 }
 
-=======
 });
 }
->>>>>>> 267b3eb756dacedcb9a6dd61197a9f1e31043fab
 function GetVehicles(){
 	$.get('vehicles.txt', function(data){
     let content = JSON.parse(data).content;
@@ -305,11 +291,8 @@ function GetVehicles(){
       console.log(todoIndex);
       $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
   });
-<<<<<<< HEAD
 	});
 }
-*/
-=======
 });
 }
 */
@@ -399,4 +382,3 @@ function sortTableByDate() {
    RenderCategorys();
    RenderVehicles();
 })();
->>>>>>> 267b3eb756dacedcb9a6dd61197a9f1e31043fab

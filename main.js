@@ -240,25 +240,30 @@ function HideCategorys() {
 	}
 }
 
-// function GetCategories(){
-// 	$.get('categories.txt', function(data){
-//     let content = JSON.parse(data).content;
-//     content.forEach(function(categoryId, categoryName){
-//       console.log(categoryId);
-//       $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
-//   });
-// });
-//
-// function GetVehicles(){
-// 	$.get('vehicles.txt', function(data){
-//     let content = JSON.parse(data).content;
-//     content.forEach(function(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value){
-//       console.log(todoIndex);
-//       $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
-//   });
-// });
 
 (function() {
    RenderCategorys();
    RenderVehicles();
 })();
+
+/*
+function GetCategories(){
+	$.get('categories.txt', function(data){
+    let content = JSON.parse(data).content;
+    content.forEach(function(categoryId, categoryName){
+      console.log(categoryId);
+      $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
+  });
+	});
+}
+
+function GetVehicles(){
+	$.get('vehicles.txt', function(data){
+    let content = JSON.parse(data).content;
+    content.forEach(function(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value){
+      console.log(todoIndex);
+      $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
+  });
+	});
+}
+*/

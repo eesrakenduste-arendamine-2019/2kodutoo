@@ -3,7 +3,7 @@ body{
     padding: 0;
     background-color: #505050;
     color: white;
-    display: flex;
+    display: inherit;
 }
 #wrapper{
     display: flex;

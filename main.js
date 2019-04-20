@@ -1,6 +1,6 @@
 /*jshint esversion:6*/
 
-﻿let categoryAdd = document.querySelector("#category");
+let categoryAdd = document.querySelector("#category");
 let vehicleType = document.querySelector("#vehicle-type");
 let vehicleList = document.querySelector("#veh-list");
 let categoryTabs = document.querySelector("#category-tabs");
@@ -46,14 +46,24 @@ function CreateCategory(categoryId, categoryName) {
 	let vehiclesTr = document.createElement("tr");
 	let vehiclesTh = document.createElement("th");
 	vehiclesTh.innerText = "Sõiduki nimi";
+	vehiclesTh.className = "veh-name-head";
+	vehiclesTh.setAttribute("onclick", "sortTableByName()");
 	vehiclesTr.appendChild(vehiclesTh);
 	vehiclesTh = document.createElement("th");
 	vehiclesTh.innerText = "Numbrimärk";
+	vehiclesTh.className = "veh-num-head";
+	vehiclesTh.setAttribute("onclick", "sortTableByNum()");
 	vehiclesTr.appendChild(vehiclesTh);
 	vehiclesTh = document.createElement("th");
 	vehiclesTh.innerText = "Töö tähtaeg";
+	vehiclesTh.className = "veh-date-head";
+	vehiclesTh.setAttribute("onclick", "sortTableByDate()");
 	vehiclesTr.appendChild(vehiclesTh);
 	vehiclesTh = document.createElement("th"); // btnite jaoks
+	vehiclesTr.appendChild(vehiclesTh);
+	vehiclesThead.appendChild(vehiclesTr);
+	vehiclesTable.appendChild(vehiclesThead);
+	vehiclesTh = document.createElement("th"); // alertide jaoks
 	vehiclesTr.appendChild(vehiclesTh);
 	vehiclesThead.appendChild(vehiclesTr);
 	vehiclesTable.appendChild(vehiclesThead);
@@ -111,7 +121,7 @@ function CreateCategory(categoryId, categoryName) {
 }
 
 function AddToVehicles(categoryId, vehicleName, vehicleNum, vehicleDate) {
-	let vhcl = {"category":categoryId, "name":vehicleName, "num":vehicleNum, "date":vehicleDate};
+	let vhcl = {"category":categoryId, "name":vehicleName, "num":vehicleNum, "date":vehicleDate , "isDone":0};
 	vehicles.push(vhcl);
 	localStorage.setItem("vehicles", JSON.stringify(vehicles));
 }
@@ -161,13 +171,14 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	let vDate = document.createElement("input");
 	vDate.value = vehicleDate;
 	vDate.id = "vehicle-date-"+vehicleIndex;
-	vDate.type = "text";
+	vDate.type = "date";
 	vDateContainer.appendChild(vDate);
 	let vBtnContainer = document.createElement("td");
+	let vAlertContainer = document.createElement("td");
 	let vEdit = document.createElement("input");
 	vBtnContainer.appendChild(vEdit);
 	vEdit.type = "button";
-	vEdit.value = "✓";
+	vEdit.value = "Uuenda";
 	vEdit.addEventListener("click", function() {
 		vehicles[vehicleIndex].name = vName.value;
 		vehicles[vehicleIndex].num = vNum.value;
@@ -175,23 +186,43 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 		localStorage.setItem("vehicles", JSON.stringify(vehicles));
 		RenderVehicles();
 	});
+	let vComplete = document.createElement("input");
+	vBtnContainer.appendChild(vComplete);
+	vComplete.type = "button";
+	vComplete.value = "✓";
+	vComplete.addEventListener("click", function() {
+		// vehicles[vehicleIndex].name = vName.value;
+		// vehicles[vehicleIndex].num = vNum.value;
+		// vehicles[vehicleIndex].date = vDate.value;
+		// localStorage.setItem("vehicles", JSON.stringify(vehicles));
+		console.log("tehtud");
+		vehicles[vehicleIndex].isDone = 1;
+		localStorage.setItem("vehicles", JSON.stringify(vehicles));
+		RenderVehicles();
+	});
 	let vDelete = document.createElement("input");
 	vBtnContainer.appendChild(vDelete);
 	vDelete.type = "button";
-	vDelete.value = "X";
+	vDelete.value = "✖";
 	vDelete.addEventListener("click", function() {
 		vehicles.splice(vehicleIndex, 1);
 		localStorage.setItem("vehicles", JSON.stringify(vehicles));
 		RenderVehicles();
 	});
 	let date = new Date();
-	let today = date.getFullYear() + "-" + String(date.getMonth() + 1).padStart(2, '0') + "-" + String(date.getDate()).padStart(2, '0');
-	let vAlertContainer = document.createElement("td");
-	let vAlert = document.createElement("p"); //this shit aint working
-	vAlertContainer.appendChild(vAlert);
-	if(today == vDate.value){
-		console.log(vName.value);
-		vAlert.innerHTML = "TÄNA!";
+	let today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+	let date2 = vDate.value.split("-");
+	let dueDate = new Date(date2[0], date2[1] - 1, date2[2]);
+	
+	if(vehicles[vehicleIndex].isDone != 1){
+		if(dueDate.getTime() == today.getTime()){
+			vAlertContainer.innerHTML = "TÄNA!";
+		}
+		else if(dueDate.getTime() < today.getTime()){
+			vAlertContainer.innerHTML = "MÖÖDUNUD!";
+		}
+	} else if(vehicles[vehicleIndex].isDone == 1){
+		vAlertContainer.innerHTML = "TEHTUD!";
 	}
 	let vRow = document.createElement("tr");
 	vRow.className = "vhcl";
@@ -209,7 +240,7 @@ function RenderCategorys() {
 	}
 }
 
-function DeleteAllBookDOMs() {
+function DeleteAllVehicleDOMs() {
 	let vhcls = document.querySelectorAll(".vhcl");
 	for(let i = 0, v; v = vhcls[i]; i++) {
 		v.parentElement.removeChild(v);
@@ -217,7 +248,7 @@ function DeleteAllBookDOMs() {
 }
 
 function RenderVehicles() {
-	DeleteAllBookDOMs();
+	DeleteAllVehicleDOMs();
 	for(let i = 0, vhcl; vhcl = vehicles[i]; i++) {
 		let tbodyElement = document.querySelector("#category-"+vhcl.category+" table tbody");
 		CreateVehicle(vhcl.name, vhcl.num, vhcl.date, tbodyElement, i);
@@ -239,6 +270,7 @@ function HideCategorys() {
 		}
 	}
 }
+<<<<<<< HEAD
 
 
 (function() {
@@ -248,22 +280,123 @@ function HideCategorys() {
 
 /*
 function GetCategories(){
+=======
+/*
+function GetCategories(){ //siin forEach loopi kasutades on max 2 väärtust, kus esimene on item(nt categoryId), teine on index. Vt: https://www.w3schools.com/jsref/jsref_foreach.asp
+>>>>>>> 267b3eb756dacedcb9a6dd61197a9f1e31043fab
 	$.get('categories.txt', function(data){
     let content = JSON.parse(data).content;
     content.forEach(function(categoryId, categoryName){
       console.log(categoryId);
       $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
   });
+<<<<<<< HEAD
 	});
 }
 
+=======
+});
+}
+>>>>>>> 267b3eb756dacedcb9a6dd61197a9f1e31043fab
 function GetVehicles(){
 	$.get('vehicles.txt', function(data){
     let content = JSON.parse(data).content;
-    content.forEach(function(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value){
+    content.forEach(function(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value){ //seepärast see siin ei tööta
       console.log(todoIndex);
       $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
   });
+<<<<<<< HEAD
 	});
 }
 */
+=======
+});
+}
+*/
+let dirN = "asc";
+let dirNum = "asc";
+let dirD = "asc";
+
+function sortTableByName() {
+	let thName = document.querySelector(".veh-name-head");
+	let thNum = document.querySelector(".veh-num-head");
+	let thDate = document.querySelector(".veh-date-head");
+	if(dirN == "asc"){
+		vehicles.sort(function (a, b) {
+			thName.innerText = "Sõiduki nimi ↓";
+			thNum.innerText = "Numbrimärk";
+			thDate.innerText = "Töö tähtaeg";
+			return a.name.localeCompare(b.name);
+		});
+	} else if(dirN == "desc") {
+		vehicles.sort(function (a, b) {
+			thName.innerText = "Sõiduki nimi ↑";
+			thNum.innerText = "Numbrimärk";
+			thDate.innerText = "Töö tähtaeg";
+			return a.name.localeCompare(b.name);
+		}).reverse();
+	}
+	if(dirN == "asc"){
+		dirN = "desc";
+	} else if(dirN == "desc"){
+		dirN = "asc";
+	}
+	RenderVehicles();	
+}
+
+function sortTableByNum() {
+	let thName = document.querySelector(".veh-name-head");
+	let thNum = document.querySelector(".veh-num-head");
+	let thDate = document.querySelector(".veh-date-head");
+	if(dirNum == "asc"){
+		vehicles.sort(function (a, b) {
+			thName.innerText = "Sõiduki nimi";
+			thNum.innerText = "Numbrimärk ↓";
+			thDate.innerText = "Töö tähtaeg";
+			return a.num.localeCompare(b.num);
+		});
+	} else if(dirNum == "desc") {
+		vehicles.sort(function (a, b) {
+			thName.innerText = "Sõiduki nimi";
+			thNum.innerText = "Numbrimärk ↑";
+			thDate.innerText = "Töö tähtaeg";
+			return a.num.localeCompare(b.num);
+		}).reverse();
+	}
+	if(dirNum == "asc"){
+		dirNum = "desc";
+	} else if(dirNum == "desc"){
+		dirNum = "asc";
+	}
+	RenderVehicles();	
+}
+
+function sortTableByDate() {
+	let thName = document.querySelector(".veh-name-head");
+	let thNum = document.querySelector(".veh-num-head");
+	let thDate = document.querySelector(".veh-date-head");
+	if(dirD == "asc"){
+		dirD = "desc";
+		vehicles.sort(function (a, b) {
+			thName.innerText = "Sõiduki nimi";
+			thNum.innerText = "Numbrimärk";
+			thDate.innerText = "Töö tähtaeg ↓";
+			return a.date.localeCompare(b.date);
+		});
+	} else if(dirD == "desc") {
+		dirD = "asc";
+		vehicles.sort(function (a, b) {
+			thName.innerText = "Sõiduki nimi";
+			thNum.innerText = "Numbrimärk";
+			thDate.innerText = "Töö tähtaeg ↑";
+			return a.date.localeCompare(b.date);
+		}).reverse();
+	}
+	RenderVehicles();	
+}
+
+(function() {
+   RenderCategorys();
+   RenderVehicles();
+})();
+>>>>>>> 267b3eb756dacedcb9a6dd61197a9f1e31043fab

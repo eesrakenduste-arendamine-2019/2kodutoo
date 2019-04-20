@@ -14,8 +14,7 @@ let todos = [];
 
 $('#addButton').on('click', ()=>addEntry());
 $('#saveButton').on('click', ()=>saveToFile());
-$('#loadButton').on('click', ()=>showTodos());
-$('#delButton').on('click', ()=>del());
+$('#loadButton').on('click', ()=>showTodosFromFile());
 
 function showTodos() {
     $('#todos').html("");
@@ -23,11 +22,23 @@ function showTodos() {
 
     if (todos != "" && todos != null) {
         for (let i = 0; i < todos.length; i++) {
-            $("#todos").append('<li>' + todos[i].task + '<br>' + todos[i].date + '</li>');
+            $("#todos").append('<li>' + todos[i].task + ' | ' + todos[i].date + '</li>');
         }
     }
 }
 
+function showTodosFromFile(){
+    $('#todos').html("");
+    $.get('data' + sessId + '.txt', function(data){
+        let content = JSON.parse(data).content;
+
+        content.forEach(function(todo, todoIndex){
+            console.log(todoIndex);
+            $("#todos").append('<li>' + todo.task + ' | ' + todo.date + '</li>');
+
+        });
+    });
+}
 
 function getTodoObject() {
     let currentTodos = localStorage.getItem('todos');
@@ -76,4 +87,4 @@ function del(){
 }
 
 //laetakse sisse kui leht tõmbab lahti
-showTodos();
+showTodosFromFile();

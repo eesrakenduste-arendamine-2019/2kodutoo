@@ -13,6 +13,8 @@ if(isset($_GET["logout"])){
     header("Location: index.php");
     exit();
 }
+
+$id =  $_SESSION["userId"];
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +25,9 @@ if(isset($_GET["logout"])){
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="main.css">
     <script src="sidebar.js"></script>
+    <script type="text/javascript">
+        var sessId = '<?php echo $id; ?>';
+    </script>
     <title>Pealeht</title>
 </head>
 <body>
@@ -42,8 +47,6 @@ if(isset($_GET["logout"])){
         <button id="addButton">LISA</button>
         <button id="saveButton">SALVESTA</button>
         <button id="loadButton">LAE</button>
-        <button id="doneButton">MARK AS DONE</button>
-        <button id="delButton">DELETE</button>
         <div id="todos">Siia tulevad todod</div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

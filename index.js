@@ -1,22 +1,3 @@
-let clockContainer;
-let dateContaier;
-
-window.onload = function () {
-  init();
-}
-
-function init () {
-  dateContainer = document.querySelector('#dateContainer');
-  console.log(clockContainer);
-  console.log(dateContainer);
-  startDate();
-}
-
-function startDate(){
-  let date = new Date();
-  let kuud = ['jaanuar', '  veebruar  ', 'märts', 'aprill', 'mai', 'juuni', 'juuli', 'august', 'september', 'oktoober', 'november', 'detsember'];
-  dateContainer.innerHTML =date.getFullYear()date.getDate()+" "+kuud[date.getMonth()]+" "+date.getDate();
-}
 
 class Todo{
   constructor(title, description, date){

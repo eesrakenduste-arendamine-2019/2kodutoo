@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <title>Ülesanded</title>
+</head>
+<body>
+    <h1>Ülesanded</h1>
+    <input type="text" id="title" placeholder="Tiitel">
+    <input type="text" id="description" placeholder="Sisu">
+    <input type="date" id="date">
+    <button id="addButton">+</button>
+    
+    <div id="sort">
+        <label for="sortProperty">Sorteeri:</label>
+        <select id="sortProperty">
+            <option value="title">Nime järgi</option>
+            <option value="description">Kirjelduse järgi</option>
+            <option value="date">Kuupäeva järgi</option>
+            <option value="done">Valmimise järgi</option>
+        </select>
+        <select id="sortDirection">
+            <option value="asc">kasvavalt</option>
+            <option value="desc">kahanevalt</option>
+        </select>
+        <button id="sortButton">></button>
+    </div>
+
+    <div id="taskList"></div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+</body>
+</html>

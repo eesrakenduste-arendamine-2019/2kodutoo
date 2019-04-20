@@ -1,23 +1,24 @@
-/*jshint esversion:6*/
-let clockContainer
-let dateContaier
+let clockContainer;
+let dateContaier;
 
 window.onload = function () {
-  init()
+  init();
 }
 
 function init () {
-  dateContainer = document.querySelector('#date')
-  console.log(clockContainer)
-  console.log(dateContainer)
-  startDate()
+  dateContainer = document.querySelector('#dateContainer');
+  console.log(clockContainer);
+  console.log(dateContainer);
+  startDate();
 }
+
 function startDate(){
-  let date = new Date()
+  let date = new Date();
   let kuud = ['jaanuar', '  veebruar  ', 'märts', 'aprill', 'mai', 'juuni', 'juuli', 'august', 'september', 'oktoober', 'november', 'detsember'];
-  dateContainer.innerHTML =date.getFullYear()date.getDate()+" "+kuud[date.getMonth()]+" "+date.getDate()
+  dateContainer.innerHTML =date.getFullYear()date.getDate()+" "+kuud[date.getMonth()]+" "+date.getDate();
 }
-class Entry{
+
+class Todo{
   constructor(title, description, date){
     this.title = title;
     this.description = description;
@@ -26,83 +27,46 @@ class Entry{
   }
 }
 
-class ToDo{
-  constructor(){
-    this.entries = JSON.parse(window.localStorage.getItem('entries')) || [];
+let todos = [];
+todos = JSON.parse(window.localStorage.getItem('todos')) || [];
+render();
 
-    document.querySelector('#addButton').addEventListener('click', () => this.addEntry());
-
-    this.render();
-  }
-
-  render(){
-    if(document.querySelector('.todo-list')){
-      document.body.removeChild(document.querySelector('.todo-list'));
-    }
-
-    const ul = document.createElement('ul');
-    ul.className = 'todo-list';
-
-    this.entries.forEach((entry, entryIndex)=>{
-      const li = document.createElement('li');
-      const removeTaskButton = document.createElement('div');
-      const removeIcon = document.createTextNode('\u00D7');
-
-      li.classList.add('entry');
-      removeTaskButton.className = "delete-task-button";
-
-      li.addEventListener('click', (event)=>{
-        event.target.classList.add('task-completed');
-
-        if(entry.done){
-          entry.done = false;
-        }else{
-          entry.done = true;
-        }
-
-        this.saveInLocalStorage();
-        this.render();
-      });
-
-      removeTaskButton.addEventListener('click', ()=>{
-        ul.removeChild(li);
-        this.entries = this.entries.slice(0, entryIndex).concat(this.entries.slice(entryIndex + 1, this.entries.length));
-        this.saveInLocalStorage();
-      });
-      if(entry.date<"2019-04-09"){
-        li.style.backgroundColor = "red";
-      }
-
-      if(entry.done){
-        li.style.backgroundColor = "lightgreen";
-        li.style.textDecoration = "line-through";
-      }
-
-      removeTaskButton.appendChild(removeIcon);
-      li.innerHTML = `${entry.title} <br> ${entry.description} <br> ${entry.date}`;
-      li.appendChild(removeTaskButton);
-      ul.appendChild(li);
-
-    });
-
-    document.body.appendChild(ul);
-  }
-
-  addEntry(){
-    const titleValue = document.querySelector('#title').value;
-    const descriptionValue = document.querySelector('#description').value;
-    const dateValue = document.querySelector('#date').value;
-
-    this.entries.push(new Entry(titleValue, descriptionValue, dateValue));
-
-    this.saveInLocalStorage();
-
-    this.render();
-  }
-
-  saveInLocalStorage(){
-    window.localStorage.setItem('entries', JSON.stringify(this.entries));
-  }
+function saveInLocalStorage(){
+  window.localStorage.setItem('todos', JSON.stringify(todos));
 }
 
-const todo = new ToDo();
+$('#addButton').on('click', ()=>addEntry());
+
+function render(){
+  $('#todos').html("");
+  $.get('database.txt', function(data){
+    let content = JSON.parse(data).content;
+    content.forEach(function(todo, todoIndex){
+      console.log(todoIndex);
+      $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description +'</li><li>'+ todo.date +'</li></ul>');
+    });
+  });
+}
+
+function addEntry(){
+  const titleValue = $('#title').val();
+  const dateValue = $('#date').val();
+  const descriptionValue = $('#description').val();
+
+  todos.push(new Todo(titleValue, descriptionValue, dateValue));
+
+  console.log(todos);
+  saveToFile();
+  saveInLocalStorage();
+  render();
+}
+
+function saveToFile(){
+  $.post('server.php', {save: todos}).done(function(){
+    console.log('done');
+  }).fail(function(){
+    console.log('fail');
+  }).always(function(){
+    console.log('always');
+  });
+}

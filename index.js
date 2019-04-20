@@ -58,6 +58,8 @@ function render(){
 }
 }
 
+
+
 function deleteB(todoIndex){
   todos.splice(todoIndex, 1);
   console.log(todos);

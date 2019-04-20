@@ -12,15 +12,21 @@
 /* Control the left side */
 .left {
   left: 0;
-  background-color: #111;
+  background-color: white;
   border: 1px solid;
   color: white;
+  border-style: double;
+  border-width: 5px
+  border-color: red
 }
 
 /* Control the right side */
 .right {
   right: 0;
-  background-color: red;
+  background-color: blue;
+  border-style: double;
+  border-width: 5px
+  border-color: red
 }
 
 /* If you want the content centered horizontally and vertically */
@@ -36,4 +42,15 @@
 .centered img {
   width: 150px;
   border-radius: 50%;
+}
+
+.controls{
+  float: right;
+}
+
+.buttons{
+  position:absolute;
+  transition: .5s ease;
+  height: 50px;
+  width: 20%;
 }

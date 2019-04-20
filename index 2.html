@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TodoList</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+     <link rel="stylesheet" type="text/css" href="style.css">	
+
+</head>
+<body>
+    
+    <div class="hero">
+        <input class = "searchBar" type="text" id="myInput" onkeyup="myFunction()" placeholder="Otsi ToDo-si.." title="Type in a name">
+        <div class="container">
+            <h1 class = "text-center display-3">ToDoList</h1>
+            <p class = "lead text-center">Tere tulemast ToDoList-i lehele</p>
+            <div class="row">
+                <form id = "form" class = "col-8 mx-auto">
+                    <div class="input-group">
+                        <input id="input" class="form-control" placeholder="Sisesta ToDo !">
+                        <input type="date" class="form-control" id="date">
+                        <span>
+                            <button id="btn" type="button" class="btn btn-primary">Lisa</button>
+                            <button class="btn btn-info" id="saveButton">Salvesta</button>
+                            <button class="btn btn-secondary" id="loadButton">Laadi</button>
+                            
+                            
+                            
+                            
+                            
+                            
+                        </span>
+                    </div>
+                    
+                </form>
+            
+
+            </div>
+
+            <div class="row ">
+                <ul id="list" class="list col-lg-6 col-8 mx-auto">
+                <!--<li>This is toDoList item<input type="checkbox" aria-label="Checkbox for following text input"></li>
+                    <li>This is toDoList item<input type="checkbox" aria-label="Checkbox for following text input"></li>
+                    <li>This is toDoList item<input type="checkbox" aria-label="Checkbox for following text input"></li>-->
+                </ul>
+            </div>
+    </div>
+    </div>
+    
+    <script type="text/javascript" src="index.js"></script>
+</body>
+</html>

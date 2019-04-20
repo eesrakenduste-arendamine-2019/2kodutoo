@@ -16,6 +16,9 @@ function formatDate(date){
   return year + "-" + month + "-" + day;
 
 }
+if(date < formatDate(dateNow)){
+  li.style.backgroundColor = "red";
+  }
 class Todo{
   constructor(title, description, date){
     this.title = title;
@@ -52,9 +55,6 @@ function addEntry(){
   const descriptionValue = $('#description').val();
 
   todos.push(new Todo(titleValue, descriptionValue, dateValue));
-  if(dateValue < formatDate(dateNow)){
-    li.style.backgroundColor = "red";
-  }
 
   console.log(todos);
   saveToFile();

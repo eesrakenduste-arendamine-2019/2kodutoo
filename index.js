@@ -10,6 +10,7 @@ class Todo {
     }
 }
 
+let today= new Date();
 let todos = [];
 let notificationTimeout = null;
 let sortBy = 'title';
@@ -44,7 +45,7 @@ $(function() { // Same as $(document).ready();
     $('input[name=options]').change(function() {
         $('input[name=options]').parent().removeClass('active');
         //$('input[name=options]:checked').parent().addClass('active');
-        let checkedElement = $('input[name=options]:checked')
+        let checkedElement = $('input[name=options]:checked');
         console.log(this.value + $('input[name=options]:checked').data('desc'));
         sortTodos(this.value, checkedElement.data('desc') == 1 ? true : false);
     });
@@ -77,12 +78,12 @@ function render() {
             default:
                 return a[sortBy].localeCompare(b[sortBy]);
         }
-    })
+    });
 
     // Group by categories
     todos.sort((a, b) => {
         return a.category.localeCompare(b.category);
-    })
+    });
 
     let lastGroup = null;
     todos.forEach(function (todo, todoIndex) {
@@ -95,13 +96,29 @@ function render() {
         if (todo.done) {
             checked = 'checked';
         }
-        $('#todo').append('<tr>' +
+        if(todo.date<today && todo.done == false){
+          $('#todo').append('<tr class="redBackground">' +
+              '<td><input type="checkbox" class="doneCheckbox" data-id="' + todoIndex + '" name="done" value="1" ' + checked + '></td>' +
+              '<td>' + todo.title + '</td>' +
+              '<td>' + todo.description + '</td>' +
+              '<td class="text-nowrap">' + todo.date + '</td>' +
+              '<td><button class="deleteButton btn btn-sm btn-danger" data-id="' + todoIndex + '" >Kustuta</button></td>' +
+          '</tr>');
+        } else if(todo.done==true){
+          $('#todo').append('<tr class="greenBackground">' +
+              '<td><input type="checkbox" class="doneCheckbox" data-id="' + todoIndex + '" name="done" value="1" ' + checked + '></td>' +
+              '<td>' + todo.title + '</td>' +
+              '<td>' + todo.description + '</td>' +
+              '<td class="text-nowrap">' + todo.date + '</td>' +
+              '<td><button class="deleteButton btn btn-sm btn-danger" data-id="' + todoIndex + '" >Kustuta</button></td>' +
+          '</tr>');
+        } else {$('#todo').append('<tr>' +
             '<td><input type="checkbox" class="doneCheckbox" data-id="' + todoIndex + '" name="done" value="1" ' + checked + '></td>' +
             '<td>' + todo.title + '</td>' +
             '<td>' + todo.description + '</td>' +
             '<td class="text-nowrap">' + todo.date + '</td>' +
             '<td><button class="deleteButton btn btn-sm btn-danger" data-id="' + todoIndex + '" >Kustuta</button></td>' +
-        '</tr>');
+        '</tr>');}
     });
 }
 

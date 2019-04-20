@@ -7,6 +7,8 @@ Karen Minski ja Madis Otenurm
 Tekkinud keerukused:
 
    * Elementide kuvamisel/eemaldamisel ei suutnud leida lahendust kuidas kasutada jQuery animatsioone
+   
+   * css animatsioone ei osanud panna eraldi listi elemendile
 
 Funktsionaalsused:
 

@@ -1,0 +1,63 @@
+<html>
+    <head>
+        <title>to-do List</title>
+
+        <link rel="stylesheet" href="lib/Bootstrap/bootstrap.min.css" />
+        <link rel="stylesheet" href="lib/jQuery/jquery.ui.min.css" />
+        <link rel="stylesheet" href="assets/todo.css" />
+    </head>
+
+    <body class="well">
+        <div id="container">
+
+            <div id="header"> To Do List </div>
+			
+			<div class="task-list">
+                <h3>Lisa ülesanne</h3>
+                <form id="todo-form">
+                    <input type="text" placeholder="Ülesanne" />
+                    <textarea placeholder="Kirjeldus"></textarea>
+                    <input type="text" id="datepicker" placeholder="Kuupäevaks (pp/kk/aaaa)" />
+                    <input type="button" class="btn btn-primary" value="Lisa" onclick="todo.add();" />
+                </form>
+
+                <input type="button" class="btn btn-primary" value="Kustuta kõik" onclick="todo.clear();" />
+
+                <div id="delete-div">
+                    Lohista siia kustutamiseks
+                </div>
+            </div>
+
+            <div class="task-list task-container" id="pending">
+                <h3>Nimekiri</h3>
+                
+            </div>
+
+            <div class="task-list task-container" id="inProgress">
+                <h3>Tegemisel</h3>
+            </div>
+
+            <div class="task-list task-container" id="completed">
+                <h3>Tehtud</h3>
+            </div>
+
+            
+
+            <div style="clear:both;"></div>
+	          <script type="text/javascript" src="lib/jQuery/jquery.min.js"></script>
+            <script type="text/javascript" src="lib/Bootstrap/bootstrap.min.js"></script>
+            <script type="text/javascript" src="lib/jQuery/jquery.ui.min.js"></script>
+            <script type="text/javascript" src="assets/todo.js"></script>
+
+            <script type="text/javascript">
+                $( "#datepicker" ).datepicker();
+                $( "#datepicker" ).datepicker("option", "dateFormat", "dd/mm/yy");
+
+                $(".task-container").droppable();
+                $(".todo-task").draggable({ revert: "valid", revertDuration:200 });
+                todo.init();
+            </script>
+
+        </div>
+    </body>
+</html>

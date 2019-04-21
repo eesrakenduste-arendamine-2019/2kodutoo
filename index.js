@@ -29,6 +29,7 @@ $(document).one('pageinit', function(){
     $('#editTask').val(localStorage.getItem('currentTask'));
     $('#editDate').val(localStorage.getItem('currentDate'));
   }
+
   function deleteTask(){
     localStorage.setItem('currentTask', $(this).data('task'));
     localStorage.setItem('currentDate', $(this).data('date'));
@@ -123,21 +124,6 @@ $(document).one('pageinit', function(){
     console.log('always');
   });
 }
-
-
-
-  $("#flip-2").change(function(){
-    let color = $("[id=content]").css('background-color');
-    if(color == "rgb(255, 255, 255)"){
-      console.log('must');
-      color  = $("[id=content]").css({"background-color": "black"});
-  
-    }else{
-      console.log('valge');
-      color = $("[id=content]").css({"background-color": "white"});
-    }
-    });
-
 
 
 });

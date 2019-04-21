@@ -1,0 +1,29 @@
+html, body {
+  height: 100%;
+}
+
+h2 {
+  text-align: center;
+}
+
+/*submit nupp keskele*/
+#submitAdd {
+  width: 200px;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+}
+
+#submitEdit {
+  width: 200px;
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+}
+#addTask {
+  height: 35px;
+}
+
+#addDate {
+  height: 35px;
+}

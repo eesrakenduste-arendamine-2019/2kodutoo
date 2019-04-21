@@ -119,6 +119,8 @@ function CreateCategory(categoryId, categoryName) {
 
 	categoryBlock.appendChild(vehiclesContainer);
 	vehicleList.appendChild(categoryBlock);
+
+	saveCategory(categoryLabel);
 }
 
 function AddToVehicles(categoryId, vehicleName, vehicleNum, vehicleDate, vehicleTbody, i) {
@@ -324,31 +326,31 @@ function sortTableByDate() {
 	RenderVehicles();
 }
 
-// function CompareCategories(){
-// 	$.get('categories.txt', function(data){
-//     let content = JSON.parse(data).content;
-//     content.forEach(function(categoryId, categoryName){
-//       console.log(categoryId);
-//   	});
-// 	});
-// }
-//
-// function CompareVehicles(){
-// 	$.get('vehicles.txt', function(data){
-//     let content = JSON.parse(data).content;
-//     content.forEach(function(categoryId, vehicleName, vehicleNum, vehicleDate, vehicleTbody, i){
-//       console.log(categoryId, vehicleName);
-//   	});
-// 	});
-// }
-//
-// function saveCategory(){
+function CompareCategories(){
+	$.get('categories.txt', function(data){
+    let content = JSON.parse(data).content;
+    content.forEach(function(categoryId, categoryName){
+      console.log(categoryId);
+  	});
+	});
+}
+
+function CompareVehicles(){
+	$.get('vehicles.txt', function(data){
+    let content = JSON.parse(data).content;
+    content.forEach(function(categoryId, vehicleName, vehicleNum, vehicleDate, vehicleTbody, i){
+      console.log(categoryId, vehicleName);
+  	});
+	});
+}
+
+// function saveCategory(categoryLabel){
 // 	console.log("Jõudis saveCategory funktsiooni");
 // 	var data = new FormData();
-// 		data.append("id", categoryId.value);
+// 		data.append("name", categoryLabel.value);
 //
 // 		var req = new XMLHttpRequest();
-// 		req.open('POST', "/server.php");
+// 		req.open('POST', "server.php");
 // 		req.onload = function() {
 // 			if (req.status == 200) {
 // 				console.log(req.response);
@@ -360,6 +362,21 @@ function sortTableByDate() {
 // 		};
 //
 // 		req.send(data);
+// }
+//
+// function saveToFile(){
+//     console.log("Jõudis saveToFile funktsiooni");
+//     $.post('server.php', {save: todos});
+// }
+//
+// function saveCategory(){
+//   $.post('server.php', {save: categorys}).done(function(){
+//     console.log('done');
+//   }).fail(function(){
+//     console.log('fail');
+//   }).always(function(){
+//     console.log('always');
+//   });
 // }
 
 (function() {

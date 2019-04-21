@@ -1,4 +1,5 @@
 <?php
+  echo "Jõudis server.php'sse";
   if(isset($_POST["save"]) && !empty($_POST["save"])){
     saveCategory($_POST["save"]);
   }

@@ -12,10 +12,9 @@
 </head>
 <body>
     <div class="eventList">
-        <div class="calendar">Calendar
+        <div class="calendar">
+            <h1>Calendar</h1>
             <div id="tableTest">
-                <input id="submitC" type="month" name="date">
-                <input type="submit" name="Show" value="Show" onclick="showCalender();">
                 <table>
                 <tr>
                     <th>Mo</th>
@@ -27,6 +26,9 @@
                     <th>Su</th>
                 </tr>
                 </table>
+                    <button class="previous" name="">&laquo; Prev</button>
+                    <button class="next" name="">Next &raquo;</button>
+                <br>
             </div>
         </div>
         <div class="addEvents">
@@ -39,7 +41,13 @@
             </section>
         </div>
 
-        <div class="showEvents">Events
+        <div class="showEvents">
+            <h1>Events</h1>
+            <select name="" id="">
+                <option value="id">Id</option>
+                <option value="date">Date</option>
+                <option value="date">Show To-Do events only!</option>
+            </select>
             <div id="showEventsTable">
                 <table id="seTable">
                 <tr>
@@ -51,6 +59,7 @@
                     <th>Delete</th>
                 </tr>
                 </table>
+                <br>
             </div>
         </div>
     </div>

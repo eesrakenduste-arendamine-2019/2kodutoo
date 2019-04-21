@@ -1,49 +1,62 @@
 body{
-    background-color: rgb(181, 235, 252);
+    /* background-color: rgb(181, 235, 252); */
+    background-image: url('5.jpg');
+    background-size: cover; 
     font-family: 'Arial';
 }
 
+h1 {
+  font-size: 30px;
+  font-family: 'Vladimir Script';
+  font-weight: bolder;
+}
 
   .eventList {
-    border: solid 3px black;
     margin-left: auto;
     margin-right: auto;
     position: fixed;
     left: 7.5%;
     width: 85%;
     height: 85%;
+    background: rgba(0, 0, 0, 0);
   }
 
   .calendar {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid #5180a0;
+    border-radius: 15px;
     font-size: 30px;
     text-align: center;
     position: fixed;
-    width: 42.5%;
+    overflow: auto;
+    width: 40%;
     height: 40%;
   }
 
   .addEvents {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid #5180a0;
+    border-radius: 15px;
     font-size: 16px;
     text-align: center;
     position: fixed;
-    left: 50.25%;
-    width: 42.5%;
+    overflow: auto;
+    left: 50.4%;
+    width: 40%;
     height: 40%;
   }
 
   .showEvents {
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.8);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid #5180a0;
+    border-radius: 15px;
     font-size: 30px;
     text-align: center;
     position: relative;
-    width: 100%;
+    overflow: auto;
+    width: 97.5%;
     height: 52.5%;
-    top: 47.25%;
+    top: 52.5%;
   }
 
 
@@ -55,49 +68,52 @@ body{
   }
 
   input[type = "text"], input[type = "date"], input[type = "month"], textarea{
-    border:0;
     background: none;
     display: block;
     margin: 20px auto;
     text-align: center;
     color: black;
     border: 2px solid #5180a0;
-    padding: 14px 10px;
-    width: 400px;
+    padding: 10px 14px;
+    width: 75%;
     outline: none;
     border-radius: 24px;
-    transition: 0.25s;
-  }
-  input[type = "text"]:focus{
-    width: 280px;
-    border-color: #e937bc;
   }
 
   input[type = "submit"]{
-    border:0;
     background: none;
     display: block;
     margin: 20px auto;
     text-align: center;
-    border: 2px solid #e937bc;
+    border: 2px solid #5180a0;
     padding: 14px 40px;
     outline: none;
     border-radius: 24px;
-    transition: 0.25s;
     cursor: pointer;
   }
+  input[type = "text"]:hover, input[type = "month"]:hover, input[type = "date"]:hover, textarea:hover{
+    border-color: #e937bc;
+  }
+
   input[type = "submit"]:hover{
+    border-color: #e937bc;
     background-color: #e937bc;
   }
 
+
   table {
-      border: 1px solid black;
-      width: 25%;
+      border: 3px solid #5180a0;
+      border-radius: 24px;
+      width: 75%;
       margin-left: auto;
       margin-right: auto;
       margin-top: 20px;
       word-wrap: break-word;
       table-layout: fixed;
+  }
+
+  table:hover {
+    border: 3px solid #e937bc;
   }
 
   #seTable {
@@ -118,3 +134,37 @@ body{
   }
 
   /* */
+
+select {
+  width: 25%;
+  text-align: center;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  border: 2px solid #5180a0;
+  padding: 14px 40px;
+  border-radius: 24px;
+  cursor: pointer;
+
+}
+
+select:hover {
+  border-color:  #e937bc;
+}
+
+
+.previous {
+  background-color: #f1f1f1;
+  color: black;
+  border-radius: 20%;
+  font-size: 24px;
+  border: 2px solid white;
+}
+
+.next {
+  background-color: #5180a0;
+  color: white;
+  border-radius: 20%;
+  font-size: 24px;
+  border: 2px solid white;
+}

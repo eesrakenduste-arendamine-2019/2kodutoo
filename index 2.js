@@ -39,9 +39,14 @@ function render(){
     console.log(content);
     content.forEach(function(todo, todoIndex){
       $('#list').append(`<li class="ui-body-inherit ui-li-static" id="li-${todoIndex}">${todo.title}<br>${todo.date}
-                  <input id="box-${todoIndex}"
-                      class="checkboxes" type="checkbox">
-                      <button id="delete${todoIndex+1}" class="btn deleteBtn" onclick="deleteB(${todoIndex});"><i class="fa fa-trash"></i></button></li>`);
+                  <input id="box-${todoIndex}" class="checkboxes" type="checkbox">
+                  <button id="delete${todoIndex+1}" class="btn deleteBtn" onclick="deleteB(${todoIndex});"><i class="fa fa-trash"></i></button></li>`);
+      console.log(new Date().getTime());
+      console.log(new Date(todo.date).getTime());
+     if(new Date().getTime() >= new Date(todo.date).getTime() && todo.status == false)
+            {
+              $('#li-'+todoIndex).css('color', 'orange');
+            }
   });
 }
 }

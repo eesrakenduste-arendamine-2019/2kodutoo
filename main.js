@@ -349,23 +349,12 @@ function CompareVehicles(){
 	});
 }
 
-
-
 function saveCategory(categoryLabel){
-	console.log("Jõudis saveCategory funktsiooni");
 	var data = new FormData();
 		data.append("name", categoryLabel.value);
 
 		var req = new XMLHttpRequest();
 		req.open('POST', "server.php");
-
-		xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("demo").innerHTML =
-      this.responseText;
-    	}
-  	};
-
 		req.onload = function() {
 			if (req.status == 200) {
 				console.log(req.response);
@@ -377,8 +366,15 @@ function saveCategory(categoryLabel){
 		};
 
 		req.send(data);
+
+		// req.onreadystatechange = function() {
+    // if (this.readyState == 4 && this.status == 200) {
+    //   document.getElementById("categoryLabel").innerHTML =
+    //   this.responseText;
+    // 	}
 }
-//
+
+
 // function saveToFile(){
 //     console.log("Jõudis saveToFile funktsiooni");
 //     $.post('server.php', {save: todos});

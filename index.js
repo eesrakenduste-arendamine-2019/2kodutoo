@@ -6,11 +6,15 @@ $(document).one('pageinit', function(){
   $('#todos').on('tap', '#editLink', setCurrent);
   $('#submitEdit').on('tap', editTask);
   $('#todos').on('tap', '#deleteLink', deleteTask);
-  $('#toggleTheme').on('change', function() {
-        setTheme();
+  $('#todos').on('tap', '#doneTask', taskDone);
+
+
+  $('#flip-2').on('change', function() {
+    setTheme();
   });
 
   let whichTheme = true;
+
 
   $(function(){
     $('.date').each(function(){
@@ -18,27 +22,35 @@ $(document).one('pageinit', function(){
     });
   });
 
-  function setTheme(){
-        if (whichTheme){
-            $("header").removeClass("ui-bar-b");
-            $("footer").removeClass("ui-bar-b");
-            $("header").addClass("ui-bar-a");
-            $("footer").addClass("ui-bar-a");
-            whichTheme = !whichTheme;
-        }
-        else {
-            $("header").removeClass("ui-bar-a");
-            $("footer").removeClass("ui-bar-a");
-            $("header").addClass("ui-bar-b");
-            $("footer").addClass("ui-bar-b");
-            whichTheme = !whichTheme;
-        }
 
-    }
 
-  function deleteTask(){
-    localStorage.setItem('currentTask', $(this).data('task'));
-    localStorage.setItem('currentDate', $(this).data('dateF'));
+
+
+
+function setTheme(){
+      if (whichTheme){
+          $("div").removeClass("ui-bar-b");
+          $("div").addClass("ui-bar-a");
+          $("header").removeClass("ui-bar-b");
+          $("footer").removeClass("ui-bar-b");
+          $("header").addClass("ui-bar-a");
+          $("footer").addClass("ui-bar-a");
+
+          whichTheme = !whichTheme;
+      }
+      else {
+          $("div").removeClass("ui-bar-a");
+          $("div").addClass("ui-bar-b");
+          $("header").removeClass("ui-bar-a");
+          $("footer").removeClass("ui-bar-a");
+          $("header").addClass("ui-bar-b");
+          $("footer").addClass("ui-bar-b");
+
+          whichTheme = !whichTheme;
+        }
+      }
+
+  function taskDone() {
 
     let currentTask = localStorage.getItem('currentTask');
     let currentDate = localStorage.getItem('currentDate');
@@ -47,21 +59,31 @@ $(document).one('pageinit', function(){
       if(todos[i].task == currentTask && todos[i].date == currentDate){
         todos.splice(i, 1);
       }
-
       localStorage.setItem('todos', JSON.stringify(todos));
     }
 
-    let update_todo = {
-      task: task,
-      date: date
-    };
-
-    alert("ülesanne kustutatud!");
-    window.location.href = "index.html";
-    return false;
   }
 
 
+  function deleteTask(){
+    localStorage.setItem('currentTask', $(this).data('task'));
+    localStorage.setItem('currentDate', $(this).data('date'));
+
+    let currentTask = localStorage.getItem('currentTask');
+    let currentDate = localStorage.getItem('currentDate');
+
+    for(let i = 0; i < todos.length; i++){
+      if(todos[i].task == currentTask && todos[i].date == currentDate){
+        todos.splice(i, 1);
+      }
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    alert("Ülesanne kustutatud!");
+
+    window.location.href = "index.html";
+    return false;
+  }
 
   function editTask(){
     let currentTask = localStorage.getItem('currentTask');
@@ -71,26 +93,18 @@ $(document).one('pageinit', function(){
       if(todos[i].task == currentTask && todos[i].date == currentDate){
         todos.splice(i, 1);
       }
-
       localStorage.setItem('todos', JSON.stringify(todos));
     }
-
     let task = $('#editTask').val();
     let date = $('#editDate').val();
-
     let update_todo = {
       task: task,
       date: date
     };
-
     todos.push(update_todo);
-
     alert("ülesanne muudetud!");
-
     localStorage.setItem('todos', JSON.stringify(todos));
-
     window.location.href = "index.html";
-
     return false;
   }
 
@@ -107,10 +121,19 @@ $(document).one('pageinit', function(){
 
     if(todos != "" && todos != null){
       for(let i = 0; i < todos.length; i++){
-        $("#todos").append('<li class="ui-body-inherit ui-li-static">'+ todos[i].task +'<br>'+ todos[i].date +'<div class="controls"><a href="#edit" id="editLink" data-task="'+todos[i].task+'" data-date="'+ todos[i].date +'">Muuda</a> | <a href="#" id="deleteLink" data-task="'+todos[i].task+'" data-date="'+ todos[i].date +'" onclick="return confirm(\'Kas oled kindel?\')">Kustuta</a></div></li>');
+        $("#todos").append('<li class="ui-body-inherit ui-li-static">'+
+        todos[i].task +'<br>'+ todos[i].date +
+        "<input id= 'check' type='checkbox'>"+
+        '<div class="controls"><a href="#edit" id="editLink" data-task="'+
+        todos[i].task+'" data-date="'+ todos[i].date +
+        '">Muuda</a> | <a href="#" id="deleteLink" data-task="'+
+        todos[i].task+'" data-date="'+ todos[i].date +
+
+        '" onclick="return confirm(\'Kas oled kindel?\')">Kustuta</a></div></li>');
       }
     }
   }
+
 
   function addTask(){
     let task = $('#addTask').val();
@@ -125,7 +148,7 @@ $(document).one('pageinit', function(){
 
     todos.push(todo);
 
-    alert("ülesanne lisatud");
+    alert("Ülesanne lisatud");
 
     localStorage.setItem('todos', JSON.stringify(todos));
 
@@ -133,6 +156,7 @@ $(document).one('pageinit', function(){
 
     return false;
   }
+
 
   function getTodoObject(){
     let currentTodos = localStorage.getItem('todos');
@@ -147,6 +171,7 @@ $(document).one('pageinit', function(){
       return new Date(b.date) - new Date(a.date);
     });
   }
+
 
 
 });

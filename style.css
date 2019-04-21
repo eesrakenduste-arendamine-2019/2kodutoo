@@ -1,0 +1,206 @@
+body {
+    background-color: #2e2e2e;
+    display: flex;
+    flex-direction: column;
+    font-family: Helvetica Neue, Arial, Helvetica, sans-serif;
+    align-items: center;
+    color: #ffffff;
+    padding: 0px;
+    margin: 0px;
+}
+
+.important{
+    background-color: #4d4c4c;
+    opacity: 1;
+}
+
+.importantSelect {
+    position: relative;
+    right: 12px;
+}
+
+.importantSelect label {
+    position: relative;
+    top: -12px;
+}
+
+.importantPin {
+    width: 15px;
+    height: 15px;
+    top: 40px;
+    right: 12px;
+    position: absolute;
+}
+
+.section {
+    background-color: #3f3f3f;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0px;
+    width: 50vw;
+    min-width: 336px;
+    padding: 0px 0px 10px 0px;
+    box-shadow: 0px 50px 60px #00000069;
+    overflow: hidden;
+    font-size: 12px;
+    color: #ababab;
+}
+
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    padding: 4px 4px;
+    background-color: #3f3f3f;
+    color: #808080;
+}
+
+.settingsBar {
+    background-color: #3f3f3f;
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    position: relative;
+    z-index: 5;
+    color: #808080;
+    font-size: 12px;
+    justify-content: flex-end; 
+}
+
+#displayTasks {
+    padding: 0px;
+}
+
+.section input{
+    background-color: #727272;
+    border: none;
+    height: 35px;
+    padding: 5px 10px;
+    font-size: 15px;
+    border-bottom: 1px solid #545353;
+}
+
+.buttonRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 25px;
+    margin: 10px 0px 0px;
+}
+
+button {
+    background-color: #a038e9;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    color: #ffffff;
+    height: 30px;
+    padding: 0px 20px;
+    margin: 0px 10px;
+    box-shadow: 0px 15px 30px #00000069;
+}
+
+.task button {
+    position: absolute;
+    right: 12px;
+    bottom: 15px;
+    margin: 0px;
+    box-shadow: none;
+}
+
+.task {
+    padding: 10px 20px;
+    border-bottom: 1px solid #4b4b4b;
+    font-size: 15px;
+    color: #ababab;
+    position: relative;
+}
+
+.taskDate {
+    color: #808080;
+    font-size: 10px;
+}
+
+h5 {
+    font-size: 15px;
+    margin: 0px;
+    line-height: 16px;
+}
+
+.deleteTaskBtn {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 15px;
+    right: 12px;
+}
+
+.deleteTaskBtn:hover, .taskDone:hover, .importantPin:hover {
+    opacity: .7;
+    fill: #727272;
+}
+
+.taskDone {
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 65px;
+    right: 12px;
+    
+}
+
+#taskTabs {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    height: 40px;
+    margin-top: 10px;
+    width: 100%;
+    min-width: 336px;
+    z-index: 5;
+    color: #ababab;
+}
+
+.statusTab {
+    text-align: center;
+    width: 50%;
+    padding: 10px 0px;
+    border-radius: 5px 5px 0px 0px;
+    background-color: #3f3f3f;
+    display: relative;
+    z-index: 2;
+}
+
+.notSelected {
+    background-color: #2d2d2d;
+    color: #808080;
+    transition: background-color ease-in 250ms;
+}
+
+.notSelected:hover {
+    background-color: #3a3a3a;
+    transition: background-color ease-in 250ms;
+}
+
+#taskSection {
+    margin-top: 0px;
+    border-radius: 0px 0px 5px 5px;
+    padding-bottom: 0px;
+}
+
+.bouncy {
+    animation: bouncy 5s infinite linear;
+    position: relative;
+}
+
+@keyframes bouncy {
+    0% { top: 0em }
+    40% { top: 0em }
+    43% { top: -0.9em }
+    46% { top: 0em }
+    48% { top: -0.4em }
+    50% { top: 0em }
+    100% { top: 0em; }
+}

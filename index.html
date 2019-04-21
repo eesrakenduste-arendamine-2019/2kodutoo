@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>ToDoApp</title>
+</head>
+<body>
+    <div id="page-container">
+    <div id="content-wrap">
+    <div class="section" id="insertTasks">
+        <input type="text" id="title" placeholder="Ülesande pealkiri">
+        <input type="text" id="description" placeholder="Kirjeldus">
+        <input type="date" id="date">
+        <div id="message"></div>
+        <div class="buttonRow">
+            <button id="addButton" class="button1 bouncy">LISA</button>
+             <!--<input type="checkbox"  name="import" id="importantCheck" ><label for="importantCheck">Tähtis:</label>-->
+            <div class="form importantSelect">
+                <label for="importantCheck">märgi tähtsana:</label>
+                <input type="checkbox" id="importantCheck" title="Märgi tähtsaks" />
+            </div>
+            <!--<button id="loadButton">LAADI</button>-->
+        </div>
+    </div>
+
+    <div id="taskTabs">
+        <div class="statusTab" id="notDone">Tegemata</div>
+        <div class="statusTab notSelected" id="done">Tehtud</div>
+    </div>
+    <div class="settingsBar">
+        <p>Sorteeri:</p>
+        <select onchange="render()" id="sort">
+            <option value="title">Pealkirja järgi</option>
+            <option value="date" selected="selected">Kuupäeva järgi</option>
+            <option value="priority">Tähtsuse järgi</option>
+        </select>
+    </div>
+    <div class="section" id="taskSection">
+        <div id="displayTasks"></div>
+        
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="index.js"></script>
+    
+</body>
+</html>

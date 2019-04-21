@@ -44,6 +44,9 @@ function render(){
     let content = JSON.parse(data).content;
     content.forEach(function(todo, todoIndex){
       console.log(todoIndex);
+      const removeTaskButton = document.createElement('div');
+      const removeIcon = document.createTextNode('\u00D7');
+      removeTaskButton.className = "delete-task-button";
       $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description +'</li><li>'+ todo.date +'</li></ul>');
     });
   });

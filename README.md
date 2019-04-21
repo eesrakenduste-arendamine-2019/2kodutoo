@@ -1,7 +1,7 @@
 # 2. kodutöö – ToDo rakendus
 
 Autorid: Rait Väiko, Karl-Daniel Karu
-Tekkinud keerukused: Kuupäeva järgi järjestamine, sorteerimisel märgitud ülesannete asukoht muutub, ülesannete märkimisel "refreshi" tehes ei ole nad enam märgitud.
+Tekkinud keerukused: Kuupäeva järgi järjestamine, sorteerimisel märgitud ülesannete asukoht muutub, kui ülesanded on märgitud ja teha  "refresh", siis kaob märge.
 Funktsionaalsused:
 * Saab lisada ja kustutada
 * Saab ülesande nime ja kuupäeva muuta

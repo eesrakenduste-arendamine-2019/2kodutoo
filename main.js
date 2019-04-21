@@ -161,21 +161,24 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	vEdit.type = "button";
 	vEdit.value = "Uuenda";
 	vEdit.addEventListener("click", function() {
-		vehicles[vehicleIndex].name = vName.value;
-		vehicles[vehicleIndex].num = vNum.value;
-		vehicles[vehicleIndex].date = vDate.value;
-		localStorage.setItem("vehicles", JSON.stringify(vehicles));
-		RenderVehicles();
+		$(this).closest("tr").fadeOut(200).fadeIn(200, function(){
+			vehicles[vehicleIndex].name = vName.value;
+			vehicles[vehicleIndex].num = vNum.value;
+			vehicles[vehicleIndex].date = vDate.value;
+			localStorage.setItem("vehicles", JSON.stringify(vehicles));
+			RenderVehicles();
+		});
 	});
 	let vComplete = document.createElement("input");
 	vBtnContainer.appendChild(vComplete);
 	vComplete.type = "button";
 	vComplete.value = "✓";
 	vComplete.addEventListener("click", function() {
-		console.log("tehtud");
-		vehicles[vehicleIndex].isDone = 1;
-		localStorage.setItem("vehicles", JSON.stringify(vehicles));
-		RenderVehicles();
+		$(this).closest("tr").fadeOut(200).fadeIn(200, function(){
+			vehicles[vehicleIndex].isDone = 1;
+			localStorage.setItem("vehicles", JSON.stringify(vehicles));
+			RenderVehicles();
+		});
 	});
 	let vDelete = document.createElement("input");
 	vBtnContainer.appendChild(vDelete);

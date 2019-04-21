@@ -9,7 +9,7 @@
     * autorite nimesid;
     * kirjeldust tekkinud keerukustest
     * funktsionaalsuste kirjeldust
-1. Todo rakenduse funktsionaalsused:   
+1. Todo rakenduse funktsionaalsused:
     * Saab lisada ja kustutada
     * Saab märkida ülesandeid tehtuks
     * Saab järjestada kuupäeva ja nime järgi ülesandeid
@@ -51,11 +51,17 @@ Martin Tšerdantsev
 
 KIRJELDUS:
 
-NB! ME EI TEINUD SEDA ÜKSI, MEIL OLI JUHENDAJA ABI! Probleem oli ausalt öeldes, kõigega. Aga aja jooksul saime probleemidest üle.
-Kõige veidram ja raskem asi ole meie jaoks kujundus ja põhifunktsionaalsus. Ka praegugi ei ole see vigadeta.
+Ilus praktilise kujundusega funktsionaalne tegumihaldur.
+
+PROBLEEMI KIRJELDUS:
+NB! Antud töö valmimiskäigul juhendas meid Kevini tuttav. Juhendajaga tegime läbi harjutusülesandeid, mis sarnanesid antud ülesandele.
+Ehitasime antud Todo listi nullist üles tänu juhendaja viidetele nõuannetele ja parandustele.
+Probleemiks kujunesid 5. tunni materjalidest võetud algfailid, mis olid lõppude lõpuks kõigi poolt tundmatuseni ära modifitseeritud. Antud asjaolu
+tekitas olukorra, kus meil kõigil oli koodi üpris raske mõista ning vigade põhjust välja selgitada. Seega otsustasime ehitada Todo listi üles täiesti nullist.
+Lõime programmi rakenduse, mis toimib ja on esteetiliselt ilus, kuid paraku esineb seal veel vigu.
 
 Kevin Pruus: võttis ühendust juhendajaga ning tegeles töö vundamendiga.
-Oleksii Inno: tegeles kujundusega.
+Oleksii Inno ja Kevin Pruus tegeleid kujundusega.
 Martin Tšerdantsev: tegeles jQuery funktsionaalsusega, veaparanduse ja testimisega.
 
 FUNKTSIONAALSUSED:

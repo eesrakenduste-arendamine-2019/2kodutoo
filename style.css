@@ -12,6 +12,8 @@ h1 {
   font-weight: bolder;
 }
 
+/* Container, kuhu peale kastid paigutatud on */
+
   .eventList {
     margin-left: auto;
     margin-right: auto;
@@ -21,6 +23,9 @@ h1 {
     height: 85%;
     background: rgba(0, 0, 0, 0);
   }
+/* Container, kuhu peale kastid paigutatud on  lõpp*/
+
+/* Funktsionaalsuse kastid */
 
   .calendar {
     background-color: rgba(255, 255, 255, 0.5);
@@ -65,8 +70,10 @@ h1 {
   }
 
 
+  /* Funktsionaalsuse kastid  lõpp */
 
-  /*   */
+
+  /*  Erinevate input taggide kujundus */
 
   textarea {
      resize: none;
@@ -105,6 +112,9 @@ h1 {
     background-color: #e937bc;
   }
 
+/*  Erinevate input taggide kujundus  lõpp*/
+
+/*  Tabeli kujundus */
 
   table {
       border: 3px solid #5180a0;
@@ -137,8 +147,10 @@ h1 {
       text-align: center;
       font-size: 12px;
   }
+  /*  Tabeli kujundus lõpp */
 
-  /* */
+
+  /*  Select tag */
 
 select {
   width: 25%;
@@ -152,24 +164,39 @@ select {
   cursor: pointer;
 
 }
+  /*  Select tag lõpp */
 
 select:hover {
   border-color:  #e937bc;
 }
 
-
+/* Next ja prev nupud */
 .previous {
-  background-color: #f1f1f1;
-  color: black;
-  border-radius: 20%;
-  font-size: 24px;
-  border: 2px solid white;
+  background: none;
+  margin: 20px auto;
+  text-align: center;
+  color: white;
+  border: 2px solid #5180a0;
+  padding: 10px 14px;
+  width: 15%;
+  outline: none;
+  border-radius: 24px;
 }
 
 .next {
-  background-color: #5180a0;
-  color: white;
-  border-radius: 20%;
-  font-size: 24px;
-  border: 2px solid white;
+  background: none;
+  margin: 20px auto;
+  text-align: center;
+  color: black;
+  border: 2px solid #5180a0;
+  padding: 10px 14px;
+  width: 15%;
+  outline: none;
+  border-radius: 24px;
 }
+
+.previous:hover, .next:hover {
+  border-color:  #e937bc;
+}
+
+/* Nxt ja prev nupud lõpp */

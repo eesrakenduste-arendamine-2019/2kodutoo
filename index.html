@@ -1,20 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <title>Tegumihaldur</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="external/bootstrap.min.css">
+    <title>ToDo rakendus</title>
 </head>
 <body>
-  <input type="text" id="title">
-  <input type="text" id="description">
-  <input type="date" id="date">
-  <button id="addButton">LISA ÜLESANNE</button>
-
-  <div id="todos"></div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="index.js"></script>
+<div class="jumbotron text-center">
+    <h1>ToDo rakendus</h1>
+    <p>Lisa, eemalda, halda ülesandeid!</p>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-bordered" id="todoList"></table>
+        </div>
+        <div class="col-6">
+            <form id="todoForm"></form>
+        </div>
+    </div>
+</div>
+<script src="external/jquery-3.4.0.js"></script>
+<script src="external/popper.min.js"></script>
+<script src="external/bootstrap.min.js"></script>
+<script src="main.js"></script>
 </body>
 </html>

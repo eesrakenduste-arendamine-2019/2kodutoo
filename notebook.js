@@ -10,6 +10,7 @@ class Todo{
 
 
 
+//let todos = JSON.parse(localStorage.getItem('todos')) || [];
 let todos = [];
 
 $('#addButton').on('click', ()=>addEntry());
@@ -25,6 +26,7 @@ function showTodos() {
             $("#todos").append('<li>' + todos[i].task + ' | ' + todos[i].date + '</li>');
         }
     }
+
 }
 
 function showTodosFromFile(){
@@ -38,6 +40,15 @@ function showTodosFromFile(){
 
         });
     });
+}
+
+function todosFromFileToLocalstorage(){
+    $.get('data' + sessId + '.txt', function(data){
+        let content = data;
+        localStorage.todos = content;
+    });
+
+    return false;
 }
 
 function getTodoObject() {
@@ -61,16 +72,17 @@ function addEntry(){
 
     localStorage.setItem('todos', JSON.stringify(todos));
 
-    window.location.href = "main.php";
+    showTodos();
+    //window.location.href = "main.php";
 
     return false;
 }
 
 function saveToFile(){
     $.post('server.php', {save: todos}).done(function(){
-        alert("Done!");
+        console.log("Done!");
     }).fail(function(){
-        alert("HAA-HAA!");
+        console.log("HAA-HAA!");
     });
 }
 
@@ -87,4 +99,7 @@ function del(){
 }
 
 //laetakse sisse kui leht tõmbab lahti
-showTodosFromFile();
+//todosFromFileToLocalstorage();
+showTodos();
+//saveToFile();
+//showTodosFromFile();

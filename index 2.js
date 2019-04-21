@@ -1,7 +1,6 @@
 /*jshint esversion:6*/
 
 let todos = [];
-console.log("Test");
 
 $(document).ready(function(){
     render();
@@ -21,7 +20,6 @@ $('#saveButton').on('click', ()=>saveToFile());
 $('#loadButton').on('click', ()=>render());
 
 function render(){
-  console.log("should do something");
   $('#list').html("");
   if(localStorage.getItem("ToDoList") != null && localStorage.getItem("ToDoList") != undefined){
     var content = JSON.parse(localStorage.getItem("ToDoList"));
@@ -41,7 +39,11 @@ function render(){
   function printToDO(content){
     console.log(content);
     content.forEach(function(todo, todoIndex){
-
+      $('#list').append(`<li id="li-${todoIndex}">${todo.title}
+                  <input id="delete${todoIndex+1}"
+                      class="checkboxes" type="checkbox">
+                      <button id="delete${todoIndex+1}" class="btn deleteBtn" onclick="deleteB(${todoIndex});"><i class="fa fa-trash"></i></button></li>`);
+                      /*
       if(todo.status == false || todo.status == 'false'){
         $('#list').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button onclick="deleteB('+todoIndex+');" id=delete'+(todoIndex+1)+'>KUSTUTA</button></ul>');
       } else if (todo.status == 'true') {
@@ -53,7 +55,7 @@ function render(){
         $("#"+todoIndex+"").css("background-color","red");
       }
         $("li").css("display","inline-block");
-        $("li").css("padding","5px");
+        $("li").css("padding","5px");*/
   //  });
   });
 }

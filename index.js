@@ -1,7 +1,45 @@
 /*jshint esversion:6*/
-function myFunction(divObj) {
-    divObj.style.background="#90EE90";
+let addButton;
+let loadButton;
+
+window.onload = function(){
+  init();
+};
+function init(){
+  pealkiri = document.getElementById('150');
+
+  addButton = document.getElementById('150');
+  loadButton = document.getElementById('150');
+
+  loadButton.addEventListener('click', loadFromLocalStorage);
 }
+
+function loadFromLocalStorage(){
+  const localValue = JSON.stringify(localStorage);
+  if(localValue){
+    let div = document.createElement('div');
+    div.innerHTML = localValue;
+    console.log(localValue);
+
+    document.body.appendChild(div);
+  } else{
+    console.log("ERROR 404");
+  }
+}
+
+
+function myFunction(divObj ) {
+   //divObj.style.background="";
+	//var x = document.getElementsByClassName("ui-body-inherit ui-li-static");
+    if (divObj.style.background === 'white') {
+        divObj.style.background = '#90EE90';
+    } else {
+        divObj.style.background = 'white';
+    }
+	localStorage.setItem("color", divObj.style.background);
+
+  }
+
 $(document).one('pageinit', function(){
   let todos;
   showTodos();

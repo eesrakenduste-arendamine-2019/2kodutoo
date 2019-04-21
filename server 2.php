@@ -1,4 +1,6 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+
   if(isset($_POST["save"]) && !empty($_POST["save"])){
     saveToFile($_POST["save"]);
   }

@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>TodoList</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-     <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <!--<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -16,18 +17,20 @@
 <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>-->
 
-     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
 
 </head>
+
 <body>
-<div id="new_div" style="display: none;"></div>
+    <div id="new_div" style="display: none;"></div>
     <div class="hero">
-        <input class = "searchBar" type="text" id="myInput" onkeyup="myFunction()" placeholder="Otsi ToDo-si.." title="Type in a name">
+        <input class="searchBar" type="text" id="todoSearch" placeholder="Otsi ToDo-si.."
+            title="Type in a name">
         <div class="container">
-            <h1 class = "text-center display-3">ToDoList</h1>
-            <p class = "lead text-center">Tere tulemast ToDoList-i lehele</p>
+            <h1 class="text-center display-3">ToDoList</h1>
+            <p class="lead text-center">Tere tulemast ToDoList-i lehele</p>
             <div class="row">
-                <form id = "form" class = "col-8 mx-auto">
+                <form id="form" class="col-8 mx-auto">
                     <div class="input-group">
                         <input id="input" class="form-control" placeholder="Sisesta ToDo !">
                         <input type="date" class="form-control" id="date">
@@ -50,15 +53,17 @@
             </div>
 
             <div class="row ">
-                <ul id="list" class="list col-lg-6 col-8 mx-auto" data-role="listview" data-filter="true" data-filter-placeholder="Otsi kuupäeva või nime järgi" data-inset="true">
-                <!--<li>This is toDoList item<input type="checkbox" aria-label="Checkbox for following text input"></li>
+                <ul id="list" class="list col-lg-6 col-8 mx-auto" data-role="listview" data-filter="true"
+                    data-filter-placeholder="Otsi kuupäeva või nime järgi" data-inset="true">
+                    <!--<li>This is toDoList item<input type="checkbox" aria-label="Checkbox for following text input"></li>
                     <li>This is toDoList item<input type="checkbox" aria-label="Checkbox for following text input"></li>
                     <li>This is toDoList item<input type="checkbox" aria-label="Checkbox for following text input"></li>-->
                 </ul>
             </div>
-    </div>
+        </div>
     </div>
 
     <script type="text/javascript" src="index 2.js"></script>
 </body>
+
 </html>

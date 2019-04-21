@@ -98,11 +98,11 @@ function render() {
         }
         let toAdd='';
         if(todo.date<today && todo.done == false){
-          toAdd='<tr class="redBackground">';
+          toAdd='<tr class="table-danger">';
         } else if(todo.done==true){
-          toAdd='<tr class="greenBackground">';
+          toAdd='<tr class="table-success">';
         } else if(todo.date==today && todo.done==false){
-          toAdd='<tr class="yellowBackground">';
+          toAdd='<tr class="table-info">';
         } else {
           toAdd= '<tr>';
         }

@@ -1,5 +1,10 @@
 # 2. kodutöö – ToDo rakendus
 Priit Laupa, Caupo helvik, Kristjan Põldmets - Remonditöökoja ToDo rakendus
+
+Ette tulnud keerukusteks olid JSON array elementide sorteerimine.
+Grupitööd viisime läbi SourceTree abil, eemaldades vajaduse greenysse logimiseks ja Putty teel Lin2 ühenduse loomiseks.
+Rakenduses on võimalik lisada ja kustutada kirjeid, märkida ülesanded tehtuks, järjestada kuupäeva, nime ja numbrimärgi järgi kirjeid, lisada kategooriaid, märkida ülesandeid tehtuks. Möödunud ja sama kuupäevaga kirjed kuvavad vastavat teavitust.
+
 ### Tähtpäev 21.04.2019 23:59
 
 ## Nõuded

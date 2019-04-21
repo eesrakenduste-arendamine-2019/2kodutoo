@@ -92,8 +92,10 @@ function CreateCategory(categoryId, categoryName) {
 
 	// Sõiduki lisamine
 	vehicleAdd.addEventListener("click", function() {
+		AddToVehicles(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value, vehicleTbody, vehicles.length);
+		/*
 		CreateVehicle(vehicleName.value, vehicleNum.value, vehicleDate.value, vehicleTbody, vehicles.length);
-		AddToVehicles(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value);
+		*/
 
 		vehicleName.value = "";
 		vehicleNum.value = "";
@@ -120,10 +122,11 @@ function CreateCategory(categoryId, categoryName) {
 	vehicleList.appendChild(categoryBlock);
 }
 
-function AddToVehicles(categoryId, vehicleName, vehicleNum, vehicleDate) {
+function AddToVehicles(categoryId, vehicleName, vehicleNum, vehicleDate, vehicleTbody, i) {
 	let vhcl = {"category":categoryId, "name":vehicleName, "num":vehicleNum, "date":vehicleDate , "isDone":0};
 	vehicles.push(vhcl);
 	localStorage.setItem("vehicles", JSON.stringify(vehicles));
+	CreateVehicle(vehicleName, vehicleNum, vehicleDate, vehicleTbody, i);
 }
 
 function AddToCategorys(categoryId, categoryName) {
@@ -174,7 +177,6 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	vDate.type = "date";
 	vDateContainer.appendChild(vDate);
 	let vBtnContainer = document.createElement("td");
-	let vAlertContainer = document.createElement("td");
 	let vEdit = document.createElement("input");
 	vBtnContainer.appendChild(vEdit);
 	vEdit.type = "button";
@@ -191,10 +193,6 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	vComplete.type = "button";
 	vComplete.value = "✓";
 	vComplete.addEventListener("click", function() {
-		// vehicles[vehicleIndex].name = vName.value;
-		// vehicles[vehicleIndex].num = vNum.value;
-		// vehicles[vehicleIndex].date = vDate.value;
-		// localStorage.setItem("vehicles", JSON.stringify(vehicles));
 		console.log("tehtud");
 		vehicles[vehicleIndex].isDone = 1;
 		localStorage.setItem("vehicles", JSON.stringify(vehicles));
@@ -209,12 +207,13 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 		localStorage.setItem("vehicles", JSON.stringify(vehicles));
 		RenderVehicles();
 	});
+	let vAlertContainer = document.createElement("td");
 	let date = new Date();
 	let today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	let date2 = vDate.value.split("-");
 	let dueDate = new Date(date2[0], date2[1] - 1, date2[2]);
 	
-	if(vehicles[vehicleIndex].isDone != 1){
+	if(vehicles[vehicleIndex].isDone == 0){
 		if(dueDate.getTime() == today.getTime()){
 			vAlertContainer.innerHTML = "TÄNA!";
 		}
@@ -224,6 +223,7 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	} else if(vehicles[vehicleIndex].isDone == 1){
 		vAlertContainer.innerHTML = "TEHTUD!";
 	}
+
 	let vRow = document.createElement("tr");
 	vRow.className = "vhcl";
 	vRow.appendChild(vNameContainer);
@@ -305,6 +305,7 @@ function sortTableByName() {
 	let thNum = document.querySelector(".veh-num-head");
 	let thDate = document.querySelector(".veh-date-head");
 	if(dirN == "asc"){
+		dirN = "desc";
 		vehicles.sort(function (a, b) {
 			thName.innerText = "Sõiduki nimi ↓";
 			thNum.innerText = "Numbrimärk";
@@ -312,17 +313,13 @@ function sortTableByName() {
 			return a.name.localeCompare(b.name);
 		});
 	} else if(dirN == "desc") {
+		dirN = "asc";
 		vehicles.sort(function (a, b) {
 			thName.innerText = "Sõiduki nimi ↑";
 			thNum.innerText = "Numbrimärk";
 			thDate.innerText = "Töö tähtaeg";
 			return a.name.localeCompare(b.name);
 		}).reverse();
-	}
-	if(dirN == "asc"){
-		dirN = "desc";
-	} else if(dirN == "desc"){
-		dirN = "asc";
 	}
 	RenderVehicles();	
 }
@@ -332,6 +329,7 @@ function sortTableByNum() {
 	let thNum = document.querySelector(".veh-num-head");
 	let thDate = document.querySelector(".veh-date-head");
 	if(dirNum == "asc"){
+		dirNum = "desc";
 		vehicles.sort(function (a, b) {
 			thName.innerText = "Sõiduki nimi";
 			thNum.innerText = "Numbrimärk ↓";
@@ -339,17 +337,13 @@ function sortTableByNum() {
 			return a.num.localeCompare(b.num);
 		});
 	} else if(dirNum == "desc") {
+		dirNum = "asc";
 		vehicles.sort(function (a, b) {
 			thName.innerText = "Sõiduki nimi";
 			thNum.innerText = "Numbrimärk ↑";
 			thDate.innerText = "Töö tähtaeg";
 			return a.num.localeCompare(b.num);
 		}).reverse();
-	}
-	if(dirNum == "asc"){
-		dirNum = "desc";
-	} else if(dirNum == "desc"){
-		dirNum = "asc";
 	}
 	RenderVehicles();	
 }

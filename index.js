@@ -1,83 +1,121 @@
 /*jshint esversion:6*/
-class Entry{
-  constructor(title, description, toDoDate){
-    this.title = title;
-    this.description = description;
-    this.date = toDoDate;
-    this.done = false;
-  }
+function myFunction(divObj) {
+    divObj.style.background="#90EE90";
 }
+$(document).one('pageinit', function(){
+  let todos;
+  showTodos();
 
-class ToDo{
-  constructor(){
-    this.entries = JSON.parse(window.localStorage.getItem('entries')) || [];
-    document.querySelector("#addButton").addEventListener('click', () => this.addEntry());
-    this.render(this.entries);
-  }
+  $('#submitAdd').on('tap', addTask);
+  $('#todos').on('tap', '#editLink', setCurrent);
+  $('#submitEdit').on('tap', editTask);
+  $('#todos').on('tap', '#deleteLink', deleteTask);
 
-  render(){
-    if(document.querySelector('.todo-list')){
-      document.body.removeChild(document.querySelector('.todo-list'));
+
+
+  $('.date').each(function(){
+    $(this).datepicker();
+  });
+
+
+  function deleteTask(){
+    localStorage.setItem('currentTask', $(this).data('task'));
+    localStorage.setItem('currentDate', $(this).data('date'));
+
+    let currentTask = localStorage.getItem('currentTask');
+    let currentDate = localStorage.getItem('currentDate');
+
+    todos = getTodoObject();
+
+    for(let i = 0;i<todos.length;i++){
+      if(todos[i].task == currentTask && todos[i].date == currentDate){
+        todos.splice(i, 1);
+      }
+      localStorage.setItem('todos',JSON.stringify(todos));
     }
-    const ul = document.createElement('ul');
-    ul.className = "todo-list";
 
-    this.entries.forEach((entry, entryIndex)=>{
-      const li = document.createElement('li');
-      const removeTaskButton = document.createElement('div');
-      const removeIcon = document.createTextNode('\u00D7');
-
-      li.classList.add('entry');
-      removeTaskButton.className = "delete-task-button";
-
-      li.addEventListener('click', (event) =>{
-        event.target.classList.add('task--completed');
-
-        if(entry.done){
-          entry.done = false;
-        }else{
-        entry.done = true;
-      }
-
-        this.saveEntriesInLocalStorage();
-        this.render();
-      });
-
-
-      if(entry.done){
-        li.style.backgroundColor = "lightgreen";
-        li.style.textDecoration = "line-through";
-      }
-      removeTaskButton.addEventListener('click', ()=>{
-        ul.removeChild(li);
-        this.entries = this.entries.slice(0, entryIndex).concat(this.entries.slice(entryIndex + 1, this.entries.length));
-        this.saveEntriesInLocalStorage();
-      });
-
-      removeTaskButton.appendChild(removeIcon);
-      li.innerHTML = `${entry.title}<br>${entry.description}<br> ${entry.date}`;
-      li.appendChild(removeTaskButton);
-      ul.appendChild(li);
-
-    });
-
-    document.body.appendChild(ul);
-
+    alert("Ülesanne kustatud");
+    window.location.href="index.html";
   }
 
-  addEntry(){
-    const titleValue = document.querySelector("#title").value;
-    const descriptionValue = document.querySelector("#description").value;
-    const dateValue = document.querySelector('#date').value;
-    this.entries.push(new Entry(titleValue, descriptionValue, dateValue));
-    this.saveEntriesInLocalStorage();
-    this.render(this.entries);
+function setCurrent(){
+  localStorage.setItem('currentTask', $(this).data('task'));
+  localStorage.setItem('currentDate', $(this).data('date'));
 
-  }
-
-  saveEntriesInLocalStorage(){
-    window.localStorage.setItem('entries', JSON.stringify(this.entries));
-  }
+  $('#editTask').val(localStorage.getItem('currentTask'));
+  $('#editDate').val(localStorage.getItem('currentDate'));
 }
 
-const todo = new ToDo();
+function editTask(){
+  let currentTask = localStorage.getItem('currentTask');
+  let currentDate = localStorage.getItem('currentDate');
+
+  todos = getTodoObject();
+
+  for(let i = 0;i<todos.length;i++){
+    if(todos[i].task == currentTask && todos[i].date == currentDate){
+      todos.splice(i, 1);
+    }
+    localStorage.setItem('todos',JSON.stringify(todos));
+  }
+
+  let task = $('#editTask').val();
+  let date = $('#editDate').val();
+
+  let update_todo = {
+    task: task,
+    date: date
+  };
+  todos.push(update_todo);
+  alert("Ülesanne muudetud");
+  localStorage.setItem('todos',JSON.stringify(todos));
+
+  window.location.href="index.html";
+  return false;
+}
+
+function addTask(){
+  let task = $('#addTask').val();
+  let date = $('#addDate').val();
+
+  let todo = {
+    task: task,
+    date: date
+  };
+
+  todos = getTodoObject();
+  todos.push(todo);
+
+  localStorage.setItem('todos', JSON.stringify(todos));
+
+  window.location.href="index.html";
+
+  return false;
+}
+function getTodoObject(){
+  let currentTodos = localStorage.getItem('todos');
+
+  if(currentTodos != null){
+    todos = JSON.parse(currentTodos);
+  } else{
+    todos = [];
+  }
+
+  return todos.sort(function(a, b){
+    return new Date(b.date) - new Date(a.date);
+  });
+
+}
+
+function showTodos(){
+  todos = getTodoObject();
+  if(todos != "" && todos != null){
+    for(let i = 0;i < todos.length; i++){
+        $('#todos').append('<li class="ui-body-inherit ui-li-static" onclick=myFunction(this)>'+ todos[i].task+ '<br>'+ todos[i].date +'<div class="controls"><a href="#edit" id="editLink" data-task="'+todos[i].task + '" data-date="' + todos[i].date + '">Muuda|</a><a href="#" id="deleteLink" data-task="'+todos[i].task + '" data-date="' + todos[i].date + '" onclick="return confirm(\'Kas oled kindel, et tahad ülesannet kustutada?\')">Kustuta</a></div></li>');
+	}
+  }
+  $('#home').on('pageinit', function(){
+    $('#todos').listview('refresh');
+  });
+}
+});

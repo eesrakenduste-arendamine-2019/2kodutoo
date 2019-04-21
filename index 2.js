@@ -35,76 +35,16 @@ function render(){
       printToDO(content);
     });
   }
-  //$.get('database.txt', function(data){
   function printToDO(content){
     console.log(content);
     content.forEach(function(todo, todoIndex){
-      $('#list').append(`<li id="li-${todoIndex}">${todo.title}
-                  <input id="delete${todoIndex+1}"
+      $('#list').append(`<li class="ui-body-inherit ui-li-static" id="li-${todoIndex}">${todo.title}<br>${todo.date}
+                  <input id="box-${todoIndex}"
                       class="checkboxes" type="checkbox">
                       <button id="delete${todoIndex+1}" class="btn deleteBtn" onclick="deleteB(${todoIndex});"><i class="fa fa-trash"></i></button></li>`);
-                      /*
-      if(todo.status == false || todo.status == 'false'){
-        $('#list').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button onclick="deleteB('+todoIndex+');" id=delete'+(todoIndex+1)+'>KUSTUTA</button></ul>');
-      } else if (todo.status == 'true') {
-        $('#list').append('<ul id="'+todoIndex+'"><li>'+todo.title+'</li><li>'+todo.description+'</li><li>'+todo.date+'</li> <button onclick="deleteB('+todoIndex+');" id=delete'+(todoIndex+1)+'>KUSTUTA</button></ul>');
-      }
-      if(todo.done == true || todo.status == 'true'){
-        $("#"+todoIndex+"").css("background-color","lightgreen");
-      } else {
-        $("#"+todoIndex+"").css("background-color","red");
-      }
-        $("li").css("display","inline-block");
-        $("li").css("padding","5px");*/
-  //  });
   });
 }
 }
-
-/*window.onload = function() {
-    var form = document.getElementById("form");
-    var input = document.getElementById("input");
-    var btn = document.getElementById("btn");
-    var list = document.getElementById("list");
-    var id = 1;
-
-
-    btn.addEventListener("click", addToDoItem);
-
-    list.addEventListener("click", boxChecked);
-
-
-    function addToDoItem(){
-        if(input.value === ""){
-            alert("Sisesta sisu!");
-        }else{
-            if(list.style.borderTop === ""){
-                list.style.borderTop ==="2px solid white";
-            }
-            var text = input.value;
-            var item = `<li id="li-${id}">${text}
-                        <input id="box-${id}"
-                            class="checkboxes" type="checkbox">
-                            <button class="btn deleteBtn"><i class="fa fa-trash"></i></button></li>`;
-            list.insertAdjacentHTML('beforeend', item);
-            id++;
-            form.reset();
-        }
-    }
-
-    function boxChecked(event){
-        const element = event.target;
-        if(element.type === "checkbox"){
-            element.parentNode.style.textDecoration = "line-through";
-        }else{
-            element.parentNode.style.textDecoration = "none";
-        }
-    }
-
-
-}*/
-
-//$('#saveButton').on('click', ()=>saveToFile());
 
 function addEntry(){
   const titleValue = $('#input').val();

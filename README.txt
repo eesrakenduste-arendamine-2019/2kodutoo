@@ -43,3 +43,25 @@
 * [Collaboration on github](https://github.com/eesrakenduste-arendamine-2019/2kodutoo/settings/collaboration)
 * [JQuery POST](https://api.jquery.com/jquery.post/)
 * [JQuery AJAX](http://api.jquery.com/jquery.ajax/)
+
+AUTORID:
+Kevin Pruus
+Oleksii Inno
+Martin Tšerdantsev
+
+KIRJELDUS:
+
+NB! ME EI TEINUD SEDA ÜKSI, MEIL OLI JUHENDAJA ABI! Probleem oli ausalt öeldes, kõigega. Aga aja jooksul saime probleemidest üle.
+Kõige veidram ja raskem asi ole meie jaoks kujundus ja põhifunktsionaalsus. Ka praegugi ei ole see vigadeta.
+
+Kevin Pruus: võttis ühendust juhendajaga ning tegeles töö vundamendiga.
+Oleksii Inno: tegeles kujundusega.
+Martin Tšerdantsev: tegeles jQuery funktsionaalsusega, veaparanduse ja testimisega.
+
+FUNKTSIONAALSUSED:
+   * Saab kirjeid lisada ja kustutada.
+   * Kirjed salvestatakse localStorage'sse ja tekstifaili.
+   * Rakendus töötab AJAX'i abil.
+   * Kirjed, mille kuupäev on väiksem/võrdne tänasega märgitakse oranži värviga.
+   * Ülesandeid saab märkida tehtuks.
+   * Kirjeid saab otsida.

@@ -1,32 +1,16 @@
-# 2. kodutöö – ToDo rakendus
+# 2. kodutöö – To-do rakendus
 
 ## Funktsionaalsus:
+* Ülesannete lisamine, kustutamine
+* Ülesannete sorteerimine pealkirja, sisuteksti, tähtaja ja staatuse järgi
+* Ülesannete grupeerimine kategooriate järgi
+* Ülesanded erinevat värvi olenevalt kas nende tähtaeg on täna, möödunud või ülesanne on tehtud.
+* Kategooriate lisamine, eemaldamine
+* Automaatne salvestamine nii lokaalselt kui serverisse
+* Vahemälust (local storage) laadimine, et ülesanded oleks kiirelt olemas
 
 ## Probleemid:
+Slide animatsiooni lisamine ülesande lisamisel / kustutamisel ei õnnestunud, kuna brauserid kohtlevad `<tr>` tag'i erinevalt block elementidest. [More info...](https://stackoverflow.com/a/6600343)
 
 ## Arendajad:
-    Marvin Helstein, Taavi Liivat
-
-
-
-
-## Nõuded
-
-1. Töö tuleb teha vähemalt kahekesi, eelnevalt kokkuleppel on lubatud ka kolm liiget. GitHub'is peab eristuma, kes mida tegi!
-1. README.md fail sisaldab:
-    * ~~autorite nimesid~~
-    * kirjeldust tekkinud keerukustest
-    * funktsionaalsuste kirjeldust
-1. Todo rakenduse funktsionaalsused:   
-    * ~~Saab lisad ja kustutada~~
-    * ~~Saab märkida ülesandeid tehtuks~~
-    * ~~Saab järjestada kuupäeva ja nime järgi ülesandeid~~
-    * ~~Ülesanded salvestatakse localStorage'isse ja faili/andmebaasi~~
-    * ~~Ülesannete salvestamiseks ja kuvamiseks kasutatakse AJAX-it~~
-    * ~~Kui kasutaja tuleb lehele, siis näidatakse varem salvestatud ülesandeid~~
-    * Lisa ise 2 funktsionaalsust juurde. Võib ise mõelda või valida antud listist:
-         * ~~Võimalus lisada kategooriad ja nende alusel jagada ülesandeid~~
-         * Möödunud ja/või tänase kuupäevaga tegemata ülesanded märkida erinevalt
-1. Väljanägemine ja animatsioonid
-    * ~~Rakendus näeb kena välja~~
-    * Elementide kuvamisel/eemaldamisel on kasutatud jQuery animatsioone
+Marvin Helstein, Taavi Liivat

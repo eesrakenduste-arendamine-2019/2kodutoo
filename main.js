@@ -22,7 +22,6 @@ if(categoryAdd !== null && categoryAdd !== undefined) {
 
 
 function CreateCategory(categoryId, categoryName) {
-	saveCategory();
 	let existingBlock = document.querySelector("#category-"+categoryId);
 	if(existingBlock !== null && existingBlock !== undefined) {
 		alert("Selline sõidukitüüp on juba olemas!");
@@ -325,43 +324,43 @@ function sortTableByDate() {
 	RenderVehicles();
 }
 
-function CompareCategories(){
-	$.get('categories.txt', function(data){
-    let content = JSON.parse(data).content;
-    content.forEach(function(categoryId, categoryName){
-      console.log(categoryId);
-  	});
-	});
-}
-
-function CompareVehicles(){
-	$.get('vehicles.txt', function(data){
-    let content = JSON.parse(data).content;
-    content.forEach(function(categoryId, vehicleName, vehicleNum, vehicleDate, vehicleTbody, i){
-      console.log(categoryId, vehicleName);
-  	});
-	});
-}
-
-function saveCategory(){
-	console.log("Jõudis saveCategory funktsiooni");
-	var data = new FormData();
-		data.append("id", categoryId.value);
-
-		var req = new XMLHttpRequest();
-		req.open('POST', "/server.php");
-		req.onload = function() {
-			if (req.status == 200) {
-				console.log(req.response);
-			}
-		};
-
-		req.onerror = function() {
-			console.log("Error Network Error");
-		};
-
-		req.send(data);
-}
+// function CompareCategories(){
+// 	$.get('categories.txt', function(data){
+//     let content = JSON.parse(data).content;
+//     content.forEach(function(categoryId, categoryName){
+//       console.log(categoryId);
+//   	});
+// 	});
+// }
+//
+// function CompareVehicles(){
+// 	$.get('vehicles.txt', function(data){
+//     let content = JSON.parse(data).content;
+//     content.forEach(function(categoryId, vehicleName, vehicleNum, vehicleDate, vehicleTbody, i){
+//       console.log(categoryId, vehicleName);
+//   	});
+// 	});
+// }
+//
+// function saveCategory(){
+// 	console.log("Jõudis saveCategory funktsiooni");
+// 	var data = new FormData();
+// 		data.append("id", categoryId.value);
+//
+// 		var req = new XMLHttpRequest();
+// 		req.open('POST', "/server.php");
+// 		req.onload = function() {
+// 			if (req.status == 200) {
+// 				console.log(req.response);
+// 			}
+// 		};
+//
+// 		req.onerror = function() {
+// 			console.log("Error Network Error");
+// 		};
+//
+// 		req.send(data);
+// }
 
 (function() {
    RenderCategorys();

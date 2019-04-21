@@ -7,13 +7,14 @@
     <title>ToDo</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="caleneder.js"></script>
+    <script src="calender.js"></script>
     <script src="todo.js"></script>
 </head>
 <body>
     <div class="eventList">
         <div class="calendar">
             <h1>Calendar</h1>
+            <p id="monthName">Kuu</p>
             <div id="tableTest">
                 <table>
                 <tr>
@@ -26,8 +27,8 @@
                     <th>Su</th>
                 </tr>
                 </table>
-                    <button class="previous" name="">&laquo; Prev</button>
-                    <button class="next" name="">Next &raquo;</button>
+                    <button class="previous" name="" onclick="previousMonth();">&laquo; Prev</button>
+                    <button class="next" name="" onclick="nextMonth();">Next &raquo;</button>
                 <br>
             </div>
         </div>
@@ -43,15 +44,14 @@
 
         <div class="showEvents">
             <h1>Events</h1>
-            <select name="" id="">
-                <option value="id">Id</option>
+            <select name="" id="sort" onchange="changeSorting();">
                 <option value="date">Date</option>
-                <option value="date">Show To-Do events only!</option>
+                <option value="name">Name</option>
+                <option value="todo">Show To-Do events only!</option>
             </select>
             <div id="showEventsTable">
                 <table id="seTable">
                 <tr>
-                    <th>Id</th>
                     <th>Date</th>
                     <th>Event Name</th>
                     <th>Event</th>

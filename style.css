@@ -1,7 +1,7 @@
 body{
     /* background-color: rgb(181, 235, 252); */
     background-image: url('5.jpg');
-    background-size: cover; 
+    background-size: cover;
     font-family: 'Arial';
 }
 
@@ -68,6 +68,10 @@ h1 {
     height: 52.5%;
     top: 52.5%;
   }
+
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-thumb { -webkit-border-radius: 10px; border-radius: 10px; background: #5180a0; -webkit-box-shadow: inset 0 0 6px #5180a0; }
+::-webkit-scrollbar-thumb:window-inactive { background: #5180a0; }
 
 
   /* Funktsionaalsuse kastid  lõpp */

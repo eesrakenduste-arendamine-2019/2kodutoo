@@ -1,5 +1,8 @@
 let events = [];
 let eventDiv;
+let onlyUnDone = false;
+let onlySpecDay = false;
+let sortDate;
 
 class Entry{
     constructor(date, name, eventText){
@@ -26,18 +29,45 @@ function getEvents () {
     $("#showEventsTable tr:not(:first)").remove();
     let tableString = "";
     for (let i = 0; i < events.length; i++) {
-        tableString += "<tr>";
-        tableString += "<td>" + (i+1).toString() + "</td>";
-        tableString += "<td>" + events[i].date + "</td>";
-        tableString += "<td>" + events[i].name + "</td>";
-        tableString += "<td>" + events[i].eventText + "</td>";
-        if (events[i].done == true) {
-            tableString += "<td>" + "<input type='checkbox' onclick='changeToUndone(" + (i).toString() + ")' checked>" + "</td>";
+        if (onlySpecDay) {
+            if (events[i].date == sortDate) {
+                if (events[i].done && !onlyUnDone) {
+                    tableString += "<tr>";
+                    tableString += "<td>" + events[i].date + "</td>";
+                    tableString += "<td>" + events[i].name + "</td>";
+                    tableString += "<td>" + events[i].eventText + "</td>";
+                    tableString += "<td>" + "<input type='checkbox' onclick='changeToUndone(" + (i).toString() + ")' checked>" + "</td>";
+                    tableString += '<td>' + "<button onclick='deleteRow(" + (i).toString() + ")'>Delete</button>" + "</td>";
+                    tableString += "</tr>";
+                } else if (!events[i].done) {
+                    tableString += "<tr>";
+                    tableString += "<td>" + events[i].date + "</td>";
+                    tableString += "<td>" + events[i].name + "</td>";
+                    tableString += "<td>" + events[i].eventText + "</td>";
+                    tableString += "<td>" + "<input type='checkbox' onclick='changeToDone(" + (i).toString() + ")'>" + "</td>";
+                    tableString += '<td>' + "<button onclick='deleteRow(" + (i).toString() + ")'>Delete</button>" + "</td>";
+                    tableString += "</tr>";
+                }
+            }
         } else {
-            tableString += "<td>" + "<input type='checkbox' onclick='changeToDone(" + (i).toString() + ")'>" + "</td>";
+            if (events[i].done && !onlyUnDone) {
+                tableString += "<tr>";
+                tableString += "<td>" + events[i].date + "</td>";
+                tableString += "<td>" + events[i].name + "</td>";
+                tableString += "<td>" + events[i].eventText + "</td>";
+                tableString += "<td>" + "<input type='checkbox' onclick='changeToUndone(" + (i).toString() + ")' checked>" + "</td>";
+                tableString += '<td>' + "<button onclick='deleteRow(" + (i).toString() + ")'>Delete</button>" + "</td>";
+                tableString += "</tr>";
+            } else if (!events[i].done) {
+                tableString += "<tr>";
+                tableString += "<td>" + events[i].date + "</td>";
+                tableString += "<td>" + events[i].name + "</td>";
+                tableString += "<td>" + events[i].eventText + "</td>";
+                tableString += "<td>" + "<input type='checkbox' onclick='changeToDone(" + (i).toString() + ")'>" + "</td>";
+                tableString += '<td>' + "<button onclick='deleteRow(" + (i).toString() + ")'>Delete</button>" + "</td>";
+                tableString += "</tr>";
+            }
         }
-        tableString += '<td>' + "<button onclick='deleteRow(" + (i).toString() + ")'>Delete</button>" + "</td>";
-        tableString += "</tr>";
     }
     eventDiv.append($(tableString));
 }
@@ -85,4 +115,36 @@ function sortByDate () {
         if(a.date > b.date) { return 1; }
         return 0;
     })
+}
+
+function showOnlyByDate (day, month, year) {
+    let addNull = "";
+    let addNull2 = "";
+    onlySpecDay = true;
+    if (day.toString().length == 1) {
+        addNull = "0";
+    }
+    if (month.toString().length == 1) {
+        addNull2 = "0";
+    }
+    sortDate = year.toString() + "-" + addNull2 + month.toString() + "-" + addNull + day.toString();
+    getEvents();
+    console.log(year.toString() + "-" + addNull2 + month.toString() + "-" + addNull + day.toString());
+}
+
+function changeSorting () {
+    if ($("#sort").val() == "name") {
+        onlyUnDone = false;
+        onlySpecDay = false;
+        sortAlphabetically();
+        getEvents();
+    } else if ($("#sort").val() == "date") {
+        onlySpecDay = false;
+        onlyUnDone = false;
+        sortByDate();
+        getEvents();
+    } else if ($("#sort").val() == "todo") {
+        onlyUnDone = true;
+        getEvents();
+    }
 }

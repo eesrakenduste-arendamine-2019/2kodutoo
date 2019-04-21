@@ -7,8 +7,6 @@ let categoryTabs = document.querySelector("#category-tabs");
 
 let categorys = JSON.parse(localStorage.getItem("categorys"));
 let vehicles = JSON.parse(localStorage.getItem("vehicles"));
-// let categorys = [];
-// let vehicles = [];
 
 if(categorys === null || categorys === undefined) { categorys = []; }
 if(vehicles === null || vehicles === undefined) { vehicles = []; }
@@ -22,7 +20,9 @@ if(categoryAdd !== null && categoryAdd !== undefined) {
 	});
 }
 
+
 function CreateCategory(categoryId, categoryName) {
+	saveCategory();
 	let existingBlock = document.querySelector("#category-"+categoryId);
 	if(existingBlock !== null && existingBlock !== undefined) {
 		alert("Selline sõidukitüüp on juba olemas!");
@@ -135,28 +135,6 @@ function AddToCategorys(categoryId, categoryName) {
 	localStorage.setItem("categorys", JSON.stringify(categorys));
 }
 
-// function AddToCategorys(categoryId, categoryName) {
-// 	let category = {"id":categoryId, "name":categoryName};
-// 	categorys.push(category);
-// 	var data = new FormData();
-// 		data.append("name", htmlElement.value);
-//
-// 		var req = new XMLHttpRequest();
-// 		req.open('POST', "/url-kuhu-saata-info.php");
-// 		req.onload = function() {
-// 			if (req.status == 200) {
-// 				console.log(req.response);
-// 			}
-// 		};
-//
-// 		req.onerror = function() {
-// 			console.log("Error Network Error");
-// 		};
-//
-// 		req.send(data);
-// 	localStorage.setItem("categorys", JSON.stringify(categorys));
-// }
-
 function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex) {
 	let vNameContainer = document.createElement("td");
 	let vName = document.createElement("input");
@@ -212,7 +190,7 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	let today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 	let date2 = vDate.value.split("-");
 	let dueDate = new Date(date2[0], date2[1] - 1, date2[2]);
-	
+
 	if(vehicles[vehicleIndex].isDone == 0){
 		if(dueDate.getTime() == today.getTime()){
 			vAlertContainer.innerHTML = "TÄNA!";
@@ -271,31 +249,6 @@ function HideCategorys() {
 	}
 }
 
-/*
-function GetCategories(){ //siin forEach loopi kasutades on max 2 väärtust, kus esimene on item(nt categoryId), teine on index. Vt: https://www.w3schools.com/jsref/jsref_foreach.asp
-	$.get('categories.txt', function(data){
-    let content = JSON.parse(data).content;
-    content.forEach(function(categoryId, categoryName){
-      console.log(categoryId);
-      $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
-  });
-	});
-}
-
-});
-}
-function GetVehicles(){
-	$.get('vehicles.txt', function(data){
-    let content = JSON.parse(data).content;
-    content.forEach(function(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value){ //seepärast see siin ei tööta
-      console.log(todoIndex);
-      $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
-  });
-	});
-}
-});
-}
-*/
 let dirN = "asc";
 let dirNum = "asc";
 let dirD = "asc";
@@ -321,7 +274,7 @@ function sortTableByName() {
 			return a.name.localeCompare(b.name);
 		}).reverse();
 	}
-	RenderVehicles();	
+	RenderVehicles();
 }
 
 function sortTableByNum() {
@@ -345,7 +298,7 @@ function sortTableByNum() {
 			return a.num.localeCompare(b.num);
 		}).reverse();
 	}
-	RenderVehicles();	
+	RenderVehicles();
 }
 
 function sortTableByDate() {
@@ -369,7 +322,45 @@ function sortTableByDate() {
 			return a.date.localeCompare(b.date);
 		}).reverse();
 	}
-	RenderVehicles();	
+	RenderVehicles();
+}
+
+function CompareCategories(){
+	$.get('categories.txt', function(data){
+    let content = JSON.parse(data).content;
+    content.forEach(function(categoryId, categoryName){
+      console.log(categoryId);
+  	});
+	});
+}
+
+function CompareVehicles(){
+	$.get('vehicles.txt', function(data){
+    let content = JSON.parse(data).content;
+    content.forEach(function(categoryId, vehicleName, vehicleNum, vehicleDate, vehicleTbody, i){
+      console.log(categoryId, vehicleName);
+  	});
+	});
+}
+
+function saveCategory(){
+	console.log("Jõudis saveCategory funktsiooni");
+	var data = new FormData();
+		data.append("id", categoryId.value);
+
+		var req = new XMLHttpRequest();
+		req.open('POST', "/server.php");
+		req.onload = function() {
+			if (req.status == 200) {
+				console.log(req.response);
+			}
+		};
+
+		req.onerror = function() {
+			console.log("Error Network Error");
+		};
+
+		req.send(data);
 }
 
 (function() {

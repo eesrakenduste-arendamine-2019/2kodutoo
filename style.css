@@ -5,8 +5,9 @@ body{
     font-family: 'Arial';
 }
 
+
 h1 {
-  font-size: 30px;
+  font-size: 40px;
   font-family: 'Vladimir Script';
   font-weight: bolder;
 }
@@ -41,6 +42,8 @@ h1 {
     text-align: center;
     position: fixed;
     overflow: auto;
+    scrollbar-color: #5180a0 white;
+    scrollbar-width: thin;
     left: 50.4%;
     width: 40%;
     height: 40%;
@@ -54,6 +57,8 @@ h1 {
     text-align: center;
     position: relative;
     overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #5180a0 white;
     width: 97.5%;
     height: 52.5%;
     top: 52.5%;

@@ -8,28 +8,64 @@ body {
     padding: 0px;
     margin: 0px;
 }
+
 .important{
-    background-color: rgba(206, 202, 236, 0.26);
+    background-color: #4d4c4c;
     opacity: 1;
 }
+
+.importantSelect {
+    position: relative;
+    right: 12px;
+}
+
+.importantSelect label {
+    position: relative;
+    top: -12px;
+}
+
 .importantPin {
     width: 15px;
     height: 15px;
-    position: absolute;
     top: 40px;
     right: 12px;
+    position: absolute;
 }
+
 .section {
     background-color: #3f3f3f;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     margin: 10px 0px;
-    width: 50%;
-    min-width: 600px;
+    width: 50vw;
+    min-width: 336px;
     padding: 0px 0px 10px 0px;
     box-shadow: 0px 50px 60px #00000069;
     overflow: hidden;
+    font-size: 12px;
+    color: #ababab;
+}
+
+select {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    padding: 4px 4px;
+    background-color: #3f3f3f;
+    color: #808080;
+}
+
+.settingsBar {
+    background-color: #3f3f3f;
+    display: flex;
+    flex-direction: row;
+    padding: 0px;
+    position: relative;
+    z-index: 5;
+    color: #808080;
+    font-size: 12px;
+    justify-content: flex-end; 
 }
 
 #displayTasks {
@@ -48,7 +84,7 @@ body {
 .buttonRow {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 25px;
     margin: 10px 0px 0px;
@@ -99,20 +135,21 @@ h5 {
     position: absolute;
     top: 15px;
     right: 12px;
-
 }
+
 .deleteTaskBtn:hover, .taskDone:hover, .importantPin:hover {
     opacity: .7;
+    fill: #727272;
 }
+
 .taskDone {
     width: 15px;
     height: 15px;
     position: absolute;
     top: 65px;
     right: 12px;
-
+    
 }
-
 
 #taskTabs {
     display: flex;
@@ -134,16 +171,6 @@ h5 {
     background-color: #3f3f3f;
     display: relative;
     z-index: 2;
-}
-.sort {
-    text-align: center;
-    width: 30%;
-    padding: 10px 0px;
-    align-items: center;
-    border-radius: 5px 5px 0px 0px;
-    background-color: #2d2d2d;
-    display: relative;
-    z-index: auto;
 }
 
 .notSelected {
@@ -170,66 +197,10 @@ h5 {
 
 @keyframes bouncy {
     0% { top: 0em }
-
     40% { top: 0em }
-
     43% { top: -0.9em }
-
     46% { top: 0em }
-
     48% { top: -0.4em }
-
     50% { top: 0em }
-
     100% { top: 0em; }
-}
-
-.footer {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 0;
-    background-color: #efefef;
-    text-align: center;
-}
-
-input#importantCheck {
-    position: absolute;
-    top: 0px;
-    left: 100px;
-    opacity: 0;
-}
-input#importantCheck:checked + label svg path {
-    stroke-dashoffset: 0;
-}
-input#importantCheck:focus + label {
-    transform: scale(1.03);
-}
-
-#importantCheck + label {
-    display: block;
-    border: 2px solid #808080;
-    width: var(--d);
-    height: var(--d);
-    border-radius: 14px;
-    cursor: pointer;
-    transition: all .2s ease;
-}
-#importantCheck + label:active {
-    transform: scale(1.05);
-    border-radius: 3px;
-}
-#importantCheck + label svg {
-    pointer-events: none;
-}
-#importantCheck + label svg path {
-    fill: none;
-    stroke: #808080;
-    stroke-width: 4px;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-dasharray: 100;
-    stroke-dashoffset: 101;
-    transition: all 350ms cubic-bezier(1, 0, 0.37, 0.91);
 }

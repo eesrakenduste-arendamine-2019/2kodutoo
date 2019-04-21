@@ -17,7 +17,6 @@ $('#notDone').on("click", () => switchTab('#notDone'));
 
 let content;
 
-
 window.onload = function(){
     document.querySelector("#displayTasks").style.opacity = "0";
     render();
@@ -26,7 +25,6 @@ window.onload = function(){
 function switchTab(clickedTab) {
     if ($(clickedTab).hasClass('notSelected')) {
         $(clickedTab).removeClass('notSelected');
-        
         if ($(clickedTab).is('#done')) {
             $('#notDone').addClass('notSelected');
             render();
@@ -43,10 +41,10 @@ function changeStatus(taskID, act){
 function render() {
     sortValue = $('#sort').val();
     document.querySelector("#displayTasks").style.opacity = "0";
-     $( "#displayTasks" ).animate({
+    $( "#displayTasks" ).animate({
         width: "104%",
         marginLeft: "-0.15in",
-      }, 500 ); 
+    }, 500 ); 
     $('#displayTasks').html("");
     $.get("server.php?function=data&sort="+ sortValue, function (data) {
         
@@ -117,16 +115,16 @@ function saveToFile(){
         
     }
 
- function deleteTask(taskID) {
-     let conf = confirm('Kas oled kindel, et tahad ülesannet kustutada?');
-     if (conf == true) {
-         console.log(taskID);
-         $.post("server.php?function=deleteTask", {
-             delete_id: taskID
-         }).done(function(){ setTimeout(render(), 200); });
-     } else {
-         return;
-     }
- }
+function deleteTask(taskID) {
+    let conf = confirm('Kas oled kindel, et tahad ülesannet kustutada?');
+    if (conf == true) {
+        console.log(taskID);
+        $.post("server.php?function=deleteTask", {
+            delete_id: taskID
+        }).done(function(){ setTimeout(render(), 200); });
+    } else {
+        return;
+    }
+}
 
  

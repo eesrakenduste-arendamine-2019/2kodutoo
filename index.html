@@ -18,13 +18,9 @@
         <div class="buttonRow">
             <button id="addButton" class="button1 bouncy">LISA</button>
              <!--<input type="checkbox"  name="import" id="importantCheck" ><label for="importantCheck">Tähtis:</label>-->
-             <div class="form">
-            <input type="checkbox" id="importantCheck" title="Märgi tähtsaks" />
-            <label for="importantCheck" style="--d: 15px;">
-                <svg viewBox="0,0,50,50">
-                <path d="M5 30 L 20 45 L 45 5"></path>
-                </svg>
-            </label>
+            <div class="form importantSelect">
+                <label for="importantCheck">märgi tähtsana:</label>
+                <input type="checkbox" id="importantCheck" title="Märgi tähtsaks" />
             </div>
             <!--<button id="loadButton">LAADI</button>-->
         </div>
@@ -33,16 +29,14 @@
     <div id="taskTabs">
         <div class="statusTab" id="notDone">Tegemata</div>
         <div class="statusTab notSelected" id="done">Tehtud</div>
-        <div class="sort">
-            <select onchange="render()" id="sort">
-                <option disabled>Valikud:</option>
-             <option value="none" >Sorteeri:</option>
-                <option value="title">Pealkirja järgi</option>
-                <option value="date">Kuupäeva järgi</option>
-                <option value="priority">Tähtsuse järgi</option>
+    </div>
+    <div class="settingsBar">
+        <p>Sorteeri:</p>
+        <select onchange="render()" id="sort">
+            <option value="title">Pealkirja järgi</option>
+            <option value="date" selected="selected">Kuupäeva järgi</option>
+            <option value="priority">Tähtsuse järgi</option>
         </select>
-        
-        </div>
     </div>
     <div class="section" id="taskSection">
         <div id="displayTasks"></div>

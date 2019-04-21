@@ -149,7 +149,7 @@ function showTodos(){
   todos = getTodoObject();
   if(todos != "" && todos != null){
     for(let i = 0;i < todos.length; i++){
-        $('#todos').append('<li class="ui-body-inherit ui-li-static" onclick=myFunction(this)>'+ todos[i].task+ '<br>'+ todos[i].date +'<div class="controls"><a href="#edit" id="editLink" data-task="'+todos[i].task + '" data-date="' + todos[i].date + '">Muuda|</a><a href="#" id="deleteLink" data-task="'+todos[i].task + '" data-date="' + todos[i].date + '" onclick="return confirm(\'Kas oled kindel, et tahad ülesannet kustutada?\')">Kustuta</a></div></li>');
+        $('#todos').append('<li class="ui-body-inherit ui-li-static" id=150 name=150 onclick=myFunction(this)>'+ todos[i].task+ '<br>'+ todos[i].date +'<div class="controls"><a href="#edit" id="editLink" data-task="'+todos[i].task + '" data-date="' + todos[i].date + '">Muuda|</a><a href="#" id="deleteLink" data-task="'+todos[i].task + '" data-date="' + todos[i].date + '" onclick="return confirm(\'Kas oled kindel, et tahad ülesannet kustutada?\')">Kustuta</a></div></li>');
 	}
   }
   $('#home').on('pageinit', function(){

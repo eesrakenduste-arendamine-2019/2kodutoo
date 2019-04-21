@@ -6,21 +6,53 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>ToDo</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="caleneder.js"></script>
+    <script src="todo.js"></script>
 </head>
 <body>
     <div class="eventList">
-        <div class="calendar">Calendar</div>
+        <div class="calendar">Calendar
+            <div id="tableTest">
+                <input id="submitC" type="month" name="date">
+                <input type="submit" name="Show" value="Show" onclick="showCalender();">
+                <table>
+                <tr>
+                    <th>Mo</th>
+                    <th>Tu</th>
+                    <th>We</th>
+                    <th>Th</th>
+                    <th>Fr</th>
+                    <th>Sa</th>
+                    <th>Su</th>
+                </tr>
+                </table>
+            </div>
+        </div>
         <div class="addEvents">
             <h1>Add events</h1>
             <section>
-                <form action=""> <input type="date" name="date">
-                                <input type="text" id="event" name="event" placeholder="Event name!">
-                                <input type="submit" name="add" value="Add">
-                </form>
+                <input id="date" type="date" name="date">
+                <input type="text" id="eventName" name="eventName" placeholder="Event name!">
+                <textarea id="event" rows="10" cols="150"></textarea>
+                <input type="submit" name="add" value="Add" onclick="addNewEvent();">
             </section>
         </div>
-        
-        <div class="showEvents">Events</div>
+
+        <div class="showEvents">Events
+            <div id="showEventsTable">
+                <table id="seTable">
+                <tr>
+                    <th>Id</th>
+                    <th>Date</th>
+                    <th>Event Name</th>
+                    <th>Event</th>
+                    <th>Done</th>
+                    <th>Delete</th>
+                </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </form>
 </body>

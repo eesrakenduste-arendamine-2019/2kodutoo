@@ -6,4 +6,4 @@
 <p>Saab lisada/kustutada ülesandeid/evente. Dropdown menüüst saab järjestada sissekandeid ajaliselt, nimeliselt ning sorteerida tegemata ülesanded. Kalendrist saab vaadata kindla tähtpäevaga ülesandeid.</p>
 <h2>Raskused</h2>
 <p>Peamiselt esines raskuseid kalendri tegemises.</p>
-<img src="screenshot.jpg" width="1280px" height="720px">
+<img src="screenshot.jpg">

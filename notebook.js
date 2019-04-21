@@ -5,6 +5,7 @@ class Todo{
         this.task = task;
         this.date = date;
         this.done = false;
+          $('#todos').on('tap', '#deleteLink', deleteTask);
     }
 }
 
@@ -23,7 +24,7 @@ function showTodos() {
 
     if (todos != "" && todos != null) {
         for (let i = 0; i < todos.length; i++) {
-            $("#todos").append('<li>' + todos[i].task + ' | ' + todos[i].date + '</li>');
+        $("#todos").append('<li class="ui-body-inherit ui-li-static">'+ todos[i].task +'<br>'+ todos[i].date +' <a href="#" id="deleteLink" data-task="'+todos[i].task+'" data-date="'+ todos[i].date +'" onclick="deleteTask()">Kustuta</a></div></li>');
         }
     }
 
@@ -36,11 +37,36 @@ function showTodosFromFile(){
 
         content.forEach(function(todo, todoIndex){
             console.log(todoIndex);
-            $("#todos").append('<li>' + todo.task + ' | ' + todo.date + '</li>');
+            $("#todos").append('<li class="ui-body-inherit ui-li-static">'+ todos[i].task +'<br>'+ todos[i].date +' <a href="#" id="deleteLink" data-task="'+todos[i].task+'" data-date="'+ todos[i].date +'" onclick="deleteTask()">Kustuta</a></div></li>');
+
 
         });
     });
 }
+
+function deleteTask(){
+    localStorage.setItem('currentTask', $(this).data('task'));
+    localStorage.setItem('currentDate', $(this).data('date'));
+
+    let currentTask = localStorage.getItem('currentTask');
+    let currentDate = localStorage.getItem('currentDate');
+
+    for(let i = 0; i < todos.length; i++){
+      if(todos[i].task == currentTask && todos[i].date == currentDate){
+        todos.splice(i, 1);
+        console.log("test");
+      }
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    alert("Ülesanne kustutatud!");
+
+    window.location.href = "main.php";
+
+    saveToFile();
+
+    return false;
+  }
 
 function todosFromFileToLocalstorage(){
     $.get('data' + sessId + '.txt', function(data){
@@ -90,13 +116,6 @@ function done(){
 
 }
 
-function del(){
-  $.post('server.php', {delete: todos}).done(function(){
-      alert("Done!");
-  }).fail(function(){
-      alert("HAA-HAA!");
-  });
-}
 
 //laetakse sisse kui leht tõmbab lahti
 //todosFromFileToLocalstorage();

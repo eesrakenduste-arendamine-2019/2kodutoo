@@ -203,9 +203,11 @@ function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex
 	vDelete.type = "button";
 	vDelete.value = "✖";
 	vDelete.addEventListener("click", function() {
-		vehicles.splice(vehicleIndex, 1);
-		localStorage.setItem("vehicles", JSON.stringify(vehicles));
-		RenderVehicles();
+		$(this).closest("tr").hide(300, function(){
+			vehicles.splice(vehicleIndex, 1);
+			localStorage.setItem("vehicles", JSON.stringify(vehicles));
+			RenderVehicles();
+		});
 	});
 	let vAlertContainer = document.createElement("td");
 	let date = new Date();

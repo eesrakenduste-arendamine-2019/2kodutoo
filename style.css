@@ -1,12 +1,14 @@
 
-  celll{
+celll{
     "width":"20vw",
     "border":"3px solid black",
     "margin":"3px"
-  }
+}
 
 .stroked{
- text-decoration: line-through;
- background-color: lightgreen;
-
- }
+   text-decoration: line-through;
+   background-color: lightgreen;
+}
+.important{
+   background-color: gold;
+}

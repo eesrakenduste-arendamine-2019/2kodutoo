@@ -1,48 +1,48 @@
 /*jshint esversion:6*/
 class Todo{
-  constructor(title, description, date){
+  constructor(title, description, date, done = false, important = false){
     this.title = title;
     this.description = description;
     this.date = date;
-    this.done = false;
+    this.done = done;
+    this.important = important;
   }
 }
 let todos = [];
 $('#addButton').on('click', addEntry);
 $('#saveButton').on('click', ()=>{saveToFile();saveToLocalStorage();});
-$('#loadButton').on('click', render);
+$('#loadButton').on('click', loadFromFile);
 $('#todos').on('click','ul' , function(){
-  $(this).toggleClass('stroked');
   console.log(todos);
   todos[this.id].done = !todos[this.id].done;
   console.log("olen siin");
+  render();
 });
 $('#todos').on('click', '.deleteButton', removeEntry);
+
 window.onload = function(){
-  render();
+  loadFromFile();
 };
+
 
 function render(){
   $('#todos').html("");
-  todos = [];
-  $.get('database.txt', function(data){
-    let content = JSON.parse(data).content;
-    content.forEach(function(todo, todoIndex){
-      todos.push(new Todo(todo.title, todo.description, todo.date, todo.done));
-      console.log(todo);
-      //$('#todos').append('<ul id="' + todoIndex + '" style="border:1px solid #000000;"><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+todo.date+'</li><button class="deleteButton">KUSTUTA</button><button class="doneButton">TEHTUD</button></ul>');
-    if(todo.done == true){
-      $('#todos').append('<ul id="' + todoIndex + '" style="border:1px solid #000000;" class="stroked"><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+todo.date+'</li><button class="deleteButton">KUSTUTA</button><button class="doneButton">TEHTUD</button></ul>');
-    } else {
-      $('#todos').append('<ul id="' + todoIndex + '" style="border:1px solid #000000;"><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+todo.date+'</li><button class="deleteButton">KUSTUTA</button><button class="doneButton">TEHTUD</button></ul>');
+  todos.forEach(function(todo, todoIndex){
+    console.log(todo);
+    let className = '';
+    if (todo.done){
+      className = 'class="stroked"';
+    } else if (todo.important) {
+      className = 'class="important"';
     }
-    });
-    });
+    $('#todos').append('<ul id="' + todoIndex + '" style="border:1px solid #000000;" ' + className + ' ><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+todo.date+'</li><button class="deleteButton">KUSTUTA</button><button class="doneButton">TEHTUD</button></ul>');
+  });
+  console.log("render funkstioon tehtud");
 
 }
 
 function saveToLocalStorage() {
-    localStorage.setItem('todos', JSON.stringify(todos));
+  localStorage.setItem('todos', JSON.stringify(todos));
 }
 
 
@@ -54,9 +54,9 @@ function removeEntry(){
 
   todos.splice(index, 1);
   saveToFile();
-  render();
-  console.log(index);
-  console.log(todos);
+  //setTimeout(render(),1000);
+  /*console.log(index);
+  console.log(todos);*/
 }
 
 
@@ -64,11 +64,36 @@ function addEntry(){
   const titleValue = $('#title').val();
   const dateValue = $('#date').val();
   const descriptionValue = $('#description').val();
-  todos.push(new Todo(titleValue, descriptionValue, dateValue));
-  //render(todos);
+  var important = false;
+
+  if($('#important').is(':checked')){
+    important = true;
+    console.log("Salvestas kuldselt");
+  }
+  todos.push(new Todo(titleValue, descriptionValue, dateValue, false, important));
   console.log(todos);
+  render();
 }
 
+function importantTask(element) {
+  element.style.backgroundColor = "gold";
+  console.log("Teeb kuldseks");
+}
+function saveToLocalStorage() {
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+
+function loadFromFile() {
+  todos = [];
+  $.get('database.txt', function(data){
+    let content = JSON.parse(data).content;
+    content.forEach(function(todo, todoIndex){
+      todos.push(new Todo(todo.title, todo.description, todo.date, todo.done, todo.important));
+      render();
+    });
+  });
+}
 
 function saveToFile(){
   console.log(todos);
@@ -79,4 +104,5 @@ function saveToFile(){
   }).always(function(){
     console.log('always');
   });
+  setTimeout(render(),1000);
 }

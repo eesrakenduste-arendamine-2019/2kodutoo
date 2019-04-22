@@ -1,0 +1,225 @@
+body{
+    /* background-color: rgb(181, 235, 252); */
+    background-image: url('5.jpg');
+    background-size: cover;
+    font-family: 'Arial';
+}
+
+
+h1 {
+  font-size: 40px;
+  font-family: 'Vladimir Script';
+  font-weight: bolder;
+}
+
+/* Container, kuhu peale kastid paigutatud on */
+
+  .eventList {
+    margin-left: auto;
+    margin-right: auto;
+    position: fixed;
+    left: 7.5%;
+    width: 85%;
+    height: 85%;
+    background: rgba(0, 0, 0, 0);
+  }
+/* Container, kuhu peale kastid paigutatud on  lõpp*/
+
+/* Funktsionaalsuse kastid */
+
+  .calendar {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid #5180a0;
+    border-radius: 15px;
+    font-size: 30px;
+    text-align: center;
+    position: fixed;
+    overflow: auto;
+    width: 40%;
+    height: 40%;
+  }
+
+  .addEvents {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid #5180a0;
+    border-radius: 15px;
+    font-size: 16px;
+    text-align: center;
+    position: fixed;
+    overflow: auto;
+    scrollbar-color: #5180a0 white;
+    scrollbar-width: thin;
+    left: 50.4%;
+    width: 40%;
+    height: 40%;
+  }
+
+  .showEvents {
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid #5180a0;
+    border-radius: 15px;
+    font-size: 30px;
+    text-align: center;
+    position: relative;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #5180a0 white;
+    width: 97.5%;
+    height: 52.5%;
+    top: 52.5%;
+  }
+
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-thumb { -webkit-border-radius: 10px; border-radius: 10px; background: #5180a0; -webkit-box-shadow: inset 0 0 6px #5180a0; }
+::-webkit-scrollbar-thumb:window-inactive { background: #5180a0; }
+
+
+  /* Funktsionaalsuse kastid  lõpp */
+
+
+  /*  Erinevate input taggide kujundus */
+
+  textarea {
+     resize: none;
+  }
+  
+  input[type = "checkbox"] {
+	padding-left:5px;
+    padding-right:5px;
+    border-radius:15px;
+
+    -webkit-appearance:button;
+
+    border: double 2px #5180a0;
+
+    color:#FFF;
+    white-space: nowrap;
+    overflow:hidden;
+
+    width:15px;
+    height:15px;
+  }
+  
+  input[type = "checkbox"]:checked {
+    background-color:#5180a0;
+  }
+
+  input[type = "checkbox"]:hover {
+	box-shadow:0px 0px 10px #5180a0;
+  }
+
+  input[type = "text"], input[type = "date"], input[type = "month"], button, textarea{
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    color: black;
+    border: 2px solid #5180a0;
+    padding: 10px 14px;
+    width: 75%;
+    outline: none;
+    border-radius: 24px;
+  }
+
+  input[type = "submit"]{
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #5180a0;
+    padding: 14px 40px;
+    outline: none;
+    border-radius: 24px;
+    cursor: pointer;
+  }
+  
+  input[type = "text"]:hover, input[type = "month"]:hover, input[type = "date"]:hover, button:hover, textarea:hover{
+    border-color: #e937bc;
+  }
+
+  input[type = "submit"]:hover{
+    border-color: #e937bc;
+    /*background-color: #e937bc;*/
+  }
+
+/*  Erinevate input taggide kujundus  lõpp*/
+
+/*  Tabeli kujundus */
+
+  table {
+      border: 3px solid #5180a0;
+      border-radius: 24px;
+      width: 75%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 20px;
+      word-wrap: break-word;
+      table-layout: fixed;
+  }
+
+  table:hover {
+    border: 3px solid #e937bc;
+  }
+
+  #seTable {
+      width: 70%;
+  }
+
+  th {
+      width: 2vh;
+      height: 2vh;
+      text-align: center;
+      font-size: 12px;
+  }
+  td {
+      width: 2vh;
+      height: 2vh;
+      text-align: center;
+      font-size: 12px;
+  }
+  /*  Tabeli kujundus lõpp */
+
+
+  /*  Select tag */
+
+select {
+  width: 25%;
+  text-align: center;
+  background: none;
+  display: block;
+  margin: 20px auto;
+  border: 2px solid #5180a0;
+  padding: 14px 40px;
+  border-radius: 24px;
+  cursor: pointer;
+
+}
+  /*  Select tag lõpp */
+
+select:hover {
+  border-color:  #e937bc;
+}
+
+/* Next, delete ja prev nupud */
+.previous {
+  color: white;
+  border: 2px solid #5180a0;
+  padding: 10px 14px;
+  width: 15%;
+  border-radius: 24px;
+  display: inline;
+}
+
+.next {
+  border: 2px solid #5180a0;
+  padding: 10px 14px;
+  width: 15%;
+  border-radius: 24px;
+  display: inline;
+}
+
+.previous:hover, .next:hover {
+  border-color:  #e937bc;
+}
+
+/* Nxt ja prev nupud lõpp */

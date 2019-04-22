@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ToDo</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="calender.js"></script>
+    <script src="todo.js"></script>
+</head>
+<body>
+    <div class="eventList">
+        <div class="calendar">
+            <h1>Calendar</h1>
+            <p id="monthName">Kuu</p>
+            <div id="tableTest">
+                <table>
+                <tr>
+                    <th>Mo</th>
+                    <th>Tu</th>
+                    <th>We</th>
+                    <th>Th</th>
+                    <th>Fr</th>
+                    <th>Sa</th>
+                    <th>Su</th>
+                </tr>
+                </table>
+                    <button class="previous" name="" onclick="previousMonth();">&laquo; Prev</button>
+                    <button class="next" name="" onclick="nextMonth();">Next &raquo;</button>
+                <br>
+            </div>
+        </div>
+        <div class="addEvents">
+            <h1>Add events</h1>
+            <section>
+                <input id="date" type="date" name="date">
+                <input type="text" id="eventName" name="eventName" placeholder="Event name!">
+                <textarea id="event" rows="10" cols="150"></textarea>
+                <input id="addButton" type="submit" name="add" value="Add" onclick="addNewEvent();">
+            </section>
+        </div>
+
+        <div class="showEvents">
+            <h1>Events</h1>
+            <select name="" id="sort" onchange="changeSorting();">
+                <option value="date">Date</option>
+                <option value="name">Name</option>
+                <option value="todo">Show To-Do events only!</option>
+            </select>
+            <div id="showEventsTable">
+                <table id="seTable">
+                <tr>
+                    <th>Date</th>
+                    <th>Event Name</th>
+                    <th>Event</th>
+                    <th>Done</th>
+                    <th>Delete</th>
+                </tr>
+                </table>
+                <br>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

@@ -5,12 +5,12 @@ class Todo{
         this.task = task;
         this.date = date;
         this.done = false;
-          $('#todos').on('tap', '#deleteLink', deleteTask);
+
     }
 }
 
 
-
+$('#todos').on('click', '#deleteLink', deleteTask);
 //let todos = JSON.parse(localStorage.getItem('todos')) || [];
 let todos = [];
 
@@ -24,7 +24,7 @@ function showTodos() {
 
     if (todos != "" && todos != null) {
         for (let i = 0; i < todos.length; i++) {
-        $("#todos").append('<li class="ui-body-inherit ui-li-static">'+ todos[i].task +'<br>'+ todos[i].date +' <a href="#" id="deleteLink" data-task="'+todos[i].task+'" data-date="'+ todos[i].date +'" onclick="deleteTask()">Kustuta</a></div></li>');
+        $("#todos").append('<li class="ui-body-inherit ui-li-static">'+ todos[i].task +'<br>'+ todos[i].date +' <a href="#" id="deleteLink" data-task="'+todos[i].task+'" data-date="'+ todos[i].date +'">Kustuta</a></div></li>');
         }
     }
 
@@ -34,10 +34,11 @@ function showTodosFromFile(){
     $('#todos').html("");
     $.get('data' + sessId + '.txt', function(data){
         let content = JSON.parse(data).content;
+        console.log(content);
 
         content.forEach(function(todo, todoIndex){
             console.log(todoIndex);
-            $("#todos").append('<li class="ui-body-inherit ui-li-static">'+ todos[i].task +'<br>'+ todos[i].date +' <a href="#" id="deleteLink" data-task="'+todos[i].task+'" data-date="'+ todos[i].date +'" onclick="deleteTask()">Kustuta</a></div></li>');
+            $("#todos").append('<li class="ui-body-inherit ui-li-static">'+ todos[i].task +'<br>'+ todos[i].date +' <a href="#" id="deleteLink" data-task="'+todos[i].task+'" data-date="'+ todos[i].date +'">Kustuta</a></div></li>');
 
 
         });
@@ -47,10 +48,13 @@ function showTodosFromFile(){
 function deleteTask(){
     localStorage.setItem('currentTask', $(this).data('task'));
     localStorage.setItem('currentDate', $(this).data('date'));
+    console.log($(this).data('date'));
 
     let currentTask = localStorage.getItem('currentTask');
     let currentDate = localStorage.getItem('currentDate');
-
+    console.log(todos);
+    console.log(currentTask);
+    console.log(currentDate);
     for(let i = 0; i < todos.length; i++){
       if(todos[i].task == currentTask && todos[i].date == currentDate){
         todos.splice(i, 1);

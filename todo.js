@@ -23,6 +23,9 @@ function addNewEvent () {
         saveLocal();
         showCalender();
     }
+	let animButton = $("#addButton");
+    animButton.animate({width: '300px', height: '55px'}, 100);
+    animButton.animate({width: '100px', height: '50px'}, 200);
 }
 
 function getEvents () {
@@ -37,7 +40,7 @@ function getEvents () {
                     tableString += "<td>" + events[i].name + "</td>";
                     tableString += "<td>" + events[i].eventText + "</td>";
                     tableString += "<td>" + "<input type='checkbox' onclick='changeToUndone(" + (i).toString() + ")' checked>" + "</td>";
-                    tableString += '<td>' + "<button onclick='deleteRow(" + (i).toString() + ")'>Delete</button>" + "</td>";
+                    tableString += '<td>' + '<button id="del" onclick="deleteRow(' + (i).toString() + ')">Delete</button>' + '</td>';
                     tableString += "</tr>";
                 } else if (!events[i].done) {
                     tableString += "<tr>";

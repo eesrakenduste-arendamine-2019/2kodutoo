@@ -82,8 +82,33 @@ h1 {
   textarea {
      resize: none;
   }
+  
+  input[type = "checkbox"] {
+	padding-left:5px;
+    padding-right:5px;
+    border-radius:15px;
 
-  input[type = "text"], input[type = "date"], input[type = "month"], textarea{
+    -webkit-appearance:button;
+
+    border: double 2px #5180a0;
+
+    color:#FFF;
+    white-space: nowrap;
+    overflow:hidden;
+
+    width:15px;
+    height:15px;
+  }
+  
+  input[type = "checkbox"]:checked {
+    background-color:#5180a0;
+  }
+
+  input[type = "checkbox"]:hover {
+	box-shadow:0px 0px 10px #5180a0;
+  }
+
+  input[type = "text"], input[type = "date"], input[type = "month"], button, textarea{
     background: none;
     display: block;
     margin: 20px auto;
@@ -107,13 +132,14 @@ h1 {
     border-radius: 24px;
     cursor: pointer;
   }
-  input[type = "text"]:hover, input[type = "month"]:hover, input[type = "date"]:hover, textarea:hover{
+  
+  input[type = "text"]:hover, input[type = "month"]:hover, input[type = "date"]:hover, button:hover, textarea:hover{
     border-color: #e937bc;
   }
 
   input[type = "submit"]:hover{
     border-color: #e937bc;
-    background-color: #e937bc;
+    /*background-color: #e937bc;*/
   }
 
 /*  Erinevate input taggide kujundus  lõpp*/
@@ -174,29 +200,22 @@ select:hover {
   border-color:  #e937bc;
 }
 
-/* Next ja prev nupud */
+/* Next, delete ja prev nupud */
 .previous {
-  background: none;
-  margin: 20px auto;
-  text-align: center;
   color: white;
   border: 2px solid #5180a0;
   padding: 10px 14px;
   width: 15%;
-  outline: none;
   border-radius: 24px;
+  display: inline;
 }
 
 .next {
-  background: none;
-  margin: 20px auto;
-  text-align: center;
-  color: black;
   border: 2px solid #5180a0;
   padding: 10px 14px;
   width: 15%;
-  outline: none;
   border-radius: 24px;
+  display: inline;
 }
 
 .previous:hover, .next:hover {

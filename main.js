@@ -14,9 +14,11 @@ if(vehicles === null || vehicles === undefined) { vehicles = []; }
 if(categoryAdd !== null && categoryAdd !== undefined) {
 	categoryAdd.addEventListener("click", function() {
 		let categoryId = vehicleType.value.replace(/[^a-z0-9]/gi,'');
+		console.log(categoryId);
 		// kontroll kas juba on olemas.
 		CreateCategory(categoryId, vehicleType.value);
 		AddToCategorys(categoryId, vehicleType.value);
+		saveCategory(categoryId);
 	});
 }
 
@@ -132,28 +134,6 @@ function AddToCategorys(categoryId, categoryName) {
 	categorys.push(category);
 	localStorage.setItem("categorys", JSON.stringify(categorys));
 }
-
-// function AddToCategorys(categoryId, categoryName) {
-// 	let category = {"id":categoryId, "name":categoryName};
-// 	categorys.push(category);
-// 	var data = new FormData();
-// 		data.append("name", htmlElement.value);
-//
-// 		var req = new XMLHttpRequest();
-// 		req.open('POST', "/url-kuhu-saata-info.php");
-// 		req.onload = function() {
-// 			if (req.status == 200) {
-// 				console.log(req.response);
-// 			}
-// 		};
-//
-// 		req.onerror = function() {
-// 			console.log("Error Network Error");
-// 		};
-//
-// 		req.send(data);
-// 	localStorage.setItem("categorys", JSON.stringify(categorys));
-// }
 
 function CreateVehicle(vehicleName, vehicleNum, vehicleDate, tbody, vehicleIndex) {
 	let vNameContainer = document.createElement("td");
@@ -374,54 +354,52 @@ function sortTableByDate() {
 	RenderVehicles();
 }
 
-// function CompareCategories(){
-// 	$.get('categories.txt', function(data){
-//     let content = JSON.parse(data).content;
-//     content.forEach(function(categoryId, categoryName){
-//       console.log(categoryId);
-//   	});
-// 	});
-// }
-//
-// function CompareVehicles(){
-// 	$.get('vehicles.txt', function(data){
-//     let content = JSON.parse(data).content;
-//     content.forEach(function(categoryId, vehicleName, vehicleNum, vehicleDate, vehicleTbody, i){
-//       console.log(categoryId, vehicleName);
-//   	});
-// 	});
-// }
-//
-// function saveCategory(categoryLabel){
-// 	var data = new FormData();
-// 		data.append("name", categoryLabel.value);
-//
-// 		var req = new XMLHttpRequest();
-// 		req.open('POST', "server.php");
-// 		req.onload = function() {
-// 			if (req.status == 200) {
-// 				console.log(req.response);
-// 			}
-// 		};
-//
-// 		req.onerror = function() {
-// 			console.log("Error Network Error");
-// 		};
-//
-// 		req.send(data);
-//
-//
-// }
+function CompareCategories(){
+	$.get('categories.txt', function(data){
+    let content = JSON.parse(data).content;
+    content.forEach(function(categoryId, categoryName){
+      console.log(categoryId);
+  	});
+	});
+}
+
+function CompareVehicles(){
+	$.get('vehicles.txt', function(data){
+    let content = JSON.parse(data).content;
+    content.forEach(function(categoryId, vehicleName, vehicleNum, vehicleDate, vehicleTbody, i){
+      console.log(categoryId, vehicleName);
+  	});
+	});
+}
+
+function saveCategory(categoryId){
+	var data = new FormData();
+		data.append("name", categoryId);
+
+		var req = new XMLHttpRequest();
+		req.open('POST', "server.php");
+		req.onload = function() {
+			if (req.status == 200) {
+				console.log(req.response);
+			}
+		};
+
+		req.onerror = function() {
+			console.log("Error Network Error");
+		};
+
+		req.send(data);
+}
 
 // req.onreadystatechange = function() {
 // if (this.readyState == 4 && this.status == 200) {
 //   document.getElementById("categoryLabel").innerHTML =
 //   this.responseText;
 // 	}
-// function saveToFile(){
-//     console.log("Jõudis saveToFile funktsiooni");
-//     $.post('server.php', {save: todos});
-// }
+function saveToFile(){
+    console.log("Jõudis saveToFile funktsiooni");
+    $.post('server.php', {save: categorys});
+}
 //
 // function saveCategory(){
 //   $.post('server.php', {save: categorys}).done(function(){

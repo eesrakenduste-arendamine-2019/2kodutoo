@@ -1,10 +1,8 @@
 <?php
-  var_dump($_POST);die;
+ var_dump($_POST);
+ // die;
 
-  if(isset($_POST["save"]) && !empty($_POST["save"])){
-    saveToFile($_POST["save"]);
-  }
-  function saveToFile($stringToSave){
+  function saveCategory($stringToSave){
     $object = new StdClass();
     $object->last_modified = time();
     $object->content = $stringToSave;

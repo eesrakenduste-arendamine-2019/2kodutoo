@@ -38,6 +38,7 @@ function render(){
      + className + ' ><li>'+"Pealkiri: "+ todo.title+'</li><li>'+"Sisu:"+ todo.description+'</li><li>'
      +"kuupäev: "+todo.date+'</li><button class="deleteButton">KUSTUTA</button><button class="doneButton" >TEHTUD</button></ul>');
   });
+  //saveToFile();
   console.log("render funkstioon tehtud");
 
 }
@@ -55,7 +56,7 @@ function removeEntry(){
 
   todos.splice(index, 1);
   saveToFile();
-  //setTimeout(render(),1000);
+  render();
   /*console.log(index);
   console.log(todos);*/
 }
@@ -72,7 +73,9 @@ function addEntry(){
   }
   todos.push(new Todo(titleValue, descriptionValue, dateValue, false, important));
   console.log(todos);
+  saveToFile();
   render();
+
 }
 
 
@@ -101,5 +104,5 @@ function saveToFile(){
   }).always(function(){
     console.log('always');
   });
-  setTimeout(render(),1000);
+
 }

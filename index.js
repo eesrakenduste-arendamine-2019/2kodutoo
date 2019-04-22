@@ -15,7 +15,6 @@ $('#loadButton').on('click', loadFromFile);
 $('#todos').on('click','ul' , function(){
   console.log(todos);
   todos[this.id].done = !todos[this.id].done;
-  console.log("olen siin");
   render();
 });
 $('#todos').on('click', '.deleteButton', removeEntry);
@@ -35,7 +34,9 @@ function render(){
     } else if (todo.important) {
       className = 'class="important"';
     }
-    $('#todos').append('<ul id="' + todoIndex + '" style="border:1px solid #000000;" ' + className + ' ><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+todo.date+'</li><button class="deleteButton">KUSTUTA</button><button class="doneButton">TEHTUD</button></ul>');
+    $('#todos').append('<ul id="' + todoIndex + '" style="border:1px solid #000000;" '
+     + className + ' ><li>'+"Pealkiri: "+ todo.title+'</li><li>'+"Sisu:"+ todo.description+'</li><li>'
+     +"kuupäev: "+todo.date+'</li><button class="deleteButton">KUSTUTA</button><button class="doneButton" >TEHTUD</button></ul>');
   });
   console.log("render funkstioon tehtud");
 
@@ -68,7 +69,6 @@ function addEntry(){
 
   if($('#important').is(':checked')){
     important = true;
-    console.log("Salvestas kuldselt");
   }
   todos.push(new Todo(titleValue, descriptionValue, dateValue, false, important));
   console.log(todos);

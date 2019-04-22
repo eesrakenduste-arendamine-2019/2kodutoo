@@ -1,0 +1,119 @@
+.title{
+    font-size: 40px;
+    width: 100%;
+    height: 80px;
+    background-color: #438ef7;
+    overflow-x: hidden;
+    top: 0;
+    left: 0;
+    position: fixed;
+    border-bottom:solid #76afff 4px;
+}
+.title a{
+    display: inline-block;
+    padding-top: 0px;
+    padding-left: 15px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.title #menuButton{
+    display: inline-block;
+    padding-top: 0px;
+    padding-left: 15px;
+    color: white;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #438ef7;
+    overflow-x: hidden;
+    margin-top: 80px;
+    transition: 0.5s;
+    border-right:solid #76afff 0px;
+  }
+  .sidenav h1 {
+    padding: 0px 8px 8px 32px;
+    text-decoration: none;
+    font-family: menu1;
+    font-size: 35px;
+    color: #f1f1f1;
+    display: block;
+    transition: 0.3s;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-family: menu1;
+    font-size: 20px;
+    color: #d4cdcdef;
+    display: block;
+    transition: 0.3s;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+    background-color: #438ef7;
+    cursor: pointer;
+  }
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  }
+  @media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+ul {
+  background: #3399ff;
+  padding: 20px;
+}
+ul li {
+  background: #cce5ff;
+  margin: 5px;
+}
+#task{
+    width: 175px;
+    height: 15px;
+    background-color: white;
+    color: black;
+}
+#date{
+    width: 110px;
+    height: 15px;
+    background-color: white;
+    color: black;
+}
+#saveButton{
+    width: 100px;
+    height: 20px;
+    background-color: white;
+    color: black;
+}
+#loadButton{
+    width: 100px;
+    height: 20px;
+    background-color: white;
+    color: black;
+}
+#addButton{
+    width: 100px;
+    height: 20px;
+    background-color: white;
+    color: black;
+}

@@ -5,7 +5,7 @@
   function saveToFile($stringToSave){
     $object = new StdClass();
     $object->last_modified = time();
-    $object->content = $stringToSave;
+    $object->content = json_decode($stringToSave);
     $jsonString = json_encode($object);
     if(file_put_contents("database.txt", $jsonString)){
       echo "success";
@@ -13,6 +13,6 @@
   }
 
   function deleteFromFile(){
-    
+
   }
  ?>

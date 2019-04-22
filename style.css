@@ -4,3 +4,9 @@
     "border":"3px solid black",
     "margin":"3px"
   }
+
+.stroked{
+ text-decoration: line-through;
+ background-color: lightgreen;
+
+ }

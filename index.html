@@ -14,10 +14,17 @@
   <button id="addButton">LISA</button>
   <button id="saveButton">SALVESTA</button>
   <button id="loadButton">LAADI</button>
-
+  <input type="checkbox" name="important" value="important" checked> TÄHTIS<br><br>
   <div id="todos">Siia tulevad todod</div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="index.js"></script>
 
+    <script>
+      $(document).ready(function(){
+      $("#doneButton").click(function(){
+      $("li").css("color", "red");
+      });
+      });
+    </script>
 </body>
 </html>

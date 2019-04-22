@@ -1,19 +1,22 @@
 /*jshint esversion:6*/
 class Todo{
-  constructor(title, description, date){
+  constructor(title, description, date, done, important = false){
     this.title = title;
     this.description = description;
     this.date = date;
     this.done = false;
-    this.important = false;
+    this.important = important;
   }
 }
+
+
 
 let todos = [];
 $('#addButton').on('click', addEntry);
 $('#saveButton').on('click', saveToFile);
 $('#loadButton').on('click', render);
 $('#todos').on('click', '.deleteButton', removeEntry);
+
 window.onload = function(){
   render();
 };
@@ -26,15 +29,22 @@ function render(){
 
     content.forEach(function(todo, todoIndex){
       //console.log(todoIndex);
-      $('#todos').append('<ul id="' + todoIndex + '" style="border:1px solid #000000;"><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+todo.date+'</li><button class="deleteButton">KUSTUTA</button></ul>')/*.css({
-        "width":"20vw",
-        "border":"3px solid black",
-        "margin":"3px"
-      })*/;
+
+      if(important==true){
+        $('#todos').append('<ul id="' + todoIndex + '" style="border:1px solid #000000;"><li>'+ todo.title+'</li><li>'+
+         todo.description+'</li><li>'+
+         todo.date+'</li><button class="deleteButton">KUSTUTA</button></ul>');
+         importantTask();
+         console.log("PEAKS JU OLEMAS");
+      }
+      $('#todos').append('<ul id="' + todoIndex + '" style="border:1px solid #000000;"><li>'+ todo.title+'</li><li>'+
+       todo.description+'</li><li>'+
+       todo.date+'</li><button class="deleteButton">KUSTUTA</button></ul>');
 
       todos.push(new Todo(todo.title, todo.description, todo.date));
     });
   });
+  console.log("render funkstioon tehtud");
   //saveToFile();
 }
 
@@ -46,8 +56,8 @@ function removeEntry(){
 
   todos.splice(index, 1);
   saveToFile();
-  /*render();
-  console.log(index);
+  //setTimeout(render(),1000);
+  /*console.log(index);
   console.log(todos);*/
 }
 
@@ -55,8 +65,13 @@ function addEntry(){
   const titleValue = $('#title').val();
   const dateValue = $('#date').val();
   const descriptionValue = $('#description').val();
+  var important = false;
 
-  todos.push(new Todo(titleValue, descriptionValue, dateValue));
+  if($('#important').is(':checked')){
+    important = true;
+    console.log("Salvestas kuldselt");
+  }
+  todos.push(new Todo(titleValue, descriptionValue, dateValue, false, important));
   console.log(todos);
   saveToFile();
 }
@@ -67,6 +82,10 @@ function markAsDone(){
   todos.push(new Todo(titleValue, descriptionValue, dateValue));
 }
 
+function importantTask() {
+  li.style.backgroundColor = "gold";
+  console.log("Teeb kuldseks");
+}
 function saveToLocalStorage() {
     localStorage.setItem('todos', JSON.stringify(todos));
 }
@@ -80,4 +99,5 @@ function saveToFile(){
   })/*.always(function(){
     console.log('always');
   })*/;
+  setTimeout(render(),1000);
 }

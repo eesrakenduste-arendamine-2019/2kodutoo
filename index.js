@@ -75,10 +75,7 @@ function addEntry(){
   render();
 }
 
-function importantTask(element) {
-  element.style.backgroundColor = "gold";
-  console.log("Teeb kuldseks");
-}
+
 function saveToLocalStorage() {
     localStorage.setItem('todos', JSON.stringify(todos));
 }

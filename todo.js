@@ -85,11 +85,13 @@ function deleteRow (row) {
 function changeToDone (row) {
     events[row].done = true;
     saveLocal();
+    getEvents();
 }
 
 function changeToUndone (row) {
     events[row].done = false;
     saveLocal();
+    getEvents();
 }
 
 function loadLocal () {

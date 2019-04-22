@@ -37,6 +37,7 @@ function render(){
     }
     $('#todos').append('<ul id="' + todoIndex + '" style="border:1px solid #000000;" ' + className + ' ><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+todo.date+'</li><button class="deleteButton">KUSTUTA</button><button class="doneButton">TEHTUD</button></ul>');
   });
+  //saveToFile();
   console.log("render funkstioon tehtud");
 
 }
@@ -54,7 +55,7 @@ function removeEntry(){
 
   todos.splice(index, 1);
   saveToFile();
-  //setTimeout(render(),1000);
+  render();
   /*console.log(index);
   console.log(todos);*/
 }
@@ -72,7 +73,9 @@ function addEntry(){
   }
   todos.push(new Todo(titleValue, descriptionValue, dateValue, false, important));
   console.log(todos);
+  saveToFile();
   render();
+
 }
 
 
@@ -101,5 +104,5 @@ function saveToFile(){
   }).always(function(){
     console.log('always');
   });
-  setTimeout(render(),1000);
+
 }

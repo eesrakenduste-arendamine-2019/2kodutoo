@@ -5,6 +5,7 @@ class Todo{
     this.description = description;
     this.date = date;
     this.done = false;
+    this.important = false;
   }
 }
 
@@ -45,9 +46,9 @@ function removeEntry(){
 
   todos.splice(index, 1);
   saveToFile();
-  render();
+  /*render();
   console.log(index);
-  console.log(todos);
+  console.log(todos);*/
 }
 
 function addEntry(){

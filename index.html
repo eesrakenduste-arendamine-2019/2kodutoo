@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" type="text/css" href="index.css">
+
+
+  <style>
+  .controls{
+    float:right;
+  }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="index.js"></script>
+  <title>ToDo</title>
+</head>
+
+<body id="boody">
+  <style>
+.esimene {
+  background-color: #C1E391;
+}
+h1 {
+	color: #2FC76F;
+	font-family: "Courier New";
+}
+</style>
+  <!-- HOME PAGE -->
+  <div data-role="page" id="home" class="esimene">
+    <header data-role="header" >
+      <h1 style="font-size: 30px;">Eesrakenduste 2 kodutöö</h1>
+    </header>
+    <div data-role="navbar" >
+      <ul>
+        <li><a href="#home" data-transition="flow" data-icon="home" data-theme="b">Avaleht</a></li>
+        <li><a href="#add" data-transition="flow" data-icon="plus" data-theme="b">Lisa</a></li>
+        <li><a href="#abileht" data-transition="flow" data-icon="info" data-theme="b">Abi leht</a></li>
+        <li><a href="#seaded" data-transition="flow" data-icon="gear" data-theme="b">Seaded</a></li>
+      </ul>
+    </div>
+    <div data-role="content">
+      <h3>Tere tulemast!</h3>
+      <p>Selle rakendusega saab kõik tehtud.</p>
+      <ul id="todos" data-role="listview" data-filter="true" data-filter-placeholder="Otsi kuupäeva või nime järgi..." data-inset="true" >
+        <input type="button" id="sortByName" value="Sorteeri nime järgi"/>
+</ul>
+    </div>
+    <footer data-role="footer" data-theme="b">
+      <h4>ToDoApp 2019</h4>
+    </footer>
+  </div>
+
+  <!-- ADD PAGE -->
+  <div data-role="page" id="add" class="esimene">
+    <header data-role="header">
+      <h1 style="font-size: 30px;">Eesrakenduste 2 kodutöö</h1>
+    </header>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="flow" data-icon="home" data-theme="b">Avaleht</a></li>
+        <li><a href="#add" data-transition="flow" data-icon="plus" data-theme="b">Lisa</a></li>
+        <li><a href="#abileht" data-transition="flow" data-icon="info" data-theme="b">Abi leht</a></li>
+        <li><a href="#seaded" data-transition="flow" data-icon="gear" data-theme="b">Seaded</a></li>
+      </ul>
+    </div>
+    <div data-role="content">
+      <h3>Siin saad uusi ülesandeid lisada: </h3>
+      <form id="addForm">
+        <label for="addTask">Sisesta ülesande nimi: <a href="#popupInfo" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-info ui-btn-icon-notext" title="Learn more">Learn more</a><div data-role="popup" id="popupInfo" class="ui-content" data-theme="a" style="max-width:350px;">
+        <p>Sisestage TO-DO ülesanne</p></div></label>
+        <input type="text" id="addTask">
+        <label for="addDate">Lisa kuupäev: <a href="#popupInfo1" data-rel="popup" data-transition="pop" class="my-tooltip-btn ui-btn ui-alt-icon ui-nodisc-icon ui-btn-inline ui-icon-info ui-btn-icon-notext" title="Learn more">Learn more</a><div data-role="popup" id="popupInfo1" class="ui-content" data-theme="a" style="max-width:350px;">
+        <p>Sisestage TO-DO kuupäev</p></div></label>
+        <input type="text" data-role="date" class="date" id="addDate" data-inline="true">
+
+        <button id="submitAdd" class="ui-btn ui-btn-b ui-corner-all">LISA</button>
+      </form>
+    </div>
+    <footer data-role="footer" data-theme="b">
+      <h4>ToDoApp 2019</h4>
+    </footer>
+  </div>
+
+  <!-- EDIT PAGE -->
+  <div data-role="page" id="edit" class="esimene">
+    <header data-role="header" >
+      <h1 style="font-size: 30px;">Eesrakenduste 2 kodutöö</h1>
+    </header>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="flow" data-icon="home" data-theme="b">Avaleht</a></li>
+        <li><a href="#add" data-transition="flow" data-icon="plus" data-theme="b">Lisa</a></li>
+        <li><a href="#abileht" data-transition="flow" data-icon="info" data-theme="b">Abi leht</a></li>
+        <li><a href="#seaded" data-transition="flow" data-icon="gear" data-theme="b">Seaded</a></li>
+      </ul>
+    </div>
+    <div data-role="content">
+      <h3>Siin saad uusi ülesandeid lisada: </h3>
+      <form id="editForm">
+        <label for="editTask">Lisa ülesande nimi: </label>
+        <input type="text" id="editTask">
+        <label for="editDate">Lisa kuupäev: </label>
+        <input type="text" data-role="date" class="date" id="editDate" data-inline="true">
+
+        <button id="submitEdit" class="ui-btn ui-btn-b ui-corner-all">LISA</button>
+      </form>
+    </div>
+    <footer data-role="footer" data-theme="b">
+      <h4>ToDoApp 2019</h4>
+    </footer>
+  </div>
+
+  <!-- HELP PAGE -->
+  <div data-role="page" id="abileht" class="esimene">
+    <header data-role="header">
+      <h1 style="font-size: 30px;">Eesrakenduste 2 kodutöö</h1>
+    </header>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="flow" data-icon="home" data-theme="b">Avaleht</a></li>
+        <li><a href="#add" data-transition="flow" data-icon="plus" data-theme="b">Lisamine</a></li>
+        <li><a href="#abileht" data-transition="flow" data-icon="info" data-theme="b">Abi leht</a></li>
+        <li><a href="#seaded" data-transition="flow" data-icon="gear" data-theme="b">Seaded</a></li>
+      </ul>
+    </div>
+    <div data-role="content">
+
+      <h2>INFO</h2>
+      <p>See TO-DO rakendus põhineb "Jquery-mobile'l" ning sellel on üks lihtne funktsionaalsus. Sellega saab järge pidada ülesannetel, mida on teil vaja teha.</p>
+      <p>Selle rakendusega saab lisada, muuta ja kustutada ülesandeid.</p>
+      <a href="#transitionExample" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup">LISAMINE</a>
+      <a href="#transitionExample2" data-transition="slidedown" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" data-rel="popup">MUUTMINE</a>
+      <div data-role="popup" id="transitionExample" class="ui-content" data-theme="a">
+    <p>TO-DO ülesande lisamiseks, valige "Lisamine". Seejärel lisage ülesande nimi ja/või kuupäev ning vajutage nuppu "LISA"</p>
+    </div>
+    <div data-role="popup" id="transitionExample2" class="ui-content" data-theme="a">
+    <p>TO-DO ülesande muutmiseks, minge avalehele, valige ülesanne, mida muuta soovite ning vajutage nuppu "MUUDA"</p>
+    </div>
+
+  </div>
+    <footer data-role="footer" data-theme="b"><h4>ToDoApp 2019</h4></footer>
+  </div>
+  <footer data-role="footer" data-theme="b"><h4>ToDoApp 2019</h4></footer>
+
+  <!-- SETTINGS PAGE -->
+  <div data-role="page" id="seaded" class="esimene">
+    <header data-role="header" >
+     <h1 style="font-size: 30px;">Eesrakenduste 2 kodutöö</h1>
+    </header>
+    <div data-role="navbar">
+      <ul>
+        <li><a href="#home" data-transition="flow" data-icon="home" data-theme="b">Avaleht</a></li>
+        <li><a href="#add" data-transition="flow" data-icon="plus" data-theme="b">Lisa</a></li>
+        <li><a href="#abileht" data-transition="flow" data-icon="info" data-theme="b">Abi leht</a></li>
+        <li><a href="#seaded" data-transition="flow" data-icon="gear" data-theme="b">Seaded</a></li>
+      </ul>
+    </div>
+    <div data-role="content">
+      <h2>SEADED</h2>
+      <input type=button id=button1 value="Tume teema">
+      <script>
+      $("#button1").click(function(){
+          $("#seaded").css("background-color","#A9A9A9");
+          $("#abileht").css("background-color","#A9A9A9");
+          $("#add").css("background-color","#A9A9A9");
+          $("#home").css("background-color","#A9A9A9");
+      });
+      </script>
+      <input type=button id=button value="Hele teema">
+      <script>
+      $("#button").click(function(){
+          $("#seaded").css("background-color","white");
+          $("#abileht").css("background-color","white");
+          $("#add").css("background-color","white");
+          $("#home").css("background-color","white");
+      });
+      </script>
+    <footer data-role="footer" data-theme="b">
+      <h4>ToDoApp 2019</h4>
+    </footer>
+  </div>
+
+  </body>
+  </html>

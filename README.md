@@ -9,14 +9,14 @@ Tekib kustutamise nupp koos tehtud nuppuga kui lisada uus to do.
 Saab lisada ülesandeid tähtsaks, mis muudab to do kuldseks.
 vajutades to do peale muutub see nö tehtuks(taust roheline ja teks läbi kriipsutatud)
 
- Todo rakenduse funktsionaalsused:   
-    * Saab lisad ja kustutada
-    * Saab märkida ülesandeid tehtuks
-    * Ülesanded salvestatakse localStorage'isse ja faili/andmebaasi
-    * Ülesannete salvestamiseks ja kuvamiseks kasutatakse AJAX-it
-    * Kui kasutaja tuleb lehele, siis näidatakse varem salvestatud ülesandeid
-    * Võimalus märkida ülesandeid tähtsaks
-    * To do'd aeguvad.
+### Todo rakenduse funktsionaalsused: 
+* Saab lisad ja kustutada
+* Saab märkida ülesandeid tehtuks
+* Ülesanded salvestatakse localStorage'isse ja faili/andmebaasi
+* Ülesannete salvestamiseks ja kuvamiseks kasutatakse AJAX-it
+* Kui kasutaja tuleb lehele, siis näidatakse varem salvestatud ülesandeid
+* Võimalus märkida ülesandeid tähtsaks
+* To do'd aeguvad.
 
 
 

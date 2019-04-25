@@ -1,13 +1,11 @@
 
-html { 
-   background: url(max.jpg) no-repeat center center fixed; 
+html {
+   background: url(max.jpg) no-repeat center center fixed;
    -webkit-background-size: cover;
    -moz-background-size: cover;
    -o-background-size: cover;
    background-size: cover;
    font-weight:bold;
-
- input { border-style: none; background: transparent; outline: none; }
  }
 ul{
    background: white;
@@ -46,6 +44,9 @@ ul{
 .stroked{
    text-decoration: line-through;
    background-color: #01FF70;
+}
+.expired{
+  background-color: red;
 }
 .important{
    background-color: gold;
@@ -123,7 +124,6 @@ ul{
       position: absolute;
       top: -2px;
       color: #5A5B5E;
-     /* 99a1a7 */
    }
    .divbox{
       display: flex;

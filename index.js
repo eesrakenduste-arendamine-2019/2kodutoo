@@ -26,13 +26,22 @@ window.onload = function(){
 
 function render(){
   $('#todos').html("");
+  var today = new Date();
+  today.setHours(0,0,0,0);
   todos.forEach(function(todo, todoIndex){
     console.log(todo);
+    var checkdate = new Date(todo.date);
+    console.log(checkdate);
     let className = '';
     if (todo.done){
       className = 'class="stroked"';
-    } else if (todo.important) {
-      className = 'class="important"';
+    } else {
+      if (today > checkdate) {
+        className = 'class="expired"';
+      }
+      else if (todo.important) {
+        className = 'class="important"';
+      }
     }
     $('#todos').append('<ul id="' + todoIndex + '" style="border:1px solid #000000;" '
      + className + ' ><li>'+"Pealkiri: "+ todo.title+'</li><li>'+"Sisu:"+ todo.description+'</li><li>'
@@ -40,6 +49,8 @@ function render(){
   });
   //saveToFile();
   console.log("render funkstioon tehtud");
+  //var today = new Date();
+  console.log(today);
 
 }
 
@@ -104,5 +115,8 @@ function saveToFile(){
   }).always(function(){
     console.log('always');
   });
+
+
+
 
 }

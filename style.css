@@ -6,6 +6,8 @@ html {
    -o-background-size: cover;
    background-size: cover;
    font-weight:bold;
+
+ input { border-style: none; background: transparent; outline: none; }
  }
 ul{
    background: white;
@@ -104,7 +106,7 @@ ul{
    }
 
    .checkbox {
-      padding: 20px;
+      
      -webkit-appearance: none;
       background-color: #fafafa;
       border: 2px solid #4083A5;
@@ -126,4 +128,18 @@ ul{
    .divbox{
       display: flex;
       align-items: center;
+    }
+    .simple-form {
+      display: flex;
+    }
+    .simple-form input {
+      margin: 0 .25rem;
+      min-width: 125px;
+      border: 1px solid #eee;
+      border-left: 3px solid;
+      border-radius: 5px;
+      transition: border-color .5s ease-out;
+    }
+    .simple-form input:optional {
+      border-left-color: #999;
     }

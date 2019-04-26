@@ -26,7 +26,12 @@ Funktsionaalsused:
 		"Sort by Date"(sorteerib tabeli "Due Date" sisestatud kuupäevade järgi)
 		"Sort by name"(Sorteerib tabeli "Task"-i sisestatud väärtuste järgi(tähestikulises järjekorras))
 	
-
+Rollid: 
+	Daniel Golubkov:
+		save.php; todo.html; todo.js; toto.json ja todo.css esialgne loomine
+		
+	Jaanus Lille: 
+		todo.css täiendamine
 
 
 

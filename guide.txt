@@ -1,0 +1,7 @@
+git add .
+git commit -m "esimene fail laetud"
+git fetch
+git pull
+git push
+
+merge conflict-i puhul pane greeny korraks kinni ja tee uuesti lahti

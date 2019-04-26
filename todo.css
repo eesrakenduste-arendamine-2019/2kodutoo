@@ -1,0 +1,67 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: lightBlue;
+}
+legend {
+    font-weight: bold;
+}
+div.tableContainer {
+    font-weight: bold;
+    display: table;
+    border-spacing: 5px;
+    color: green;
+    background-color: lightSkyBlue;
+}
+div.tableRow {
+    display: table-row;
+}
+div.tableRow label {
+    display: table-cell;
+    text-align: right;
+
+}
+div.tableRow input {
+    display: table-cell;
+    font-weight: bold;
+    width: 24vw;
+    height: 25px;
+    border-radius: 5px;
+}
+form {
+    background-color: lightSkyBlue;
+}
+#todoList {
+    background-color: lightSkyBlue;
+}
+
+/* INDIVIDUAL BUTTONS:  */
+
+#submit {
+    background-color: green;
+    color: white;
+}
+#sortByName {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+#sortByDate {
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+}
+#deleteButton {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+}
+#doneButton {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+}
+#undoneButton {
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+}

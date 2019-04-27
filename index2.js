@@ -1,6 +1,7 @@
 /*jshint esversion:6*/
 
 let getTodo = localStorage.getItem('todo');
+let sort = 1;
 
 $(document).ready(function(){
 	if (getTodo != null){
@@ -19,6 +20,28 @@ $(document).ready(function(){
 	
 	let date = new Date().toISOString().split('T')[0];
 	$('#date').attr('min', date).attr('value', date);
+	
+	$("#searchbox").keyup(function(){
+
+		// Retrieve the input field text
+		let searchtext = $(this).val();
+		let searchResults = $('#searchResults');
+
+		// Loop through the local storage
+		let json = JSON.parse(localStorage.getItem('todo'));
+		
+		searchResults.empty();
+		
+		if (searchtext.length > 0){
+			for(obj in json) {
+				if(json[obj].task.includes(searchtext)){
+					$('#searchResults').append(
+						$('<li>').append("<p class='pDate'>" + json[obj].date + "</p><p class='pTask'>" + json[obj].task));
+				} 
+			}
+		}
+		
+	});
 });
 
 class Todo{
@@ -35,6 +58,12 @@ let todos = [];
 $('#addButton').on('click', ()=>addEntry());
 
 function whyTheseAgain(){
+	
+	$('#todos li').off('click');
+	$('.pImportant').off('click');
+	$('.pDelete').off('click');
+	$('.sorting').off('click');
+	
 	$("#todos li").on("click", function() {
 		$(this).toggleClass("checked");
 		markAsDone($(this).text());
@@ -51,6 +80,17 @@ function whyTheseAgain(){
 	
 	$('.pDelete').on("click", function(){
 		deleteTask($(this).parent().text());
+	});
+	
+	$('.sorting').on("click", function(){
+		if (sort == 1){
+			sort = 0;
+			$('.sorting').text("re-sort by name");
+		} else {
+			sort = 1;
+			$('.sorting').text("re-sort by date");
+		}
+		showResults();
 	});
 }
 
@@ -118,24 +158,37 @@ function saveInLocalStorage(){
 function showResults(){
 	//$('#todos').html("");
 	$('#todos').empty();
+	$('#importantTodos').empty();
+	$('#importantTodos').text("Important todos:");
     let previousTodos = JSON.parse(localStorage.getItem('todo'));
 	let newMassif = [];
 
 	if (previousTodos != null){
+		$('#todos').html("Todos: <br>")
 		$.each( previousTodos, function( key, value ) {
 			newMassif.push(value);
 		});
 	}
 	
-	newMassif.sort(function (a, b){
-		if (parseInt(a.date.substring(0, 4)) != parseInt(b.date.substring(0, 4))){
-			return parseInt(a.date.substring(0, 4)) - parseInt(b.date.substring(0, 4));
-		} else if (parseInt(a.date.substring(5, 7)) != parseInt(b.date.substring(5, 7))){
-			return parseInt(a.date.substring(5, 7)) - parseInt(b.date.substring(5, 7));
-		} else {
-			return parseInt(a.date.substring(8, 10)) - parseInt(b.date.substring(8, 10));
-		}
-	});
+	if (sort == 0){
+		newMassif.sort(function (a, b){
+			if (parseInt(a.date.substring(0, 4)) != parseInt(b.date.substring(0, 4))){
+				return parseInt(a.date.substring(0, 4)) - parseInt(b.date.substring(0, 4));
+			} else if (parseInt(a.date.substring(5, 7)) != parseInt(b.date.substring(5, 7))){
+				return parseInt(a.date.substring(5, 7)) - parseInt(b.date.substring(5, 7));
+			} else {
+				return parseInt(a.date.substring(8, 10)) - parseInt(b.date.substring(8, 10));
+			}
+		});
+	} else if (sort == 1){
+		newMassif.sort(function (a, b){
+			let aTask = a.task.toLowerCase();
+			let bTask = b.task.toLowerCase();
+			if (aTask < bTask) { return -1; }
+			if (aTask > bTask) { return 1; }
+			return 0;
+		})
+	}
 	
 	
 	/*$.each( newMassif, function (key, value) {
@@ -154,10 +207,18 @@ function showResults(){
 			$('#todos').append(
 				$('<li>').addClass("important").append("<p class='pDate'>" + value.date + "</p><p class='pTask'>" + value.task + "</p><p class='pImportant'>" + "!" + "</p><p class='pDelete'>" + "\u00D7" + "</p>") //  + " " + value.done
 			); 
+			
+			$('#importantTodos').append(
+				$('<li>').addClass("important").append("<p class='pDate'>" + value.date + "</p><p class='pTask'>" + value.task) //  + " " + value.done
+			);
 		} else if (value.done === true && value.important === true){
 			$('#todos').append(
 				$('<li>').addClass("checked important").append("<p class='pDate'>" + value.date + "</p><p class='pTask'>" + value.task + "</p><p class='pImportant'>" + "!" + "</p><p class='pDelete'>" + "\u00D7" + "</p>") //  + " " + value.done
 			); 
+			
+			$('#importantTodos').append(
+				$('<li>').addClass("checked important").append("<p class='pDate'>" + value.date + "</p><p class='pTask'>" + value.task) //  + " " + value.done
+			);
 		}
 	});
 	

@@ -11,11 +11,20 @@ body {
 	text-align: center;
 }
 
-#todos {
+#todos, #searchResults {
 	flex-wrap: wrap; 
 	justify-content: space-evenly;
 	text-decoration: none;
 	align-item: stretch;
+}
+
+#searchResults {
+	margin: 25px 0 25px 0;
+}
+
+#importantTodos li {
+	color: red;
+	font-weight: bold;
 }
 
 #todos li {
@@ -56,7 +65,7 @@ li {
   text-decoration: line-through;
 }
 
-li:nth-child(odd) {
+#todos li:nth-child(odd) {
   background: #f9f9f9;
 }
 
@@ -99,7 +108,7 @@ p.pDelete {
 	background-color: white;
 }
 
-#task, #date {
+#task, #date, #searchbox {
 	background-color: black;
 	color: white;
 	border: none;
@@ -110,6 +119,11 @@ p.pDelete {
 
 #task {
 	height: 38px;
+}
+
+#searchbox {
+	height: 20px;
+	margin-left: 30px;
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */

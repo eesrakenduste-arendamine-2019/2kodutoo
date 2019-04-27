@@ -1,0 +1,132 @@
+body {
+	display: flex;
+	justify-content: space-evenly;
+}
+
+#container{
+	width: 100vh;
+}
+
+#input {
+	text-align: center;
+}
+
+#todos, #searchResults {
+	flex-wrap: wrap; 
+	justify-content: space-evenly;
+	text-decoration: none;
+	align-item: stretch;
+}
+
+#searchResults {
+	margin: 25px 0 25px 0;
+}
+
+#importantTodos li {
+	color: red;
+	font-weight: bold;
+}
+
+#todos li {
+}
+
+#todos a {
+	color: black;
+	text-decoration: none;
+}
+
+.close {
+	text-decoration: none !important;
+}
+
+li {
+	display: block;
+	align-item: stretch;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#todos li:hover {
+  background: #ddd;
+}
+
+#todos li.checked {
+  color: gray;
+  text-decoration: line-through;
+}
+
+#todos li.important {
+  color: red;
+  text-decoration: none;
+}
+
+#todos li.checked.important {
+  color: red;
+  text-decoration: line-through;
+}
+
+#todos li:nth-child(odd) {
+  background: #f9f9f9;
+}
+
+p.pDate, p.pTask, p.pDelete, p.pImportant{
+	display: inline;
+}
+
+p.pDate {
+	margin: 0 10vh 0 20vh;
+}
+
+p.pImportant{
+	float: right;
+	margin: 0 10vh 0 5vh;
+}
+
+p.pDelete {
+	float: right;
+	margin: 0 15vh 0 10vh;
+}
+
+#addButton {
+	display: inline-block;
+	border-radius: 4px;
+	background-color: black;
+	border: none;
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 18px;
+	height: 40px;
+	width: 100px;
+	transition: all 0.5s;
+	cursor: grabbing;
+	margin: 5px;
+}
+
+#addButton:hover {
+	transition: all 1s ease;
+	color: black;
+	background-color: white;
+}
+
+#task, #date, #searchbox {
+	background-color: black;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	width: 200px;
+	height: 40px;
+}
+
+#task {
+	height: 38px;
+}
+
+#searchbox {
+	height: 20px;
+	margin-left: 30px;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 0.8; /* Firefox */
+}

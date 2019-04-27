@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css?family=Lora');
+
+body {
+  font-family: 'Lora', serif;
+  background-size: cover;
+}
+
+.background {
+  height: auto;
+  margin: 10px auto;
+  opacity: 0.8;
+}
+
+.taskform {
+  width: 80%;
+  margin: 30px auto;
+  border: 2px solid darkgray;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.taskform label {
+  display: block;
+  margin: 5px 0px 5px 0px;
+}
+
+.taskform input, textarea {
+  padding: 5px;
+  width: 95%;
+  font-family: 'Lora', serif;
+  resize: none;
+}
+
+#taskdate, #search {
+  width: 20%;
+}
+
+#submit_btn, #update_btn {
+  padding: 8px 15px;
+  color: white;
+  background: #339;
+  border: none;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+#update_btn {
+  background: #1c7600;
+}
+
+#display_area {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin: 10px auto;
+  position: relative;
+  width: 30%;
+}
+
+.taskbox {
+  cursor: default;
+  margin: 10px;
+  border: 2px solid darkgray;
+  padding: 5px 10px;
+  position: relative;
+  background: white;
+  border-radius: 10px;
+}
+
+.taskboxExpired {
+  cursor: default;
+  margin: 10px;
+  border: 2px solid darkgray;
+  padding: 5px 10px;
+  position: relative;
+  background: salmon;
+  border-radius: 10px;
+}
+
+.taskboxToday {
+  cursor: default;
+  margin: 10px;
+  border: 2px solid darkgray;
+  padding: 5px 10px;
+  position: relative;
+  background: lightgreen;
+  border-radius: 10px;
+}
+
+.delete {
+  position: absolute;
+  top: 0px;
+  right: 3px;
+  color: red;
+  display: none;
+  cursor: pointer;
+  background: white;
+  border-radius: 10px;
+  padding: 3px;
+}
+
+.edit {
+  position: absolute;
+  top: 0px;
+  right: 70px;
+  color: green;
+  display: none;
+  cursor: pointer;
+  background: white;
+  border-radius: 10px;
+  padding: 3px;
+}
+
+.taskbox:hover .edit, .taskbox:hover .delete {
+  display: block;
+}
+
+.taskboxExpired:hover .edit, .taskboxExpired:hover .delete {
+  display: block;
+}
+
+.taskboxToday:hover .edit, .taskboxToday:hover .delete {
+  display: block;
+}
+
+.taskdatetext {
+  text-align: justify;
+}
+
+.tasktext {
+  color: blue;
+  padding: 0px;
+  margin: 0px 0px 5px 0px;
+}

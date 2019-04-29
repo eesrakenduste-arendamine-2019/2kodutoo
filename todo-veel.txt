@@ -1,0 +1,6 @@
+- Saab märkida ülesandeid tehtuks
+- Saab järjestada kuupäeva ja nime järgi ülesandeid
+- Ülesanded salvestatakse lisaks veel faili/andmebaasi (hetkel local storage olemas)
+- Ülesannete salvestamiseks ja kuvamiseks kasutatakse AJAX-it
+- Möödunud ja/või tänase kuupäevaga tegemata ülesanded märkida erinevalt
+- Elementide kuvamisel/eemaldamisel on kasutatud jQuery animatsioone

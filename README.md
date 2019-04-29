@@ -2,14 +2,15 @@
 Priit Laupa, Caupo helvik, Kristjan Põldmets - Remonditöökoja ToDo rakendus
 
 
-Ette tulnud keerukusteks olid JSON array elementide sorteerimine, PHP - AJAX vaheline suhtlus ning JSON stringi püüdmine PHP's.
+Ette tulnud keerukusteks olid JSON array elementide sorteerimine; PHP - AJAX vaheline suhtlus - tänu IIS õiguste probleemile ei olnud võimalik salvestada kohalikult andmeid ning puudusid ka veakoodid; JSON'i käsitlemine salvestamisel kohalikule failile.
 Grupitööd viisime läbi SourceTree abil, eemaldades vajaduse greenysse logimiseks ja Putty teel Lin2 ühenduse loomiseks.
 Rakenduses on võimalik lisada ja kustutada kirjeid, märkida ülesanded tehtuks, järjestada kuupäeva, nime ja numbrimärgi järgi kirjeid, lisada kategooriaid, märkida ülesandeid tehtuks. Möödunud ja sama kuupäevaga kirjed kuvavad vastavalt teavitust.
-Rakendus baseerub Caupo Helvik'u loodud põhjal.
+Rakendus baseerub Caupo Helvik'u loodud rakenduse põhjal.
 Priit Laupa poolt lisatud funktsionaalsused:
 Uuendamise, töö tehtuks märkimise ja töö kustutamise nuppudele lisatud animatsioonid.
 Tabeli pealkirjade peale vajutades on võimalik sorteerida tabelit vastavalt tabeli veeru sisule.
 Vastavalt kuupäevale on tabelis teavitus, kas töö tähtaeg on, vastavalt lehe kasutamise kuupäevale, "TÄNA!" või "MÖÖDUNUD!". Töö tehtuks märkimisel on selle teavituse asemel teavitus "TEHTUD!"
+Kristjan Põldmets: Tegeles AJAX'iga ning parandas nimetute sõidukitüüpide lisamise.
 
 ### Tähtpäev 21.04.2019 23:59
 

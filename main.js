@@ -16,9 +16,14 @@ if(categoryAdd !== null && categoryAdd !== undefined) {
 		let categoryId = vehicleType.value.replace(/[^a-z0-9]/gi,'');
 		console.log(categoryId);
 		// kontroll kas juba on olemas.
-		CreateCategory(categoryId, vehicleType.value);
-		AddToCategorys(categoryId, vehicleType.value);
-		saveCategory(categoryId);
+		if(categoryId !== "") {
+			CreateCategory(categoryId, vehicleType.value);
+			AddToCategorys(categoryId, vehicleType.value);
+			saveCategory(categoryId);
+		}
+		else {
+			alert("Tüübi nimi ei saa olla tühjus");
+		}
 	});
 }
 
@@ -126,7 +131,9 @@ function AddToVehicles(categoryId, vehicleName, vehicleNum, vehicleDate, vehicle
 	let vhcl = {"category":categoryId, "name":vehicleName, "num":vehicleNum, "date":vehicleDate , "isDone":0};
 	vehicles.push(vhcl);
 	localStorage.setItem("vehicles", JSON.stringify(vehicles));
-	CreateVehicle(vehicleName, vehicleNum, vehicleDate, vehicleTbody, i);
+	CreateVehicle(categoryId, vehicleName, vehicleNum, vehicleDate, i);
+
+	saveVehicle(categoryId, vehicleName, vehicleNum, vehicleDate);
 }
 
 function AddToCategorys(categoryId, categoryName) {
@@ -254,30 +261,6 @@ function HideCategorys() {
 	}
 }
 
-/*
-function GetCategories(){ //siin forEach loopi kasutades on max 2 väärtust, kus esimene on item(nt categoryId), teine on index. Vt: https://www.w3schools.com/jsref/jsref_foreach.asp
-	$.get('categories.txt', function(data){
-    let content = JSON.parse(data).content;
-    content.forEach(function(categoryId, categoryName){
-      console.log(categoryId);
-      $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
-  });
-	});
-}
-});
-}
-function GetVehicles(){
-	$.get('vehicles.txt', function(data){
-    let content = JSON.parse(data).content;
-    content.forEach(function(categoryId, vehicleName.value, vehicleNum.value, vehicleDate.value){ //seepärast see siin ei tööta
-      console.log(todoIndex);
-      $('#todos').append('<ul><li>'+ todo.title+'</li><li>'+ todo.description+'</li><li>'+ todo.date+'</li></ul>');
-  });
-	});
-}
-});
-}
-*/
 let dirN = "asc";
 let dirNum = "asc";
 let dirD = "asc";
@@ -354,30 +337,30 @@ function sortTableByDate() {
 	RenderVehicles();
 }
 
-function CompareCategories(){
-	$.get('categories.txt', function(data){
-    let content = JSON.parse(data).content;
-    content.forEach(function(categoryId, categoryName){
-      console.log(categoryId);
-  	});
-	});
-}
-
-function CompareVehicles(){
-	$.get('vehicles.txt', function(data){
-    let content = JSON.parse(data).content;
-    content.forEach(function(categoryId, vehicleName, vehicleNum, vehicleDate, vehicleTbody, i){
-      console.log(categoryId, vehicleName);
-  	});
-	});
-}
+// function CompareCategories(){
+// 	$.get('categories.txt', function(data){
+//     let content = JSON.parse(data).content;
+//     content.forEach(function(categoryId, categoryName){
+//       console.log(categoryId);
+//   	});
+// 	});
+// }
+//
+// function CompareVehicles(){
+// 	$.get('vehicles.txt', function(data){
+//     let content = JSON.parse(data).content;
+//     content.forEach(function(categoryId, vehicleName, vehicleNum, vehicleDate, vehicleTbody, i){
+//       console.log(categoryId, vehicleName);
+//   	});
+// 	});
+// }
 
 function saveCategory(categoryId){
 	var data = new FormData();
-		data.append("name", categoryId);
+		data.append("id", categoryId);
 
 		var req = new XMLHttpRequest();
-		req.open('POST', "server.php");
+		req.open('POST', "categorysave.php");
 		req.onload = function() {
 			if (req.status == 200) {
 				console.log(req.response);
@@ -391,24 +374,23 @@ function saveCategory(categoryId){
 		req.send(data);
 }
 
-// req.onreadystatechange = function() {
-// if (this.readyState == 4 && this.status == 200) {
-//   document.getElementById("categoryLabel").innerHTML =
-//   this.responseText;
-// 	}
-function saveToFile(){
-    console.log("Jõudis saveToFile funktsiooni");
-    $.post('server.php', {save: categorys});
-}
+// function saveVehicle(categoryId, vehicleName, vehicleNum, vehicleDate, i){
+// 	var data = new FormData();
+// 		data.append("id", i);
 //
-// function saveCategory(){
-//   $.post('server.php', {save: categorys}).done(function(){
-//     console.log('done');
-//   }).fail(function(){
-//     console.log('fail');
-//   }).always(function(){
-//     console.log('always');
-//   });
+// 		var req = new XMLHttpRequest();
+// 		req.open('POST', "vehiclesave.php");
+// 		req.onload = function() {
+// 			if (req.status == 200) {
+// 				console.log(req.response);
+// 			}
+// 		};
+//
+// 		req.onerror = function() {
+// 			console.log("Error Network Error");
+// 		};
+//
+// 		req.send(data);
 // }
 
 (function() {

@@ -5,8 +5,9 @@ $(document).one('pageinit', function(){
   $('#submitAdd').on('tap', addTask);
   $('#todos').on('tap', '#editLink', setCurrent);
   $('#submitEdit').on('tap', editTask);
-  $('#todos').on('tap', '#deleteLink', deleteTask);
   $('#todos').on('tap', '#doneTask', taskDone);
+  $('#todos').on('tap', '#deleteLink', deleteTask);
+
 
 
   $('#flip-2').on('change', function() {
@@ -50,19 +51,7 @@ function setTheme(){
         }
       }
 
-  function taskDone() {
 
-    let currentTask = localStorage.getItem('currentTask');
-    let currentDate = localStorage.getItem('currentDate');
-
-    for(let i = 0; i < todos.length; i++){
-      if(todos[i].task == currentTask && todos[i].date == currentDate){
-        todos.splice(i, 1);
-      }
-      localStorage.setItem('todos', JSON.stringify(todos));
-    }
-
-  }
 
 
   function deleteTask(){
@@ -83,6 +72,28 @@ function setTheme(){
 
     window.location.href = "index.html";
     return false;
+  }
+
+  function taskDone() {
+
+    localStorage.setItem('currentTask', $(this).data('task'));
+    localStorage.setItem('currentDate', $(this).data('date'));
+
+    let currentTask = localStorage.getItem('currentTask');
+    let currentDate = localStorage.getItem('currentDate');
+
+    for(let i = 0; i < todos.length; i++){
+      if(todos[i].task == currentTask && todos[i].date == currentDate){
+        todos.splice(i, 1);
+      }
+      localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    alert("Ülesanne valma!");
+
+    window.location.href = "index.html";
+    return false;
+
   }
 
   function editTask(){
@@ -123,12 +134,13 @@ function setTheme(){
       for(let i = 0; i < todos.length; i++){
         $("#todos").append('<li class="ui-body-inherit ui-li-static">'+
         todos[i].task +'<br>'+ todos[i].date +
-        "<input id= 'check' type='checkbox'>"+
+
         '<div class="controls"><a href="#edit" id="editLink" data-task="'+
         todos[i].task+'" data-date="'+ todos[i].date +
-        '">Muuda</a> | <a href="#" id="deleteLink" data-task="'+
+        '">Muuda</a> | <a href="#" id="doneTask" data-task="'+
         todos[i].task+'" data-date="'+ todos[i].date +
-
+        '">Tehtud</a> | <a href="#" id="deleteLink" data-task="'+
+        todos[i].task+'" data-date="'+ todos[i].date +
         '" onclick="return confirm(\'Kas oled kindel?\')">Kustuta</a></div></li>');
       }
     }

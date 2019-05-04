@@ -1,25 +1,20 @@
 console.log('faili algus');
-var xd = "";
+// var xd = "";
 btn = document.getElementById('saveData');
-var xd = document.getElementById('message');
+xd = document.getElementById('message').value;
 console.log(xd.value);
-btn.addEventListener('click', pederast());
-$("button:saveData").click(function () {
-  console.log("321");
-	$('#msg').html($('input:textbox').val());
-
-    });
-function pederast(){
-  console.log('mdv');
+btn.addEventListener('click', salvesta());
+function salvesta(){
+  console.log(xd);
+  console.log('test1');
   if(message.value!="") {
-    console.log("mdv2");
+    console.log("test2");
     $.ajax({
       url: "server.php",
       type: "POST",
       async: true,
       data: { msg:$("#message").val() }, //your form data to post goes here as a json object
       dataType: "html",
-
       success: function(data) {
         $('#output').html(data);
         console.log("töötab");

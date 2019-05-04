@@ -20,12 +20,16 @@ $expiredate = date("Y-m-d");
     <label>Sõnum (max 256 märki):</label>
     <br>
     <p id="ants">as123ds3adas</p>
-      <input type="textbox" id="message" placeholder="Lisa tegevus">
+
+      <input type="text" id="message" placeholder="Lisa tegevus">
+
     <!-- <textarea name="message" rows="4" cols="64" placeholder="Lisa tegevus"></textarea> -->
       <br>
       <!-- <input type="date" name="expiredate" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<?php echo $expiredate ?>">
       <br> -->
+
       <input type="submit" id="saveData" value="Salvesta">
+
     <hr>
     <div id="output">
 

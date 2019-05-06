@@ -15,7 +15,7 @@ Väga palju keerulisi hetki ei olnud, rakendus tuli lõpuks täpselt selline vä
 * Ülesannete salvestamiseks ja kuvamiseks kasutatakse AJAX-it
 * Kui kasutaja tuleb lehele, siis näidatakse varem salvestatud ülesandeid
 
-##Juurde lisatud Funktsionaalsused
+## Juurde lisatud Funktsionaalsused
 
 * Saab märkida ülesandeid tähtsateks ja kasutajale kuvatakse need esimesena
 * Saab ülesandeid peita ja uuesti nähtavale tuua

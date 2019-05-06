@@ -1,0 +1,205 @@
+body {
+    background: lightblue; /*Kui pilt puudub*/
+    background-image: url("background.jpg");
+    background-size: cover; /*Viib pildi keskele*/
+}
+
+.inputBox {
+  height: 10%;
+  width: 90%;
+  overflow: hidden;
+  padding: 5px;
+  border-radius: 5px;
+  border-bottom: 4px solid orange;
+  border-width: 2px;
+}
+
+.addButton {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  z-index: 2;
+}
+
+.addButton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.addButton span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.addButton:hover span {
+  padding-right: 25px;
+}
+
+.addButton:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.container{
+  width: 99vw;
+  height: 42vw;
+  //background: gray;
+}
+
+.important{
+  display: inline-block;
+  padding: 10px;
+  border-radius: 100px;
+  background-color: yellow;
+  border: 2px solid black;
+  width: 25px;
+  height: 15px;
+  cursor: pointer;
+  margin: 2px;
+  transition: all 0.5s;
+  text-align: center;
+  z-index: 2;
+}
+
+.important:hover{
+  background-color: orange;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.done{
+  display: inline-block;
+  padding: 10px;
+  border-radius: 100px;
+  background-color: #00CE39;
+  border: 2px solid black;
+  width: 25px;
+  cursor: pointer;
+  transition: all 0.5s;
+  text-align: center;
+  z-index: 2;
+}
+
+.done:hover{
+  background-color: green;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.deleted{
+  display: inline-block;
+  padding: 10px;
+  border-radius: 100px;
+  background-color: #FF4646;
+  border: 2px solid black;
+  width: 25px;
+  cursor: pointer;
+  transition: all 0.5s;
+  text-align: center;
+  z-index: 2;
+  margin: 1px;
+}
+
+.deleted:hover{
+  background-color: red;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.buttons{
+  position:relative;
+  float:right;
+  top: -7px;
+}
+
+ul{
+  //background-color: blue;
+  font-family: Monospace;
+  font-size: 22px;
+  font-weight: normal;
+  color: #fdf3f3;
+  list-style-type: none;
+}
+
+li{
+  border: 2px solid white;
+  background-color: rgba(0,0,0,.2);
+  border-radius: 10px;
+  margin: 5px;
+  left: 100px;
+  text-transform: capitalize;
+  text-indent: 10px;
+}
+
+h1{
+  border-bottom: 3px solid lightblue;
+
+}
+
+.sort{
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #f4511e;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+  width: 100px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 3px;
+  z-index: 2;
+}
+
+.importantButton{
+  border: none;
+  background: none;
+  color: #C6E2FF;
+  font-weight: bold;
+  font-size: 25px;
+  cursor: pointer;
+  outline: none;
+}
+
+.todoButton{
+  border: none;
+  background: none;
+  color: #C6E2FF;
+  font-weight: bold;
+  font-size: 25px;
+  cursor: pointer;
+  outline: none;
+}
+
+.doneButton{
+  border: none;
+  background: none;
+  color: #C6E2FF;
+  font-weight: bold;
+  font-size: 25px;
+  cursor: pointer;
+  outline: none;
+}
+
+.shadow{
+  border: none;
+  background: none;
+  color: #26619C;
+  font-weight: bold;
+  font-size: 25px;
+  cursor: pointer;
+  outline: none;
+}

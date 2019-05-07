@@ -1,153 +1,143 @@
-//jshint esversion:6
+/*jshint esversion:6*/
 
-let todos = [];
-let checked = false;
-let idTask = 0;
-let tasks = [];
-let checkedtasks = [];
-let knowncheckedtasks = [];
-let items = [];
-let item;
-let titles = [];
-
-showTasks();
-taskIfChecked();
-$('#saveTask').on('click', saveThis);
-$('#todos').on('click', '#deleteLink', deleteThis);
-$('#sortByName').on('click', sortName);
-
-//Sohranjaem zapolnennie polja v localstorage
-function saveThis() {
-  let titleTask = $('#title').val();
-  let descriptionTask = $('#description').val();
-  let dateTask = $('#date').val();
-
-  todos = getToDoObject(); //poly4aem dannie iz localStorage ili pystoj masiv
-  task = {
-    id: idTask,
-    title: titleTask,
-    description: descriptionTask,
-    date: dateTask
-  };
-
-  idTask = idTask + 1;
-  todos.push(task);
-  localStorage.setItem('text', JSON.stringify(todos));
-  window.location.href = "index.html";
-  return idTask; //vozvrawaem id zadanija, 4tobi v localstorage sledjuwee zadanie bilo bolwe na 1
+class Entry{
+  constructor(title, description, date){
+    this.title = title;
+    this.description = description;
+    this.date = date;
+    this.none = false;
+  }
 }
 
-//Ydaljaem pri klike na zadachyy samy zadachy
-function deleteThis() {
-  todos = getToDoObject();
-  localStorage.setItem('currentTask', $(this).data('title'));
-  localStorage.setItem('currentDate', $(this).data('date'));
-  localStorage.setItem('currentDesc', $(this).data('description'));
-  let currentTask = localStorage.getItem('currentTask');
-  let currentDate = localStorage.getItem('currentDate');
-  let currentDesc = localStorage.getItem('currentDesc');
+
+class ToDo{
+  constructor(){
+    this.entries = JSON.parse(window.localStorage.getItem('entries')) || [];
+
+    document.querySelector('#addButton').addEventListener('click', ()=> this.addEntry());
+    this.render();
 
 
-  for(let i = 0; i < todos.length; i++){
-    if (currentDate == todos[i].date && currentTask == todos[i].title && currentDesc == todos[i].description) {
-        todos.splice(i, 1);
-        localStorage.setItem('text', JSON.stringify(todos));
-        break;
+  }
+
+
+  render(){
+    if(document.querySelector('.todo-list')){
+      document.body.removeChild(document.querySelector('.todo-list'));
+    }
+
+    const ul = document.createElement("ul");
+    ul.className = "todo-list";
+
+    this.entries.forEach((entry, entryIndex)=>{
+      const li = document.createElement("li");
+
+      let t = document.createTextNode(entry.title);
+      let desc = document.createTextNode(entry.description);
+      let date = document.createTextNode(entry.date);
+
+
+      li.appendChild(t);
+      li.appendChild(desc);
+      li.appendChild(date);
+      var span = document.createElement("SPAN");
+      var txt = document.createTextNode("\u00D7");
+      span.className = "close";
+
+
+      //var list = ul || "";
+      console.log(entryIndex);
+      span.addEventListener("click", ()=>{
+        ul.removeChild(li);
+        this.entries = this.entries.slice(0, entryIndex).concat(this.entries.slice(entryIndex + 1, this.entries.length));
+        this.saveOnLocalStorage();
+        //console.log("removing");
+        console.log(this.entries);
+      })
+
+      li.addEventListener('click', (event)=> {
+
+          //if (event.target.tagName === 'LI') {
+          event.target.classList.toggle('checked');
+
+          //}
+          if(entry.done){
+            entry.done = false;
+          }
+          else{
+            entry.done = true;
+          }
+          this.saveOnLocalStorage();
+          console.log("completed");
+          this.render();
+      });
+
+      if(entry.done){
+        li.classList.toggle('checked');
+        //li.style.textDecoration = "line-through";
       }
-  }
-  window.location.href = "index.html";
-}
 
-//Vivodim vse todos
-function showTasks() {
-  todos = getToDoObject();
-  for (let i = 0; i < todos.length; i++) {
-    $('#todos').append('<li id="'+ i +'">' + todos[i].title + " " + todos[i].description + " " + todos[i].date + " " +
-    '<a href="#" id="deleteLink" data-title="' + todos[i].title +'" data-date="' +
-    todos[i].date + '" data-description="'+ todos[i].description + '">Kustuta</a>' + '<input type="checkbox" id="checked'+ i +'" onclick="checkedTask('+ i +')"' + '</li>');
-    }
-}
+      span.appendChild(txt);
+      li.appendChild(span);
+      ul.appendChild(li);
 
-//Vozvrawaem pystoj masiv ili dannie iz localStorage
-function getToDoObject() {
-  let currentTodos = localStorage.getItem('text');
-  if(currentTodos != null){
-    todos = JSON.parse(currentTodos);
-  }
-  else{
-    todos = [];
-  }
-  return todos;
-  /*return todos.sort(function(a, b) {
-      return new Date(b.date) - new Date(a.date);
-  });*/
-}
+    });
 
-//Otme4aem vipolnenie zadachi
-function checkedTask(liId) {
-  checkedtasks = JSON.parse(localStorage.getItem("tasks")) || [];
-  knowncheckedtasks = localStorage.getItem("tasks");
-  if(document.getElementById('checked'+liId).checked){
-    checked = true;
-    $('#' + liId).css({'backgroundColor': 'red'});
-  }
-  else if(!document.getElementById('checked'+liId).checked){
-    checked = false;
-    $('#' + liId).css({'backgroundColor': 'white'});
-    if(knowncheckedtasks != null){
-		checkedtasks.splice(checkedtasks[liId].id, 1);
-	 }
+    document.body.appendChild(ul);
+
+
+
+
+    let i;
+    var close = document.getElementsByClassName("close");
+    /*for (i = 0; i < close.length; i++) {
+       close[i].onclick = function() {
+         var div = this.parentElement;
+         div.style.display = "none";
+       }
+    }*/
+
+
+
+       /*if(entry.done){
+         li.style.backgroundColor = "lightgreen";
+         li.style.textDecoration = "line-through";
+       }*/
   }
 
-	checkedtask = {
-		id: liId,
-		isDone: checked
-	};
 
-  checkedtasks.push(checkedtask);
-  localStorage.setItem("tasks", JSON.stringify(checkedtasks));
-}
+  addEntry(){
+    var li = document.createElement("li");
+    var ul = document.createElement("ul");
+    const titleValue = document.querySelector('#title').value;
+    const descriptionValue = document.querySelector('#description').value;
+    const dateValue = document.querySelector('#date').value;
+    //var inputValue = document.getElementById("myInput").value;
+    /*let t = document.createTextNode(titleValue);
+    let desc = document.createTextNode(descriptionValue);
+    let date = document.createTextNode(dateValue);
 
-//Vivodim otme4ennie zadachi
-function taskIfChecked() {
-  let items = [];
-  let item;
-  item = localStorage.getItem("tasks");
-  items = JSON.parse(item) || [];
-  if(item != null){
-  for (let i = 0; i < items.length; i++) {
-      if (items[i].isDone) {
-        document.getElementById('checked'+items[i].id).checked = true;
-        $('#' + items[i].id).css({'backgroundColor': 'red'});
-      } else {
-        document.getElementById('checked'+items[i].id).checked = false;
-        $('#' + items[i].id).css({'backgroundColor': 'white'});
-      }
-    }
+    li.appendChild(t);
+    li.appendChild(desc);
+    li.appendChild(date);
+    ul.appendChild(li);
+
+    var span = document.createElement("SPAN");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "close";
+    span.appendChild(txt);
+    li.appendChild(span);
+    document.body.appendChild(ul);*/
+
+
+    this.entries.push(new Entry(titleValue, descriptionValue, dateValue));
+    this.saveOnLocalStorage();
+    this.render();
+  }
+
+  saveOnLocalStorage(){
+    window.localStorage.setItem('entries', JSON.stringify(this.entries));
   }
 }
 
-//Vizivaem fynktsiju sortirovki, sortiryem masiv i vivodim novij masiv na stranicy
-function sortName() {
-  todos.sort(dynamicSort("title"));
-  localStorage.setItem('text', JSON.stringify(todos));
-  showTasks();
-  window.location.href = "index.html";
-}
-
-//Sortiryet masiv po alfavity, eto COPYPASTE, NE TROGAT!
-function dynamicSort(property) {
-    let sortOrder = 1;
-    if(property[0] === "-") {
-        sortOrder = -1;
-        property = property.substr(1);
-    }
-
-    return function (a,b) {
-        if(sortOrder == -1){
-            return b[property].localeCompare(a[property]);
-        }else{
-            return a[property].localeCompare(b[property]);
-        }
-    }
-}
+const todo = new ToDo();

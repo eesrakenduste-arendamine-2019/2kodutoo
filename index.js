@@ -16,23 +16,18 @@ class ToDo{
     this.render();
   }
 
-
   render(){
     if(document.querySelector('.todo-list')){
       document.body.removeChild(document.querySelector('.todo-list'));
     }
 
     const ul = document.createElement("ul");
+    ul.setAttribute("id", "myUl");
     ul.className = "todo-list";
     this.entries.forEach((entry, entryIndex)=>{
       const li = document.createElement("li");
-      let title = document.createTextNode(entry.title);
-      let desc = document.createTextNode(entry.description);
-      let date = document.createTextNode(entry.date);
+      li.innerHTML = `<b>${entry.title}</b> <br>  ${entry.description} <br>  ${entry.date}`;
 
-      li.appendChild(title);
-      li.appendChild(desc);
-      li.appendChild(date);
       let span = document.createElement("SPAN");
       let txt = document.createTextNode("\u00D7");
       span.className = "close";
@@ -47,7 +42,6 @@ class ToDo{
           if(entry.done){
             entry.done = false;
           }
-
           else{
             entry.done = true;
           }
@@ -83,3 +77,21 @@ class ToDo{
 }
 
 const todo = new ToDo();
+
+function myFunction() {
+  let input, filter, ul, li, i, txtValue;
+  let entries = JSON.parse(window.localStorage.getItem('entries'));
+  input = document.getElementById('myInput');
+  filter = input.value.toUpperCase();
+  ul = document.getElementById("myUl");
+  li = ul.getElementsByTagName("li");
+
+  for (i = 0; i < li.length; i++) {
+    txtValue = entries[i].title;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      li[i].style.display = "";
+    } else {
+      li[i].style.display = "none";
+    }
+  }
+}

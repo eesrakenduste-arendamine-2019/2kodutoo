@@ -6,9 +6,17 @@
 
 1. Töö tuleb teha vähemalt kahekesi, eelnevalt kokkuleppel on lubatud ka kolm liiget. GitHub'is peab eristuma, kes mida tegi!
 1. README.md fail sisaldab:
-    * autorite nimesid; 
-    * kirjeldust tekkinud keerukustest
-    * funktsionaalsuste kirjeldust
+    * Maksim Jelizarov, Artur Šovkunenko, Jevgeni Prostsenko
+    * Oli probleemid AJAXiga, kirjutasime koodi ja saime aru, et AJAX koodis puudub, siis peaksime ümber kirjutama uue koodi, see pärast ei jõudsime õigel ajal.
+    * Funktsionaalsus:
+      Saab lisad ja kustutada.
+      Saab märkida ülesandeid tehtuks.
+      Saab järjestada kuupäeva ja nime järgi ülesandeid.
+      Ülesanded salvestatakse localStorage'isse.
+      Ülesannete salvestamiseks ja kuvamiseks kasutatakse AJAX-it.
+      Kui kasutaja tuleb lehele, siis näidatakse varem salvestatud ülesandeid.
+      Lisasime funktsioon, et kasutaja saab otsida ülesanded nime jargi.
+      Oleme nõus tehtud tööga.
 1. Todo rakenduse funktsionaalsused:   
     * Saab lisad ja kustutada
     * Saab märkida ülesandeid tehtuks
@@ -29,7 +37,7 @@
 ## Githubi töövoog grupiga töötades
 
 1. Üks grupi liikmetest teeb fork-i 2kodutoo repositooriumist
-2. Tuleb lisada meeskonnaliikmed collaborators-iteks fork-itud repositooriumi 
+2. Tuleb lisada meeskonnaliikmed collaborators-iteks fork-itud repositooriumi
 3. Collaborator-id peavad kutsega nõustuma (e-mail)
 4. Iga ühel tuleb teha git clone fork-itud repositooriumist (git clone https://YOURUSERNAME@github.com/REPOSITORYOWNERUSERNAME/REPOSITORY.git)
 5. Muudatuste lisamine:

@@ -35,7 +35,7 @@ class ToDo{
         ul.removeChild(li);
         this.entries = this.entries.slice(0, entryIndex).concat(this.entries.slice(entryIndex + 1, this.entries.length));
         this.saveOnLocalStorage();
-      })
+      });
 
       li.addEventListener('click', (event)=> {
           event.target.classList.toggle('checked');
@@ -78,7 +78,7 @@ class ToDo{
 
 const todo = new ToDo();
 
-function myFunction() {
+function searchTitle() {
   let input, filter, ul, li, i, txtValue;
   let entries = JSON.parse(window.localStorage.getItem('entries'));
   input = document.getElementById('myInput');
@@ -94,4 +94,47 @@ function myFunction() {
       li[i].style.display = "none";
     }
   }
+}
+
+function sortName(){
+  var list, i, switching, b, shouldSwitch;
+  list = document.getElementById("myUl");
+  switching = true;
+  while (switching) {
+    switching = false;
+    b = list.getElementsByTagName("li");
+    for (i = 0; i < (b.length - 1); i++) {
+      shouldSwitch = false;
+      if (b[i].innerHTML.toLowerCase() > b[i + 1].innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      b[i].parentNode.insertBefore(b[i + 1], b[i]);
+      switching = true;
+    }
+  }
+}
+
+function sortDate(){
+  let todos = sortDateFunction();
+  window.localStorage.setItem('entries', JSON.stringify(todos));
+  window.location.href = "index.html";
+
+}
+
+function sortDateFunction(){
+  let currentTodos = localStorage.getItem('entries');
+
+  if (currentTodos != null) {
+    todos = JSON.parse(currentTodos);
+  }
+  else {
+    todos = [];
+  }
+  return todos.sort(function(a, b){
+    return new Date(b.date) - new Date(a.date);
+  });
+
 }

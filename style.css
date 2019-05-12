@@ -101,18 +101,23 @@ body {
 
   /* Style the "Add" button */
   button {
-    padding: 15px;
-    width: 25%;
+    padding: 13px;
+    width: 24.5%;
     background: #d9d9d9;
     color: #555;
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
     cursor: pointer;
     transition: 0.3s;
     border-radius: 10px;
     margin: 20px;
     justify-content:center;
     border-radius: 5;
+  }
+
+  button:hover {
+    background-color: #d1cfcf;
+    color: white;
   }
 
   #btnContainer{
@@ -125,4 +130,12 @@ body {
 
   .addBtn:hover {
     background-color: #bbb;
+  }
+
+  #sortName{
+    width: 10.5%;
+  }
+
+  #sortDate{
+    width: 10.5%;
   }

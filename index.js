@@ -18,7 +18,7 @@ $('#saveData').on('click', function(){
     method: 'POST',
     data: data,
     success: function(data) {
-      console.log("tattnina");
+      console.log("function success data");
       $('#output').html('Thank you...');
     }
   });

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,7 +22,9 @@
 <body>
   <form action="server.php" method="POST">
     <input type="text" name="messageAdd" id="message" placeholder="Lisa tegevus">
-    <br>
+    <br><br>
+    <input type="date" name="expiredate" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<?php echo $expiredate ?>">
+      <br>
     <button type="submit" id="save" name="submit" >Save</button>
     <p class="form-message"></p>
   </form>

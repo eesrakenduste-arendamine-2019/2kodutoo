@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>ToDo</title>
+  <style>
+
+.done{
+	background-color: #85d58c;
+	text-decoration: line-through; 
+}
+
+.unDone{
+	background-color: none;
+	text-decoration: none;
+}
+
+li{
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+
+	
+}
+
+ul{
+  margin: 5px;
+  text-align: center;
+  border: 2px solid black;
+  border-radius: 12px;
+}
+
+body {
+	background: #c5c5c5;
+	text-align: center;
+	font-family: 'Open Sans', sans-serif;
+
+}
+
+
+input {
+  border: 1px solid white;
+  width: 50.4%;
+  line-height: 1.5;
+  padding: 8px 0 8px 10px;
+  border-bottom: 1px solid #cfcbcc;
+  outline:0;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 12px;
+  margin: 5px;
+  background-color: #2d2b31;
+  color : white;
+
+}
+
+button {
+width: 25%;
+  line-height: 1;
+  padding: 8px 0 8px 10px;
+  border-bottom: 1px solid #cfcbcc;
+  outline:1;
+  font-size: 20px;
+  border: 1px solid white;
+  font-family: 'Helvetica', arial, sans-serif;
+  text-align: center;
+  border-radius: 12px;
+  margin: 5px;
+  background-color: #2d2b31;
+  color : white;
+
+}
+#myInput {
+  border: 1px solid white;
+  width: 50.4%;
+  line-height: 1.5;
+  padding: 8px 0 8px 10px;
+  border-bottom: 1px solid #cfcbcc;
+  outline:0;
+  font-size: 20px;
+  text-align: center;
+  border-radius: 12px;
+  background-color: #2d2b31;
+  color : white;
+}
+div.wrapper {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px; 
+  width: 500px;
+  height: 300px; 
+
+}
+
+
+    
+
+  </style>
+</head>
+<body>
+<div class="wrapper">
+  <input type="text" id="title" placeholder="add a Title"><br>
+  <input type="text" id="description" placeholder="add a Description"><br>
+  <input type="date" id="date"><br>
+  <button id="addButton">LISA</button>
+  <button id="saveButton">SALVESTA</button>
+  <button id="loadButton">LAADI</button><br>
+  <input type="text" id="myInput" onkeyup="search()" placeholder="Search the todo list">
+  <div id="todos">Siia tulevad todod</div>
+</div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
+

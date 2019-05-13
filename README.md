@@ -24,4 +24,4 @@
 
 ## Pildid töötavast rakendusest asuvad dropboxis.
 LINK: https://www.dropbox.com/sh/4nxu058v20dk4q5/AAD7Of-aos50eN6Uq18JSh4ma?dl=0
-
+Töötab aadressil: https://dev.dominiksklyarov.com/todo-app/

@@ -1,0 +1,124 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,700");
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
+  background-color: #2b2b2b;
+  color: white;
+}
+
+.website-title {
+  text-align: center;
+  margin-top: 10vh;
+}
+
+#list {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  list-style: none;
+  padding: 0;
+}
+
+#list li {
+  margin: 0px;
+  width: 400px;
+  padding: 10px;
+}
+
+#list li:hover {
+  background-color: black;
+}
+
+.categories {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  bottom: 120px;
+}
+
+.checkbox {
+  margin-right: 20px;
+  background: transparent;
+}
+
+.done-cat,
+.new-cat,
+.all-cat {
+  margin: 0 20px;
+  padding: 2px 0px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  color: #7e7e7e;
+}
+
+.done-cat:hover,
+.new-cat:hover,
+.all-cat:hover {
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  cursor: pointer;
+  color: white;
+}
+
+.active {
+  color: white;
+}
+
+.close {
+  position: absolute;
+  right: 5px;
+}
+
+.close:hover {
+  cursor: pointer;
+}
+
+.add-new-item {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #2b2b2b;
+}
+
+.add-new-item .add-icon {
+  right: 50px;
+  bottom: 20px;
+  position: absolute;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.add-new-item .add-icon:hover {
+  -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+  cursor: pointer;
+}
+
+.add-new-item .new-item {
+  width: 500px;
+  height: 50px;
+  margin-bottom: 20px;
+  background-color: transparent;
+  border-radius: 50px;
+  border: 1px solid white;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  outline: none;
+  padding-left: 30px;
+  color: white;
+  font-size: 20px;
+  font-weight: 400;
+  margin-top: 30px;
+  display: none;
+}
+/*# sourceMappingURL=style.css.map */

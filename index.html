@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="scripts/main.js"></script>
+    <title>Get Shiz Done</title>
+  </head>
+  <body>
+    <h1 class="website-title">GET SHIZ DONE</h1>
+    <div class="container">
+      <ul id="list"></ul>
+    </div>
+    <div class="add-new-item">
+      <div class="categories">
+        <p class="done-cat">done</p>
+        <p class="new-cat">new</p>
+        <p class="all-cat active">all</p>
+      </div>
+      <form action="#">
+        <input
+          type="text"
+          class="new-item"
+          placeholder="What do you want to accomplish today?"
+          name="item"
+          id="item"
+        />
+        <input
+          type="submit"
+          style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+          tabindex="-1"
+        />
+      </form>
+      <img src="assets/add.svg" class="add-icon" />
+    </div>
+  </body>
+</html>

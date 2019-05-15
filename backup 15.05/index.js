@@ -1,11 +1,4 @@
-
-
-
-
-
-
-
-/*var order = [];
+var order = [];
 $('#saveAndOrder').on('click', function(){
 alert("save");
     var myData = $('form1').serializeArray();
@@ -25,8 +18,8 @@ $('#saveData').on('click', function(){
     method: 'POST',
     data: data,
     success: function(data) {
-      console.log("function data success");
+      console.log("function success data");
       $('#output').html('Thank you...');
     }
   });
-});*/
+});

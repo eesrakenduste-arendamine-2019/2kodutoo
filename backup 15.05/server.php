@@ -4,25 +4,24 @@ $database = "if18_markus_mu_1";
 session_start();
 //var_dump($_POST);
 if (isset($_POST['submit'])) {	
-	$messageTitle = $_POST['tegevusTitle'];
 	$message = $_POST['tegevus'];
 	$expireDate = $_POST['expireDate'];
-	if(empty($message) || empty($expireDate) || empty($messageTitle)) {
+	if(empty($message) || empty($expireDate)) {
 		echo "<span>Please add an event to add</span>";
-		?><script>console.log("Täida palun kõik väljad");</script><?php
+		?><script>console.log("ple sonumit");</script><?php
 	} else {
 		echo "<span>Event added!</span>";	
-		addmsg($messageTitle, $message, $expireDate);	
+		addmsg($message, $expireDate);	
 	}
 }
 
-function addmsg($messageTitle, $message, $expireDate){
+function addmsg($message, $expireDate){
 			//echo "<span>toimib</span>";
 			$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"],$GLOBALS["serverPassword"], $GLOBALS["database"]);
 			echo $mysqli->error;
-			$stmt = $mysqli->prepare("INSERT INTO sonumid (Title, sonum, expiredate) VALUES (?,?,?)");
+			$stmt = $mysqli->prepare("INSERT INTO sonumid (sonum, expiredate) VALUES (?,?)");
 			echo $mysqli->error;
-			$stmt->bind_param("sss", $messageTitle, $message, $expireDate);
+			$stmt->bind_param("ss", $message, $expireDate);
 			if($stmt->execute()){
 				//echo "Sõnum " + $message + $expireDate + " lisatud";
 			} else {
@@ -35,26 +34,19 @@ function addmsg($messageTitle, $message, $expireDate){
 		function getmsg(){
 			$html = "";
 			$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
-			$stmt = $mysqli->prepare("SELECT Title, sonum, expiredate FROM sonumid");
+			$stmt = $mysqli->prepare("SELECT sonum, expiredate FROM sonumid");
 			echo $mysqli->error;
-			$stmt->bind_result($messageTitleDb, $messageDb, $expireDateDb);
+			$stmt->bind_result($messageDb, $expireDateDb);
 			$stmt->execute();
 			echo $stmt->error;
 			while ($stmt->fetch()){
-				$html .= "<p> Pealkiri: " .$messageTitleDb. "</p> \n";
-				$html .= "<p> Meelespea: " .$messageDb. "</p> \n";
-				$html .= "<p> Tähtaeg: " .$expireDateDb. "</p> \n";
+				$html .= "<p> Meelespea " .$messageDb. "</p> \n";
+				$html .= "<p> Tähtaeg: \n" .$expireDateDb. "</p> \n";
 				$html .="<hr>";
 			}
 			$stmt->close();
 			$mysqli->close();
 			return $html;
 		}
-
-
-
-
-
-
 ?>
-<script>$("#messageTitle, #message, #date").val("");</script>
+<script>$("#message, #date").val("");</script>

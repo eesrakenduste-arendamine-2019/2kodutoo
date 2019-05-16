@@ -1,36 +1,46 @@
 /*jshint esversion:6*/
 class Todo{
-  constructor(title, description, date, saved){
+  constructor(title, description, date){
     this.title = title;
     this.description = description;
     this.done = false;
     this.date = date;
-    this.saved = new Date();
 
   }
 }
 
 let todos = [];
-let localCheck = [];
-let entryCheck = [];
-let RenderCounter = 0;
-let EntryCounter = 0;
-
 
 $('#addButton').on('click', ()=>addEntry());
 $('#saveButton').on('click', ()=>saveToFile());
 $('#loadButton').on('click', ()=>render());
+$('#deleteButton').on('click', ()=>deleteEntry());
+
+var today = new Date().toJSON().slice(0,10);
+console.log(today);
+
 
 function render(){
   $('#todos').html("");
   $.get("database.txt", function(data){
-	let date;
     let content = JSON.parse(data).content;
-    content.forEach(function(todo, todoIndex){
-		$('#todos').append('<ul class="todo-item-done" id="ul' + RenderCounter +'"><li>'+ todo.title+'</li><li>'+ todo.description +'</li><li>'+ todo.date +'</li></ul>');
-		RenderCounter++;
+    //slice creates a copy and then reverses it
+    content.slice().reverse().forEach(function(todo, todoIndex){
+		    if(todo.done == true){
+			    if(todo.date == today || todo.date < today){
+				    $('#todos').append('<ul class="todo-item-done" id="past"><li>'+ todo.title+'</li><li>'+ todo.description +'</li><li>'+ todo.date +' </li></ul>');
+			    }else{
+				   	$('#todos').append('<ul class="todo-item-done" id="notpast"><li>'+ todo.title+'</li><li>'+ todo.description +'</li><li>'+ todo.date +' </li></ul>');
+			    }
 
-			
+		    }else{
+			    if(todo.date == today || todo.date < today){
+				    $('#todos').append('<ul class="todo-item-done" id="past"><li>'+ todo.title+'</li><li>'+ todo.description +'</li><li>'+ todo.date +' </li></ul>');
+			    }else{
+				   	$('#todos').append('<ul class="todo-item-done" id="notpast"><li>'+ todo.title+'</li><li>'+ todo.description +'</li><li>'+ todo.date +' </li></ul>');
+			    }
+			}
+				
     });
   });
 }
@@ -42,18 +52,33 @@ $(function(){
 
 });
 
-function done(){
-	for(let i = 0; i < todos.length; i++){
-		if(todos[i].title == $(this).data('title') && todos[i].description == $(this).data('description')){
-			todos[i].done = true;
-			$(this).parent().parent().toggleClass("done");
 
-		}else{
-			todos[i].done = false;
-			$(this).parent().parent().toggleClass("notDone");
-		}
-	}
+function deleteEntry(){
+	$(this).remove()
 }
+
+
+function done(){
+	$.get("database.txt", function(data){
+	    let content = JSON.parse(data).content;
+		content.forEach(function(todo, todoIndex){
+			let li = $("ul").find("li");
+			console.log(li);
+			if(todo.title == li[0].innerHTML && todo.description == li[1].innerHTML){
+				todo.done = true;
+				$(li).parent().toggleClass("done");
+			}else{
+				todo.done = false;
+				$(li).parent().toggleClass("unDone");
+			}
+			updateFile()
+			
+
+		});   
+	
+
+    });
+} 
 
 function done(){
 	$(this).toggleClass("done");
@@ -64,14 +89,10 @@ function addEntry(){
   const titleValue = $('#title').val();
   const dateValue = $('#date').val();
   const descriptionValue = $('#description').val();  
+  
   todos.push(new Todo(titleValue, descriptionValue, dateValue));
-  EntryCounter++
  
-  entryCheck.push(todos);
-  console.log(entryCheck.length);
 	saveInLocalStorage();
-
-
 
   console.log(todos);
 }
@@ -86,18 +107,23 @@ function saveToFile(){
   });
 }
 
+function updateFile(){
+	
+}
+
 function search(){
 	let input = $('#myInput').val();
 	console.log(input);
-	let filter = input.toUpperCase();
-	let ul = document.getElementById('todos');
+	input = input.toLowerCase();
+	let ul = document.getElementsByClassName('todo-item-done');
+	let li = $(ul).find("li");
+	console.log(ul.length);
 	for(let i = 0; i < ul.length; i++){
 		for(let j = 0; j < li.length; j++){
-			li[j].getElementsByTagName('li')[j];
-		if(li.innerHTML.toUpperCase().indexOf(filter) > -1){
-			li[j].style.display = "";
+		if(!li[j].innerHTML.toLowerCase().includes(input)){
+			li[j].style.display ="none";
 		}else{
-			li[j].style.display = "none";
+			li[j].style.display ="";
 		}
 	}
 		//siia vaja midagi
@@ -106,12 +132,7 @@ function search(){
 
 //saving in localstorage
 function saveInLocalStorage(){
-	localCheck.push(todos);
 	
 	window.localStorage.setItem('todos', JSON.stringify(todos));
 
-}
-
-function deleteFromLocalStorage(item){
-	localStorage.removeItem(item);
 }

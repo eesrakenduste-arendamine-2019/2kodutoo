@@ -1,19 +1,27 @@
 $(document).ready(function() {
     refreshStuff();
-    $("form").submit(function(event) {
+    $("form[name=submitMessage]").submit(function(event) {
         event.preventDefault();
+        console.log("submitted form");
         var tegevusTitle = $("#messageTitle").val();
         var tegevus = $("#message").val();
         var submit = $("#save").val();
         var expireDate = $("#date").val();
-        $(".form-message").load("server.php", {
-            tegevusTitle: tegevusTitle,
-            tegevus: tegevus,
-            expireDate: expireDate,
-            submit: submit
+        $.ajax({
+        	type:'POST',
+        	url:'server.php',
+        	date: {
+        		tegevusTitle: tegevusTitle,
+        		tegevus: tegevus,
+        		expireDate: expireDate,
+        		submit: submit
+        	},
+        	success: function(response) {
+        		$(".form-message").html(response);
+        		refreshStuff();
+        	}
         });
-        refreshStuff();
-    });
+    });    
 });
 
 function deleteRow(id){

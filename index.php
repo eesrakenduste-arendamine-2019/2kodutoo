@@ -14,17 +14,17 @@ $expiredate = date("Y-m-d");
   <title>Katkine kodutöö</title>
 </head>
 <body>
-  <form action="server.php" method="POST">
+  <form name="submitMessage" action="server.php" method="POST">
     <input type="text" name="messageTitleAdd" id="messageTitle" placeholder="Lisa tegevuse pealkiri">
     <br><br>
     <input type="text" name="messageAdd" id="message" placeholder="Lisa tegevus">
     <br><br>
     <input type="date" name="expiredate" id="date" required pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value="<?php echo $expiredate ?>">
       <br><br>
-    <button type="submit" id="save" name="submit" >Save</button>
-    <p class="form-message"></p>
+    <button id="save" name="submit" name="submit" >Save</button>
+    <p class="form-message">123</p>
   </form>
   <hr>
-  <div id="responsecontainer" class="dataFromDb">teine showdata test</div>
+  <div id="responsecontainer" class="dataFromDb"></div>
 </body>
 </html>

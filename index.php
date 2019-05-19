@@ -1,7 +1,6 @@
 <?php
 require("server.php");
 $expiredate = date("Y-m-d");
-$messagesFromDb = getmsg();
 
 ?>
 <!DOCTYPE html>
@@ -12,6 +11,7 @@ $messagesFromDb = getmsg();
   <link rel="stylesheet" type="text/css" href="index.css">
   <script>
   	$(document).ready(function() {
+  		refreshStuff();
   		$("form").submit(function(event) {
   			event.preventDefault();
         var tegevusTitle = $("#messageTitle").val();
@@ -24,6 +24,7 @@ $messagesFromDb = getmsg();
           expireDate: expireDate,
           submit: submit
         });
+        refreshStuff();
   		});
   	});
   </script>
@@ -40,28 +41,20 @@ $messagesFromDb = getmsg();
     <button type="submit" id="save" name="submit" >Save</button>
     <p class="form-message"></p>
   </form>
-  <div id="output"></div>
-  <?php echo $messagesFromDb; ?>
-  <h2>showdata.php näide</h2>
-  <div id="output">jquery asendab selle dataga</div>
+  <hr>
+  <div id="responsecontainer" class="dataFromDb">teine showdata test</div>
   <script id="source" language="javascript" type="text/javascript">
-    $(document).ready(function()
-    {
-      $.ajax({                                      
-        url: 'showdata.php',                       
-        data: "",                        
-        dataType: 'json',                
-        success: function(data)        
-        {
-          var id = data[0];              
-          var titleDb = data[1]; 
-          var msgDb = data[2];
-          var expireDb = data[3];
-          var checkedDb = data[4];       
-          $('#output').html("<b>Title: </b>"+titleDb+"<b> message: </b>"+msgDb+"<b> expiredate: </b>"+expireDb);
+    function refreshStuff() {
+    	$.ajax({    //create an ajax request to display.php
+        type: "GET",
+        url: "showdata.php",             
+        dataType: "html",   //expect html to be returned                
+        success: function(response){                    
+            $("#responsecontainer").html(response); 
+            //alert(response);
         }
-      });
-    }); 
+    });
+   }; 
   </script>
 </body>
 </html>

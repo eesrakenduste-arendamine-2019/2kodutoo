@@ -31,8 +31,8 @@ function addmsg($messageTitle, $message, $expireDate){
 			$stmt->close();
 			$mysqli->close();
 		}
-
-		function getmsg(){
+		//algne php fetch test
+		/*function getmsg(){
 			$html = "";
 			$mysqli = new mysqli($GLOBALS["serverHost"], $GLOBALS["serverUsername"], $GLOBALS["serverPassword"], $GLOBALS["database"]);
 			$stmt = $mysqli->prepare("SELECT Title, sonum, expiredate FROM sonumid");
@@ -49,12 +49,6 @@ function addmsg($messageTitle, $message, $expireDate){
 			$stmt->close();
 			$mysqli->close();
 			return $html;
-		}
-
-
-
-
-
-
+		}*/
 ?>
 <script>$("#messageTitle, #message, #date").val("");</script>

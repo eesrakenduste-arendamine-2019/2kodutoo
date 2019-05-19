@@ -10,7 +10,7 @@
 
 	$db_select = mysqli_select_db($con, $database);
 	if (!$db_select) {
-    die("Database selection failed: " . mysqli_error($connection));
+    die("Database selection failed: " . mysqli_error($con));
 	}
 
 	$result = mysqli_query($con, "SELECT * FROM $tableName");  
@@ -22,7 +22,7 @@
 	 		echo "<p> Pealkiri: $data[1]</p> \n";
 			echo "<p> Meelespea:$data[2]</p> \n";
 			echo "<p> Tähtaeg:$data[3]</p> \n";
-			echo "<div>";
+			echo "</div>";
 			echo "<hr>";
 		} 
 	  

@@ -51,4 +51,3 @@ function addmsg($messageTitle, $message, $expireDate){
 			return $html;
 		}*/
 ?>
-<script>$("#messageTitle, #message, #date").val("");</script>

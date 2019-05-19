@@ -17,9 +17,12 @@
 
 	 while($data = mysqli_fetch_row($result))
 	 	{	
+	 		echo "<div>";
+			echo '<button onclick="deleteRow(' . $data[0] . ')">Delete</button>';
 	 		echo "<p> Pealkiri: $data[1]</p> \n";
 			echo "<p> Meelespea:$data[2]</p> \n";
 			echo "<p> Tähtaeg:$data[3]</p> \n";
+			echo "<div>";
 			echo "<hr>";
 		} 
 	  

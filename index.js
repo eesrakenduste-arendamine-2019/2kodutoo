@@ -10,7 +10,7 @@ $(document).ready(function() {
         $.ajax({
         	type:'POST',
         	url:'server.php',
-        	date: {
+        	data: {
         		tegevusTitle: tegevusTitle,
         		tegevus: tegevus,
         		expireDate: expireDate,

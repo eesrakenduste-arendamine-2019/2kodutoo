@@ -8,6 +8,10 @@
 5. Ülesannete tähtaja möödumisel või tähtaja ajal muutub ülesande bg värvus.
 6. Ülesandeid on võimalik otsida läbi searchbari.
 
+# Väljanägemus
+<img width="1263" alt="Screenshot 2019-05-25 at 17 24 13" src="https://user-images.githubusercontent.com/42979748/58370719-58f37580-7f12-11e9-93a5-59da3d62b49d.png">
+
+
 
 
 ### Tähtpäev 21.04.2019 23:59

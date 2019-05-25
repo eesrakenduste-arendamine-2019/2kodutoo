@@ -1,5 +1,15 @@
 # 2. kodutöö – ToDo rakendus
 
+# Funktsionaalsused
+1. Võimalik ülesaneid lisada
+2. Ülesandeid saab tehtuks märkida
+3. Ülesanded salvestatakse localstoragisse ja ka ajaxi teel.
+4. Ülesanded on järjestatud varem salvestatud ülesannete järgi
+5. Ülesannete tähtaja möödumisel või tähtaja ajal muutub ülesande bg värvus.
+6. Ülesandeid on võimalik otsida läbi searchbari.
+
+
+
 ### Tähtpäev 21.04.2019 23:59
 
 ## Nõuded

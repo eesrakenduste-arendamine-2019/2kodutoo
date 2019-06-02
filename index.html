@@ -22,9 +22,23 @@
             <button id="addButton">Lisa ülesanne</button>
             </div>
 
-        <div class="Todo"></div>
+            <div id="sort" class="sort">
+                <label for="sortProperty">Sorteeri:</label>
+                <select id="sortProperty">
+                    <option value="title">Nime järgi</option>
+                    <option value="description">Kirjelduse järgi</option>
+                    <option value="date">Kuupäeva järgi</option>
+                </select>
+                <select id="sortDirection">
+                    <option value="asc">kasvavalt</option>
+                    <option value="desc">kahanevalt</option>
+                </select>
+                <button id="sortButton">></button>
+                <br>
             </div>
         </div>
+        <div class="Todo"></div>
+
         <br>
         <div class="notice">
             Siia tulevad sinu ülesanded:

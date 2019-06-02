@@ -18,6 +18,8 @@ body {
     padding: 0.5em;
     font-family: 'Fredoka One', cursive;
     color: white;
+    width: 50%;
+    margin: auto;
     background-color: rgb(219,112,147, 0.8);
 }
 
@@ -25,6 +27,10 @@ body {
   height: 200px;
   text-align: center;
   
+}
+.sort {
+	height: 75px;
+    text-align: center;
 }
 
 .task {
@@ -39,13 +45,17 @@ body {
 
 ul {
     list-style-type: none;
-}
+    }
 
 .task.completedTask{
     width: 100%;
     background-color: rgb(36, 202, 138, 0.7);
     text-decoration: line-through;
     border-radius: 1em;
+}
+
+.task.todayTask{
+    background-color: rgb(119, 177, 174);
 }
 
 button {
@@ -61,6 +71,21 @@ button:active {
     background-color: rgb(66, 112, 110);
 }
 
+a {
+    padding: 0.5em;
+    position: fixed;
+    bottom: 1em;
+    right: 1em;
+}
+
+p {
+    padding: 0.5em;
+    position: fixed;
+    bottom: 2em;
+    right: 1em;
+}
+
+
 h1 {
     font-size: 3em;
     text-align: center;
@@ -68,6 +93,27 @@ h1 {
     padding: 0.5em;
     font-family: 'Fredoka One', cursive;
     color: rgb(219,112,147);
+}
+
+#sortDirection {
+    background-color:  rgb(119, 177, 174);
+    border: 0.1em solid #fff;
+    color: #fff;
+    font-size: 1em;
+    text-align: center;
+    border-radius: 1em;
+    padding: 1em 1em 1em 1em;
+}
+
+#sortProperty {
+    background-color: rgb(119, 177, 174);
+    border: 0.1em solid #fff;
+    color: #fff;
+    font-size: 1em;
+    text-align: center;
+    border-radius: 1em;
+    padding: 1em 1em 1em 1em;
+    width: 30%;
 }
 
 input {
@@ -85,21 +131,6 @@ input {
 #date {
     border: 0.15em solid #fff;
     font-size: 16px;;
-}
-
-a {
-    padding: 0.5em;
-    position: fixed;
-    bottom: 1em;
-    right: 1em;
-}
-
-p {
-    padding: 0.5em;
-    bottom: 2em;
-    right: 1em;
-    width: 100%;
-    background-color: black;
 }
 
 ::placeholder {

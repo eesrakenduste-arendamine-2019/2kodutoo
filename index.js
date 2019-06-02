@@ -14,6 +14,7 @@ window.onload = function () {
     loadAndRender();
     const toDo = new Todo();
     document.querySelector('#addButton').addEventListener('click', () => this.addTask());
+    document.querySelector('#sortButton').addEventListener('click', () => this.sort());
 
 };
 const tasksDiv = "task";
@@ -118,6 +119,18 @@ async function loadAndRender(){
     this.render();
 }
 
+function sort() {
+    const sortProperty = document.querySelector('#sortProperty').value;
+    const sortDirection = document.querySelector('#sortDirection').value;
+
+    if (sortDirection == "asc") {
+        this.tasks.sort((a, b) => a[sortProperty] > b[sortProperty] ? 1 : -1);
+    } else if (sortDirection == "desc") {
+        this.tasks.sort((a, b) => a[sortProperty] < b[sortProperty] ? 1 : -1);
+    }
+
+    this.render();
+}
 
 function saveInLocalStorage() {
     window.localStorage.setItem('tasks', JSON.stringify(this.tasks));

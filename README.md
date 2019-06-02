@@ -10,3 +10,5 @@ vajutades kirje all olevale sõõriku ikoonile. Kirjed salvestuvad localStorage'
 Tekkinud raskused:
 Pikaks ajaks valmistas meile peavalu arusaamatus, miks andmed tekstifaili ei jõua. Tuli välja, et failile polnud 
 kirjutamisõigust antud.
+
+http://greeny.cs.tlu.ee/~lisaval/2kodutoo/

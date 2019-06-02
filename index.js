@@ -110,6 +110,12 @@ function addTask() {
 
     this.tasks.push(new Todo(titleValue, descriptionValue, dateValue));
 
+    document.getElementById("title").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("date").value = "";
+
+
+
     this.saveToAll();
     this.render();
 }

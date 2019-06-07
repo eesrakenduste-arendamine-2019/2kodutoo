@@ -2,6 +2,8 @@
 
 AUTOR: MARTIN JAGODIN
 
+ToDo leht: (tunneli kaudu) http://greeny.cs.tlu.ee/~martjag/javascript/kodutoo2/
+
 Veebileht on inglise keeles, saab lisada märkmeid, kustutada, märkida tähtsaks, salvestada.
 Värvid on samuti lisatud ning disainiga nägin veidi vaeva, sest minumeelest on see kõige tähtsam iga töö juures.
 

@@ -1,0 +1,114 @@
+html {
+   background: url(lead-bg.jpg) center fixed;
+   background-size: cover;
+ }
+ul{
+   background: gray;
+   opacity:0.8  ;
+}
+
+.header {
+  overflow: hidden;
+  background-color: gray;
+  padding: 5px 10px;
+}
+
+.header a {
+  float: left;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+  font-size: 15px;
+  line-height: 25px;
+  border-radius: 5px;
+}
+.deleteButton{
+  display:inline-block;
+  padding:0.7em 2em;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 900;
+  color:#FFFFFF;
+  background-color:black;
+  text-align:center;
+  border-radius: 2em;
+}
+.deleteButton:hover{
+   background-color: red;
+   }
+.doneButton{
+  display:inline-block;
+  padding:0.7em 2em;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 900;
+  color:#FFFFFF;
+  background-color:black;
+  text-align:center;
+  border-radius: 2em;
+}
+.doneButton:hover{
+   background-color: green;
+   }
+.stroked{
+   text-decoration: line-through;
+   background-color: white;
+}
+.expired{
+  background-color: red;
+} /*kui alla tänase kuupäeva*/
+.important{
+   background-color: yellow;
+}/* kui märgitud tähtsana*/
+.add{
+  display:inline-block;
+  padding:0.7em 2em;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 900;
+  color:#FFFFFF;
+  background-color:black;
+  text-align:center;
+}
+.add:hover{
+   background-color: purple;
+   }
+.save1{
+  display:inline-block;
+  padding:0.7em 2em;
+  margin:0 0.3em 0.3em 0;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 900;
+  color:#FFFFFF;
+  background-color:black;
+  text-align:center;
+}
+.save1:hover{
+   background-color: purple;
+   }
+.load{
+  display:inline-block;
+  padding:0.7em 2em;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 900;
+  color:#FFFFFF;
+  background-color:black;
+  text-align:center;
+}
+.load:hover{
+   background-color: purple;
+   }
+   .checkbox {
+     -webkit-appearance: none;
+      background-color: #fafafa;
+      padding: 10px;
+      border-radius: 3px;
+      display: inline-block;
+      position: relative;
+   }
+   .checkbox:checked:after {
+      font-size: 17px;
+      left: 4px;
+     content: '\2714';
+      position: absolute;
+      top: -1px;
+      color: #5A5B5E;
+   }
